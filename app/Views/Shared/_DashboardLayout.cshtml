@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <!-- Favicon -->
+  <link rel="icon" href="~/assets/img/brand/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="~/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="~/assets/vendor/@@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="~/assets/css/argon.css?v=1.2.0" type="text/css">
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+      <!-- Brand -->
+      <div class="sidenav-header  align-items-center">
+        <a class="navbar-brand" href="javascript:void(0)">
+          <img src="~/assets/img/brand/blue.png" class="navbar-brand-img" alt="~.">
+        </a>
+      </div>
+      <div class="navbar-inner">
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <!-- Nav items -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="dashboard.html">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="icons.html">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Icons</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="map.html">
+                <i class="ni ni-pin-3 text-primary"></i>
+                <span class="nav-link-text">Google</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">
+                <i class="ni ni-single-02 text-yellow"></i>
+                <span class="nav-link-text">Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tables.html">
+                <i class="ni ni-bullet-list-67 text-default"></i>
+                <span class="nav-link-text">Tables</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">
+                <i class="ni ni-key-25 text-info"></i>
+                <span class="nav-link-text">Login</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="register.html">
+                <i class="ni ni-circle-08 text-pink"></i>
+                <span class="nav-link-text">Register</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upgrade.html">
+                <i class="ni ni-send text-dark"></i>
+                <span class="nav-link-text">Upgrade</span>
+              </a>
+            </li>
+          </ul>
+          <!-- Divider -->
+          <hr class="my-3">
+          <!-- Heading -->
+          <h6 class="navbar-heading p-0 text-muted">
+            <span class="docs-normal">Documentation</span>
+          </h6>
+          <!-- Navigation -->
+          <ul class="navbar-nav mb-md-3">
+            <li class="nav-item">
+              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html" target="_blank">
+                <i class="ni ni-spaceship"></i>
+                <span class="nav-link-text">Getting started</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html" target="_blank">
+                <i class="ni ni-palette"></i>
+                <span class="nav-link-text">Foundation</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html" target="_blank">
+                <i class="ni ni-ui-04"></i>
+                <span class="nav-link-text">Components</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">
+                <i class="ni ni-chart-pie-35"></i>
+                <span class="nav-link-text">Plugins</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active active-pro" href="upgrade.html">
+                <i class="ni ni-send text-dark"></i>
+                <span class="nav-link-text">Upgrade to PRO</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <ul class="navbar-nav align-items-center  ml-md-auto ">
+            
+          </ul>
+          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 "  id="papp" v-cloak>
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder" v-bind:src="gravatar">
+                  </span>
+                  <div class="media-body  ml-2  d-none d-lg-block">
+                    <span class="mb-0 text-sm  font-weight-bold">{{pdata.emailid}}</span>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-menu  dropdown-menu-right ">
+                <div class="dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Welcome!</h6>
+                </div>
+                @* <a href="#!" class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span>My profile</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-settings-gear-65"></i>
+                  <span>Settings</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-calendar-grid-58"></i>
+                  <span>Activity</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-support-16"></i>
+                  <span>Support</span>
+                </a> *@
+                <div class="dropdown-divider"></div>
+                <a href="#!" class="dropdown-item" @@click="logout()">
+                  <i class="ni ni-user-run"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-6" id="dd" v-cloak>
+      <div class="container-fluid">
+        <div class="header-body" v-if="pdata">
+         
+          <div class="row" v-if="Services && pdata.type==0">
+            <div class="col-xl-2 col-md-3" v-for="a in Services">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">{{a.category_name}}</h5>
+                      @* <span class="h2 font-weight-bold mb-0">350,897</span> *@
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-active-40"></i>
+                      </div>
+                    </div>
+                  </div>
+                  @* <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p> *@
+                </div>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+<div v-cloak id="searchApp">
+
+
+      <div class="col-xl-12 col-md-12" v-if="pdata.type==0">
+               <form  >
+              <div class="form-group mb-0">
+                
+                    @* <span class="input-group-text"><i class="fas fa-search"></i></span> *@
+                    <vue-bootstrap-typeahead
+                      :data="sub"
+                      v-model="search"
+                      :serializer="s => s.servicesubcategory"
+                    >
+                    
+                
+              </div>
+              <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+                
+              </button> 
+              <hr>
+            </form>
+           </div>
+
+<div class="row" v-if="result.length>0">
+
+<div class="col-md-12 col-lg-12">
+<div class="card">
+   <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Search Result</h3>
+                </div>
+                <div class="col text-right">
+                 {{result.length}} data found.
+                </div>
+              </div>
+            </div>
+
+</div>
+
+  <div class="card" v-for="s in result">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">{{s.name}}</h3>
+                </div>
+            
+
+
+
+                <div class="col text-right">
+                  <a href="#!" @@click="bookuser(s)" class="btn btn-sm btn-primary">Book</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+             
+            </div>
+          </div>
+
+
+
+
+</div>
+
+<b-modal id="modal-2" ref="bookingDialog" title="Book Service" hide-footer no-close-on-esc no-close-on-backdrop hide-header-close>
+            <div v-if="selectedUser">
+              Book {{selectedUser.name}} for {{search}}
+            </div>
+
+            <div class="form-group">
+                
+                  <label for="example-datepicker">Choose a date for service</label>
+                  <b-form-datepicker id="example-datepicker" v-model="servicebook.request_datetime" class="mb-2"></b-form-datepicker>
+                 
+                
+            </div>
+            <div class="form-group">
+                <label>Instructions</label>
+                 <b-form-textarea
+      
+      v-model="servicebook.instruction"
+      placeholder="Enter something..."
+      rows="3"
+      max-rows="6"
+    ></b-form-textarea>
+            </div>
+
+
+
+            <button type="button" class="btn btn-info" @@click="book()">Book</button>
+            <button type="button" class="btn btn-warning"  @@click="cancel()"> Close </button>
+  </b-modal>
+
+
+
+</div>
+
+
+
+
+
+</div>
+<div></div>
+
+
+
+    @RenderBody()
+     
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <div class="copyright text-center  text-lg-left  text-muted">
+              &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="~/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="~/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="~/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="~/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="~/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="~/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="~/assets/js/argon.js?v=1.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <style>
+        [v-cloak]{
+            display:none
+        }
+    </style>
+    <script src="~/vue/vue.js"></script>
+    <script src="~/axios/axios.min.js"></script>
+    <script src="~/bootstrap-vue/bootstrap-vue.min.js" asp-add-nonce></script>
+    <script src="~/bootstrap-vue/bootstrap-vue-icons.js" asp-add-nonce></script>
+    <link href="~/bootstrap-vue/bootstrap-vue.css" rel="stylesheet" asp-add-content-to-csp csp-hash-type="SHA384" />
+    <link href="~/bootstrap-vue/bootstrap-vue-icons.css" rel="stylesheet" asp-add-content-to-csp csp-hash-type="SHA384" />
+  
+    <script src="~/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.umd.js"></script>
+    <link href="~/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.css" type="text/css" rel="stylesheet" />
+<script>
+    var MD5 = function(d){var r = M(V(Y(X(d),8*d.length)));return r.toLowerCase()};function M(d){for(var _,m="0123456789ABCDEF",f="",r=0;r<d.length;r++)_=d.charCodeAt(r),f+=m.charAt(_>>>4&15)+m.charAt(15&_);return f}function X(d){for(var _=Array(d.length>>2),m=0;m<_.length;m++)_[m]=0;for(m=0;m<8*d.length;m+=8)_[m>>5]|=(255&d.charCodeAt(m/8))<<m%32;return _}function V(d){for(var _="",m=0;m<32*d.length;m+=8)_+=String.fromCharCode(d[m>>5]>>>m%32&255);return _}function Y(d,_){d[_>>5]|=128<<_%32,d[14+(_+64>>>9<<4)]=_;for(var m=1732584193,f=-271733879,r=-1732584194,i=271733878,n=0;n<d.length;n+=16){var h=m,t=f,g=r,e=i;f=md5_ii(f=md5_ii(f=md5_ii(f=md5_ii(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_ff(f=md5_ff(f=md5_ff(f=md5_ff(f,r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+0],7,-680876936),f,r,d[n+1],12,-389564586),m,f,d[n+2],17,606105819),i,m,d[n+3],22,-1044525330),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+4],7,-176418897),f,r,d[n+5],12,1200080426),m,f,d[n+6],17,-1473231341),i,m,d[n+7],22,-45705983),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+8],7,1770035416),f,r,d[n+9],12,-1958414417),m,f,d[n+10],17,-42063),i,m,d[n+11],22,-1990404162),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+12],7,1804603682),f,r,d[n+13],12,-40341101),m,f,d[n+14],17,-1502002290),i,m,d[n+15],22,1236535329),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+1],5,-165796510),f,r,d[n+6],9,-1069501632),m,f,d[n+11],14,643717713),i,m,d[n+0],20,-373897302),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+5],5,-701558691),f,r,d[n+10],9,38016083),m,f,d[n+15],14,-660478335),i,m,d[n+4],20,-405537848),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+9],5,568446438),f,r,d[n+14],9,-1019803690),m,f,d[n+3],14,-187363961),i,m,d[n+8],20,1163531501),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+13],5,-1444681467),f,r,d[n+2],9,-51403784),m,f,d[n+7],14,1735328473),i,m,d[n+12],20,-1926607734),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+5],4,-378558),f,r,d[n+8],11,-2022574463),m,f,d[n+11],16,1839030562),i,m,d[n+14],23,-35309556),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+1],4,-1530992060),f,r,d[n+4],11,1272893353),m,f,d[n+7],16,-155497632),i,m,d[n+10],23,-1094730640),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+13],4,681279174),f,r,d[n+0],11,-358537222),m,f,d[n+3],16,-722521979),i,m,d[n+6],23,76029189),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+9],4,-640364487),f,r,d[n+12],11,-421815835),m,f,d[n+15],16,530742520),i,m,d[n+2],23,-995338651),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+0],6,-198630844),f,r,d[n+7],10,1126891415),m,f,d[n+14],15,-1416354905),i,m,d[n+5],21,-57434055),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+12],6,1700485571),f,r,d[n+3],10,-1894986606),m,f,d[n+10],15,-1051523),i,m,d[n+1],21,-2054922799),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+8],6,1873313359),f,r,d[n+15],10,-30611744),m,f,d[n+6],15,-1560198380),i,m,d[n+13],21,1309151649),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+4],6,-145523070),f,r,d[n+11],10,-1120210379),m,f,d[n+2],15,718787259),i,m,d[n+9],21,-343485551),m=safe_add(m,h),f=safe_add(f,t),r=safe_add(r,g),i=safe_add(i,e)}return Array(m,f,r,i)}function md5_cmn(d,_,m,f,r,i){return safe_add(bit_rol(safe_add(safe_add(_,d),safe_add(f,i)),r),m)}function md5_ff(d,_,m,f,r,i,n){return md5_cmn(_&m|~_&f,d,_,r,i,n)}function md5_gg(d,_,m,f,r,i,n){return md5_cmn(_&f|m&~f,d,_,r,i,n)}function md5_hh(d,_,m,f,r,i,n){return md5_cmn(_^m^f,d,_,r,i,n)}function md5_ii(d,_,m,f,r,i,n){return md5_cmn(m^(_|~f),d,_,r,i,n)}function safe_add(d,_){var m=(65535&d)+(65535&_);return(d>>16)+(_>>16)+(m>>16)<<16|65535&m}function bit_rol(d,_){return d<<_|d>>>32-_}
+</script>
+    <script>
+    Vue.use(BootstrapVue);
+    Vue.use(VueBootstrapTypeahead);
+    Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+    var app = new Vue({
+        el: "#papp",
+        data: {
+           token :null,
+           pdata:null
+        },
+        created() {
+            var token = localStorage.getItem("token");
+            if(token==null || token==undefined){
+                window.location.href='/Account/Login'
+            }
+            this.token= token;
+            this.pdata = JSON.parse(localStorage.getItem("data"))
+
+            
+        },
+        computed:{
+            gravatar(){
+            return "https://www.gravatar.com/avatar/"+MD5(this.pdata.emailid)
+            }
+        },
+        methods: {
+            logout(){
+                localStorage.clear()
+                window.location.href='/Account/Login'
+            }
+            }  
+    })
+     var app = new Vue({
+        el: "#dd",
+        data: {
+           
+           Services:[],
+           pdata:null
+        },
+        created() {
+           this.pdata = JSON.parse(localStorage.getItem("data"))
+            axios.get("/api/services/AllServices").then(data => {
+                if (data.data.status == 0) {
+                    this.Services = data.data.payload;
+                } else {
+                    alert(data.data.message)
+                }
+            })
+        },
+        computed:{
+            gravatar(){
+            return "https://www.gravatar.com/avatar/"+MD5(this.pdata.emailid)
+            }
+        },
+        methods: {
+            logout(){
+                localStorage.clear()
+                window.location.href='/Account/Login'
+            }
+            }  
+    })
+       var app = new Vue({
+        el: "#searchApp",
+        data: {
+          token:null,
+          Services:[],
+          pdata: null,
+          sub:[],
+          search:null,
+          result:[],
+          selectedUser:null,
+          servicebook:{
+            provider_id:null,
+            service_id:null,
+            request_datetime:null,
+            instruction:null
+           }
+        },
+       
+        created() {
+           var token = localStorage.getItem("token");
+            if(token==null || token==undefined){
+                window.location.href='/Account/Login'
+            }
+            this.token= token;
+           this.pdata = JSON.parse(localStorage.getItem("data"))
+            axios.get("/api/services/AllServices").then(data => {
+                if (data.data.status == 0) {
+                    this.Services = data.data.payload;
+                    for (var i = 0; i < this.Services.length; i++) {
+                        for (var l = 0; l < this.Services[i].services.length; l++) {
+                            this.sub.push(this.Services[i].services[l])
+                        }
+                    }
+                } else {
+                    alert(data.data.message)
+                }
+            })
+        },
+        computed:{
+          serviceList()
+          {
+              return this.sub.map(o=>o.servicesubcategory);
+          },
+          serviceId(){
+            return this.sub.filter(l=> l.servicesubcategory==this.search)[0];
+          },
+          gravatar(){
+          return "https://www.gravatar.com/avatar/"+MD5(this.pdata.emailid)
+          }
+        },
+        methods: {
+            logout(){
+                localStorage.clear()
+                window.location.href='/Account/Login'
+            },
+            searchUsers(query) {
+                axios.get(`/api/Booking/Search?search=${query}`, { headers: { 'Authorization': this.token } })
+                .then(res=>{
+                  if(res.data.status==0){
+                    this.result=res.data.payload
+                  }else{
+                    alert(res.data.message)
+                  }
+                })
+            },
+            book() {
+              this.servicebook.service_id = this.serviceId.service_id;
+              this.servicebook.provider_id= this.selectedUser.userId;
+              var data =JSON.parse(JSON.stringify(this.servicebook))    
+              axios.post('/api/booking/book',data, { headers: { 'Authorization': this.token } })
+              .then(data=>{
+                  if(data.data.status==0){
+                     this.selectedUser=null;
+                    this.servicebook ={
+                      provider_id:null,
+                      service_id:null,
+                      request_datetime:null,
+                      instruction:null
+                    }
+               this.$refs["bookingDialog"].hide();
+               alert("Booking success")
+               window.location.reload()
+                  }else{
+                    aler(data.data.message)
+                  }
+
+
+              })
+
+            },
+            cancel(){
+              this.selectedUser=null;
+              this.servicebook ={
+                provider_id:null,
+                service_id:null,
+                request_datetime:null,
+                instruction:null
+              }
+              this.$refs["bookingDialog"].hide();
+            },
+            bookuser(user){
+              this.selectedUser=user;
+              this.$refs["bookingDialog"].show();
+            }
+           },
+           watch: {
+               search: _.debounce(function (newQuery) { this.searchUsers(newQuery) }, 250)
+           },
+    })
+</script>
+
+@RenderSection("scripts",false)
+
+
+
+</body>
+
+</html>

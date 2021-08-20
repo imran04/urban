@@ -1,0 +1,184 @@
+﻿@{
+    Layout="_DashboardLayout";
+}
+
+<div id="app" v-cloak v-if="pdata">
+
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="card" >
+                <div class="card-body">
+                    <h2>Bookings <span class="badge badge-info float-right">{{(Bookings.length==0)?"No":Bookings.length}}  Booking(s)</span></h2>
+                   
+                    <ul class="list-group" >
+                        <li v-for="i in Bookings" class="list-group-item">
+                        <div class=row>
+                                <div class="col-md-6" v-if="isProvider">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <span class="avatar avatar-sm rounded-circle">
+                                                <img v-bind:src="gravtar(i.consumerEmail)" class="img img-avatar"> 
+                                            </span>
+                                        </div>
+                                        <div class="col-md-8">{{i.consumerName}}</div>
+                                        <b-form-rating v-model="i.consumerrating" inline readonly></b-form-rating>
+                                    </div>
+
+                                   
+                                      
+                                   
+                                </div>
+                                <div class="col-md-6" v-if="isConsumer">
+                                    <div class="col-md-4">
+                                            <span class="avatar avatar-sm rounded-circle">
+                                                <img v-bind:src="gravtar(i.providerEmail)" class="img img-avatar"> 
+                                            </span>
+                                        </div>
+                                        <div class="col-md-8">{{i.providerName}}</div>
+                                        <b-form-rating v-model="i.providerrating" inline readonly></b-form-rating>
+                                 
+                                    </div>
+                                <div class="col-md-6">
+                                    Service : {{i.serviceName}},
+                                    <p>Instructions : {{i.instruction}}</p>
+                                    <span class="badge badge-warning">On Date : {{i.onDate | date}}</span>
+                                    <span class="badge badge-success" v-if="i.complete">Completed</span>
+                                     <span class="badge badge-danger" v-if="!i.complete">Pending</span>
+                                </div>
+                                
+                        </div>
+                        
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" v-if="pdata && isProvider">
+
+                <div v-if="pdata.profile_complete==false" class="card-body">
+                    <div class="alert alert-danger">
+                        <p>Complete Profile</p>
+                    </div>
+                    Select Multiple Services
+                    <ul class="list-group"  v-for="a in Services">
+                        <li class="list-group list-group-heading">
+                            <h3>{{a.category_name}}</h3></li>
+                        <li class="list-group list-group-item"  v-for="a1 in a.services" >
+                            <input type="checkbox" v-bind:value="a1.service_id" >
+                                {{a1.servicesubcategory}}
+                        
+                            </li>
+                   </ul>
+                    <div class="mt-1">
+
+                    </div>
+                    <button class="btn btn-success">Complete</button>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+@section scripts {
+    <style>
+        select[multiple]{
+            min-height:400px;
+        }
+    </style>
+<script>
+var app = new Vue({
+el:"#app",
+data:{
+    token :null,
+    pdata:null,
+    data:null,
+    Services: [],
+    SelectService: [],
+    Bookings:[]
+},
+    mounted() {
+    this.pdata = JSON.parse(localStorage.getItem("data"))
+    var token = localStorage.getItem("token");
+    if(token==null || token==undefined){
+        window.location.href='/Account/Login'
+    }
+    this.token= token;
+    axios.get("/api/services/AllServices").then(data => {
+        if (data.data.status == 0) {
+            this.Services = data.data.payload;
+        } else {
+            alert(data.data.message)
+        }
+    })
+    axios.get("/api/booking/ListAll?page=0&size=20", { headers: { 'Authorization': this.token } }).then(data => {
+        if (data.data.status == 0) {
+            this.Bookings = data.data.payload
+        } else {
+            alert(data.data.message)
+        }
+    })
+},
+computed:{
+    isConsumer(){
+        return this.pdata.type==0
+    },
+    isProvider(){
+         return this.pdata.type==1
+    }
+},
+methods:{
+        loadData(){
+                if(this.isProvider){
+
+                }
+                if(this.isConsumer){
+
+                }
+                if(this.pdata.profile_complete==false){
+
+                }
+        },
+        gravtar(email){
+         return "https://www.gravatar.com/avatar/"+MD5(email)
+        }
+
+
+
+},
+filters: {
+    date: function (str) {
+        if (!str) { return '(n/a)'; }
+        str = new Date(str);
+        return ((str.getDate() < 10) ? '0' : '') + str.getDate() + '-' + ((str.getMonth() < 9) ? '0' : '') + (str.getMonth() + 1) + '-' + str.getFullYear()
+            ;
+    }
+}
+
+})
+
+
+
+</script>
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
