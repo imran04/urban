@@ -31,7 +31,7 @@ namespace app.Controllers
                 return View();
         }
 
-        public IActionResult Consumer(){
+        public IActionResult Register(){
             return View();
         }
 

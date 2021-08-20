@@ -14,11 +14,4 @@ namespace app.Models.ViewModels
         public string Message { get; set; }
 
     }
-
-
-    public enum ResultType
-    {
-        SUCCESS,
-        FAILED
-    }
 }

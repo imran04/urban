@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,41 +27,24 @@ namespace app.Models.ViewModels
 
     }
 
-    public class Search
-    {
-        public string Service { get; set; }
-        public int ServiceId { get; set; }
-        public int Page { get; set; }
-        public int Size { get; set; }
-    }
-
-
-    public class Category
-    {
-        public int service_category_id { get; set; }
-        public string category_name { get; set; }
-        public string image { get; set; }
-
-        public  ICollection<ServiceVm> Services { get; set; }
-
-    }
-
     public class ServiceVm
     {
         public int service_id { get; set; }
         public string servicesubcategory { get; set; }
     }
 
-
-    public class Profile
+    public class ProviderServices
     {
         public int UserId { get; set; }
-        public string Name { get; set; }
-        public string AvgRating { get; set; }
-        public string Mobile { get; set; }
-        public string Email { get; set; }
-        public string AlternateMobile { get; set; }
-
+        public int ServiceId {get;set;}
+        public string Service   {get;set;}
+        public string Category  {get;set;}
     }
 
+    public class ServiceCategoryVM
+    {
+        public string CategoryName { get; set; }
+        public string Image { get; set; }
+        public string Display { get; set; }
+    }
 }
