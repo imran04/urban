@@ -147,9 +147,10 @@
         },
         methods: {
             registeraction() {
-
-                this.register.latitute = this.location.coords.latitude;
-                this.register.longitude = this.location.coords.longitude;
+                if (this.location.coords != null) {
+                    this.register.latitute = this.location.coords.latitude;
+                    this.register.longitude = this.location.coords.longitude;
+                }
                 var data = JSON.parse(JSON.stringify(this.register))
                 axios.post("/api/account/register", data).
                 then(data => {
