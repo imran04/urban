@@ -452,3 +452,5 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+app/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs
+app/obj/Debug/net5.0/ref/app.dll

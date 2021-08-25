@@ -184,7 +184,8 @@
                 </div>
                 <div class="col text-right" v-if="search">
                   <span v-if="searching">Searching ...</span>
-                 {{result.length}} data found.
+                  <span v-if="!searching">{{result.length}} data found.</span>
+                 
                 </div>
               </div>
             </div>
