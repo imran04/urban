@@ -52,6 +52,7 @@ namespace app.Infra
                         if (insertCount == 1)
                         {
                             tra.Commit();
+
                             return new ResultObject { status = ResultType.SUCCESS, Message = "User was created Successfully" };
                         }
                         else
@@ -74,8 +75,12 @@ namespace app.Infra
         {
             string Query = "Select * from Users where username=@UserName";
             var ProfileComplete = false;
+            
             using (var cn = new SqlConnection(configuration.GetConnectionString("default")))
             {
+                cn.Execute(@"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
+                                select userid,username,0,mobile,emailid,mobile from users where userid not in
+								( select userid from profile)");
                 var count = cn.QueryFirst<Users>(Query, new { UserName});
                 if (count !=null)
                 {
@@ -87,7 +92,7 @@ namespace app.Infra
                             var r = cn.QueryFirst<int>(query1, new { uid = count.userid });
                             ProfileComplete = r > 1;
                         }
-                        this.Profile();
+                        
                         var token = GenrateToken(count);
                         return new ResultObject { status = ResultType.SUCCESS, Payload = new { token, count.username, count.address, count.emailid, count.latitute, count.longitude, count.userid, profile_complete=ProfileComplete, count.type }, Message = "Login Complete" };
                     }
