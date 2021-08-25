@@ -455,3 +455,4 @@ $RECYCLE.BIN/
 app/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs
 app/obj/Debug/net5.0/ref/app.dll
 *.pdb
+app/.vs/app/v16/.suo
