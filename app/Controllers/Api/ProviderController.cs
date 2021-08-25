@@ -1,10 +1,14 @@
 ﻿using app.Infra;
+using app.Models.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace app.Controllers.Api
@@ -26,9 +30,33 @@ namespace app.Controllers.Api
 
         [HttpGet]
         [Route("[action]")]
+         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public object Services()
         {
            return providerRepository.ListServices();
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public object AddServices(int[] serviceId){
+
+            var providerService = providerRepository.ListServices() as ResultObject;
+            if(providerService.status== ResultType.SUCCESS && (providerService.Payload as List<ProviderServices>).Count>0){
+                    var data=  (providerService.Payload as List<ProviderServices>).Select( i=> i.ServiceId).ToList();
+                    logger.LogInformation($"{string.Join(",",data)}");
+                    //data.RemoveAll(s=> serviceId.Contains(s));
+                    foreach (var item in data)
+                    {
+                        providerRepository.RemoveService(item);
+                    }
+
+                    
+            }
+            foreach(var i in serviceId)
+                providerRepository.AddService(i);
+            return serviceId;
         }
     }
 }

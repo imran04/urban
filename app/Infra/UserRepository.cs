@@ -1,5 +1,6 @@
 ﻿using app.Models.ViewModels;
 using Dapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -16,10 +17,12 @@ namespace app.Infra
         IConfiguration configuration;
         ILogger<UserRepository> logger;
 
-        public UserRepository(IConfiguration configuration, ILogger<UserRepository> logger)
+        IHttpContextAccessor HttpContext;
+        public UserRepository(IConfiguration configuration, ILogger<UserRepository> logger, IHttpContextAccessor HttpContext)
         {
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.HttpContext = HttpContext ?? throw new ArgumentNullException(nameof(HttpContext));
         }
 
         public object AddUser(Users user)
@@ -78,12 +81,16 @@ namespace app.Infra
                 {
                     if (Password.CheckValidPasswprd(count.securitystamp, count.password))
                     {
+                        
+
+
                         var query1 = "Select count(*) from selected_services where uid=@uid";
                         if (count.type == 1)
                         {
                             var r = cn.QueryFirst<int>(query1, new { uid = count.userid });
                             ProfileComplete = r > 1;
                         }
+                        this.Profile();
                         var token = GenrateToken(count);
                         return new ResultObject { status = ResultType.SUCCESS, Payload = new { token, count.username, count.address, count.emailid, count.latitute, count.longitude, count.userid, profile_complete=ProfileComplete, count.type }, Message = "Login Complete" };
                     }
@@ -94,7 +101,27 @@ namespace app.Infra
             }
         }
 
+        public object Profile(){
+            try{
+                var UserId = HttpContext.HttpContext.User.Identity.Name;
+                var Sql ="Select * from Profile where UserId=@UserId";
+                using(var connection=new SqlConnection(configuration.GetConnectionString("default"))){
+                        var data = connection.QueryFirstOrDefault<Profile>(Sql,new{UserId});
+                        if(data==null){
+                            var sql1=@"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
+                                select userid,username,0,mobile,emailid,mobile from users where userid = @UserId";
+                           connection.Execute(sql1,new{UserId});
+                           data = connection.QueryFirstOrDefault<Profile>(Sql,new{UserId});
+                        }
 
+                        return new ResultObject {status = ResultType.SUCCESS,Payload=data,Message="Sccucess"};
+                }
+            }
+            catch(Exception ex){
+                return new ResultObject {status = ResultType.FAILED,Payload=null,Message="Failed:" + ex.Message};
+            }
+
+        }
         public string GenrateToken(Users data)
         {
             logger.LogInformation(JsonConvert.SerializeObject(data));

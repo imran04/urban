@@ -43,6 +43,7 @@ namespace app.Controllers.Api
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public object Search(string Search,int page=0,int size=20)
         {
+            logger.LogInformation($"{Search}:{page}:{size}");
             return providerRepository.Search(new Models.ViewModels.Search{ Service=Search,Page=page,Size=size});
         }
 

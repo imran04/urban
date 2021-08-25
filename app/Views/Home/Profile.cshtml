@@ -27,7 +27,7 @@
                         <li class="list-group list-group-heading">
                             <h3>{{a.category_name}}</h3></li>
                         <li class="list-group list-group-item"  v-for="a1 in a.services" >
-                            <input type="checkbox" v-bind:value="a1.service_id" >
+                            <input type="checkbox" v-bind:value="a1.service_id" @@click="AddRmService(a1.service_id)"   v-bind:checked="selected(a1.service_id)">
                                 {{a1.servicesubcategory}}
                         
                             </li>
@@ -35,7 +35,7 @@
                     <div class="mt-1">
 
                     </div>
-                    <button class="btn btn-success">Complete</button>
+                    <button class="btn btn-success"  @@click="saveData()">Complete</button>
 
                 </div>
 
@@ -63,7 +63,8 @@ var app = new Vue({
         token :null,
         pdata:null,
         data:null,
-        Services:[]
+        Services:[],
+        selectedService:[]
     },
     mounted() {
     this.pdata = JSON.parse(localStorage.getItem("data"))
@@ -78,8 +79,14 @@ var app = new Vue({
         } else {
             alert(data.data.message)
         }
-    })
-   
+    });
+   axios.get("/api/Provider/Services",{ headers: { 'Authorization': this.token } }).then(data => {
+        if (data.data.status == 0) {
+            this.selectedService= data.data.payload.map(i=> i.serviceId);
+        } else {
+            alert(data.data.message)
+        }
+    });
 },
 computed:{
     isConsumer(){
@@ -90,6 +97,26 @@ computed:{
     }
 },
 methods:{
+    AddRmService(id){
+            if(this.selectedService.filter(i=>i==id).length>0){
+                var index = this.selectedService.indexOf(Id);
+                if(index!=-1){
+                    this.selectedService.splice(index,1)
+                }
+            }else{
+                this.selectedService.push(id)
+            }
+    },
+    saveData(){
+            var data = JSON.parse(JSON.stringify(this.selectedService));
+            axios.post('/api/Provider/AddServices',data,{ headers: { 'Authorization': this.token } }).then(data=>{
+                alert(data.data)
+            })
+
+    },
+    selected(id){
+        return this.selectedService.filter(i=>i==id).length>0;
+    },
 loadData(){
         if(this.isProvider){
 

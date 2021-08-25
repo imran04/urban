@@ -36,11 +36,13 @@ namespace app.Infra
                     if (count == 1)
                     {
                         tra.Commit();
+                        Logger.LogInformation($"{UserId} : {serviceId} | added");
                         return new ResultObject { status = ResultType.SUCCESS, Message = "Added " };
                     }
                     else
                     {
                         tra.Rollback();
+                        Logger.LogInformation($"{UserId} : {serviceId} | failed");
                         return new ResultObject { status = ResultType.FAILED, Message = "Failed " };
                     }
                 }
@@ -74,6 +76,7 @@ namespace app.Infra
 
         public object Search(Search s)
         {
+            Logger.LogInformation($"------------------------------Search--{s.Service}------------------------------------");
             var serach =@"select p.* from users u join
                 profile p on u.userid=p.userid join
                 selected_services ss on ss.uid=u.userid  join
@@ -87,12 +90,13 @@ namespace app.Infra
                     Logger.LogInformation(serach);
                     var count = cn.Query<Profile>(serach, new { s.Service,page=s.Page,size=s.Size }).Distinct().ToList();
 
-
+                Logger.LogInformation("--------------------------------------------------------------------");
                     return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
 
                 }
             }
             catch(Exception ex){
+                Logger.LogInformation($"------------------------------Exception : {ex.Message} --------------------------------------");
                  return new ResultObject { status = ResultType.FAILED, Message = "Failed: "+ex.Message};
             }
 
