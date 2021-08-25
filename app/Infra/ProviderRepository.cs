@@ -77,10 +77,10 @@ namespace app.Infra
         public object Search(Search s)
         {
             Logger.LogInformation($"------------------------------Search--{s.Service}------------------------------------");
-            var serach =@"select p.* from users u join
+            var serach =@"select distinct p.* from users u join
                 profile p on u.userid=p.userid join
                 selected_services ss on ss.uid=u.userid  join
-                services s on ss.service_id=s.service_id where servicesubcategory=@Service 
+                services s on ss.service_id=s.service_id where servicesubcategory=@Service or servicecategory=@Service 
                 order by userid
                 offset @page*@size rows
                 fetch next @size rows only";

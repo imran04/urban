@@ -81,9 +81,6 @@ namespace app.Infra
                 {
                     if (Password.CheckValidPasswprd(count.securitystamp, count.password))
                     {
-                        
-
-
                         var query1 = "Select count(*) from selected_services where uid=@uid";
                         if (count.type == 1)
                         {
