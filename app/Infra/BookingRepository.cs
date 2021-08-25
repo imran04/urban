@@ -28,6 +28,7 @@ namespace app.Infra
             var UserId = HttpContext.HttpContext.User.Identity.Name;
             booking.consumer_id = int.Parse(UserId);
             booking.request_completion_date= DateTime.Now;
+            booking.service_id=0;
             var Query = @"INSERT INTO [dbo].[booking]([consumer_id],[provider_id],[service_id],[request_datetime],[request_completion_date]
            ,[consumer_rating],[provider_rating],[complete_status],[instruction]) VALUES (
             @consumer_id,@provider_id,@service_id,@request_datetime,@request_completion_date
@@ -90,8 +91,8 @@ namespace app.Infra
                 Logger.LogInformation($@"{Page*Size} :{Page} :{Size}");
                 if (UserType == 0)
                 {
-                    Query = @"select b.booking_id, s.servicesubcategory ServiceName,b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,b.complete_status complete from booking b join 
-                                services s on b.service_id= s.service_id join
+                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,b.complete_status complete from booking b join 
+                                
                                 profile p on p.userid=b.provider_id join
                                 profile c on c.UserId=b.consumer_id 
                                 where b.consumer_id=@UserId order by booking_id desc 
@@ -101,8 +102,8 @@ namespace app.Infra
                 }
                 else
                 {
-                    Query = @"select b.booking_id, s.servicesubcategory ServiceName,b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,b.complete_status complete from booking b join 
-                                services s on b.service_id= s.service_id join
+                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,b.complete_status complete from booking b join 
+                             
                                 profile p on p.userid=b.provider_id join
                                 profile c on c.UserId=b.consumer_id 
                                 where b.provider_id=@UserId order by booking_id desc 

@@ -427,7 +427,7 @@
                 }).finally(()=>this.searching=false)
             },
             book() {
-              this.servicebook.service_id = this.serviceId.service_id;
+             this.servicebook.service_id = 0;
               this.servicebook.provider_id= this.selectedUser.userId;
               var data =JSON.parse(JSON.stringify(this.servicebook))    
               axios.post('/api/booking/book',data, { headers: { 'Authorization': this.token } })
