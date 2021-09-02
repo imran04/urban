@@ -5,17 +5,17 @@
 
 <div class="row justify-content-center" id="app" v-cloak>
     <div class="col-lg-6 col-md-8">
-        <div class="card bg-secondary border-0">
+        <div class="card  border-0">
             @*<div class="card-header bg-transparent pb-5">
-            <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-            <div class="text-center">
+                <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
+                <div class="text-center">
 
-                <a href="#" class="btn btn-neutral btn-icon">
-                    <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-                    <span class="btn-inner--text">Google</span>
-                </a>
-            </div>
-        </div>*@
+                    <a href="#" class="btn btn-neutral btn-icon">
+                        <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
+                        <span class="btn-inner--text">Google</span>
+                    </a>
+                </div>
+            </div>*@
            
             <div class="card-body px-lg-5 py-lg-5">
                 <div class="text-center text-muted mb-4">
@@ -86,7 +86,9 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary mt-4" @@click="registeraction()">Create account</button>
+                        <button type="button" class="btn btn-primary mt-4" @@click="registeraction()">
+                            <b-spinner v-if="isProcessing" label="Loading..."></b-spinner>  Create account
+                        </button>
                     </div>
                 </form>
             </div>
@@ -106,9 +108,10 @@
             display: none;
         }
     </style>
-    <script src="~/vue/vue.min.js"></script>
-    <script src="~/axios/axios.min.js"></script>
-
+    @*<script src="~/vue/vue.min.js"></script>
+    <script src="~/axios/axios.min.js"></script>*@
+    <script src="~/vee-validate/vee-validate.js"></script>
+    <script src="~/sweetalert/sweetalert.min.js"></script>
     <script>
     var app = new Vue({
         el: "#app",
@@ -126,7 +129,8 @@
             },
             location: null,
             gettingLocation: false,
-            errorStr: null
+            errorStr: null,
+            isProcessing:false
         },
         created() {
            /* //do we support geolocation
@@ -151,6 +155,9 @@
                 //    this.register.latitute = this.location.coords.latitude;
                 //    this.register.longitude = this.location.coords.longitude;
                 //}
+                if (this.isProcessing)
+                    return;
+                this.isProcessing=true
                 var data = JSON.parse(JSON.stringify(this.register))
                 axios.post("/api/account/register", data).
                 then(data => {
@@ -161,8 +168,13 @@
                         alert("Please provide Correct Input")
                     }
                     else {
-                        alert(data.data.message)
+                        swal(data.data.message)
+                        //alert(data.data.message)
                     }
+                }).catch(e => {
+                    swal(e.message)
+                }).finally(_ => {
+                    this.isProcessing = false
                 })
 
 

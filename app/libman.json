@@ -52,6 +52,19 @@
     {
       "library": "bootstrap-vue@2.21.2",
       "destination": "wwwroot/bootstrap-vue/"
+    },
+    {
+      "library": "vee-validate@3.3.9",
+      "destination": "wwwroot/vee-validate/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "vue-sweetalert2@5.0.2",
+      "destination": "wwwroot/vue-sweetalert2/"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/sweetalert/"
     }
   ]
 }
