@@ -12,9 +12,13 @@ using Dapper;
 using System.Data.SqlClient;
 using app.Models.ViewModels;
 using app.Infra;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace app.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -29,9 +33,11 @@ namespace app.Controllers
             configuration=_configuration;
             provider = Provider;
         }
-
+       [AllowAnonymous]
         public IActionResult Index()
         {
+            _logger.LogInformation(User.Identity.Name);
+         
             using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
             {
                 var sql = @"select category_name CategoryName,image Image,display Display from service_category where status=1;
@@ -50,15 +56,11 @@ namespace app.Controllers
                     ViewBag.Services = services;
                     return View(data);
                 }
-                
-
-
-
-
-                
+  
             }
         }
 
+        [AllowAnonymous]
         public IActionResult Search(string Search,int page=0,int size=30)
         {
             var data = provider.Search(new Models.ViewModels.Search { Service = Search, Page = page, Size = size }) as ResultObject;
@@ -68,8 +70,19 @@ namespace app.Controllers
                 throw new Exception(message: data.Message);
             
         }
+        [AllowAnonymous]
+        public IActionResult Professional(string id)
+        {
+            _logger.LogInformation(WebUtility.HtmlDecode(id));
+            var par =int.Parse(new AESEncrytDecryt().DecryptStringAES(WebUtility.HtmlDecode(id)));
+            var data = provider.ProviderDetails(par) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+                return View(data.Payload as ProfileSearchModel);
+            else
+                throw new Exception(message: data.Message);
+        }
 
-
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
@@ -81,7 +94,7 @@ namespace app.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+       
         public IActionResult Profile()
         {
             return View();

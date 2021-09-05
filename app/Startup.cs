@@ -33,7 +33,11 @@ namespace app
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+               
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+            .AddJwtBearer(options =>
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
@@ -45,21 +49,24 @@ namespace app
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"])),
                     ClockSkew = TimeSpan.Zero
                 };
-                /*
+
                 options.Events = new JwtBearerEvents
                 {
-                    OnMessageReceived = (context) => {
-                        if (context.Request.Cookies["app"] != null)
+                    OnMessageReceived = (context) =>
+                    {
+                        if (context.Request.Cookies["kjllasic"] != null)
                         {
-                            context.Token = context.Request.Cookies["app"];
+                            context.Token = context.Request.Cookies["kjllasic"];
+                            context.HttpContext.User = context.Principal;
                         }
                         return Task.CompletedTask;
                     }
                 };
-                */
 
 
-            });
+
+            }).AddCookie()
+            ;
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserRepository,UserRepository>();
             services.AddTransient<IServiceRepository, ServiceRepository>();

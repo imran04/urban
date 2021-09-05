@@ -73,7 +73,7 @@ namespace app.Infra
 
         public object Login(string UserName, string Password)
         {
-            string Query = "Select * from Users where username=@UserName";
+            string Query = "Select * from Users where username=@UserName or emailid=@UserName or mobile=@UserName";
             var ProfileComplete = false;
             
             using (var cn = new SqlConnection(configuration.GetConnectionString("default")))
@@ -94,6 +94,7 @@ namespace app.Infra
                         }
                         
                         var token = GenrateToken(count);
+                        HttpContext.HttpContext.Response.Cookies.Append("kjllasic", token);
                         return new ResultObject { status = ResultType.SUCCESS, Payload = new { token, count.username, count.address, count.emailid, count.latitute, count.longitude, count.userid, profile_complete=ProfileComplete, count.type }, Message = "Login Complete" };
                     }
                 }

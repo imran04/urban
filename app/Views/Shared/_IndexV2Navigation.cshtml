@@ -88,7 +88,9 @@
                                 </ul>
                             </div>
                         </nav>
-                        <div class="wt-loginarea">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="wt-loginarea">
                             <figure class="wt-userimg">
                                 <img src="/theme1/images/user-login.png" alt="img description">
                             </figure>
@@ -99,7 +101,7 @@
                                         <span>Login</span>
                                         <a href="javascript:;"><i class="fa fa-times"></i></a>
                                     </div>
-                                    <form class="wt-formtheme wt-loginform do-login-form">
+                                    <form class="wt-formtheme wt-loginform do-login-form" action="/Account/Login" method="post">
                                         <fieldset>
                                             <div class="form-group">
                                                 <input type="text" name="username" class="form-control" placeholder="Username">
@@ -108,10 +110,10 @@
                                                 <input type="password" name="password" class="form-control" placeholder="Password">
                                             </div>
                                             <div class="wt-logininfo">
-                                                <a href="javascript:;" class="wt-btn do-login-button">Login</a>
+                                                <button @*href="javascript:;"*@ class="wt-btn do-login-button">Login</button>
                                                 <span class="wt-checkbox">
-                                                    <input id="wt-login" type="checkbox" name="rememberme">
-                                                    <label for="wt-login">Keep me logged in</label>
+                                                    @*<input id="wt-login" type="checkbox" name="rememberme">
+                                                    <label for="wt-login">Keep me logged in</label>*@
                                                 </span>
                                             </div>
                                         </fieldset>
@@ -231,6 +233,7 @@
                                 </ul>
                             </nav>
                         </div>
+                        }
                     </div>
                 </div>
             </div>

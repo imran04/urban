@@ -9,6 +9,8 @@ using app.Models;
 using Microsoft.Extensions.Configuration;
 // using Microsoft.Data.SqlClient;
 using Dapper;
+using app.Models.ViewModels;
+using app.Infra;
 
 namespace app.Controllers
 {
@@ -16,12 +18,14 @@ namespace app.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public readonly IConfiguration configuration; 
+        public readonly IConfiguration configuration;
+        IUserRepository userRepository;
 
-        public AccountController(ILogger<HomeController> logger,IConfiguration _configuration)
+        public AccountController(ILogger<HomeController> logger,IConfiguration _configuration, IUserRepository userRepository)
         {
             _logger = logger;
             configuration=_configuration;
+            this.userRepository = userRepository;
         }
 
 
@@ -39,16 +43,26 @@ namespace app.Controllers
 
         public IActionResult Login()
         {
-                // using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
-                // {
-                //     var sql ="select * from servicesprofessional";
-                //     var data = connection.Query<servicesprofessional>(sql).ToList();
-                //     return View(data);
-                // }
-
+                
 
             return View();
         }
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            ResultObject data =userRepository.Login(model.UserName,model.Password) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+            {
+                return Redirect("/Home/Profile/");
+            }
+            else
+            {
+                ModelState.AddModelError("UserName", data.Message);
+                return View(model);
+            }
+        }
+
+
 
         public IActionResult Privacy()
         {

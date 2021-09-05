@@ -10,6 +10,9 @@ namespace app.Infra
         object RemoveService(int serviceId);
 
         object ListServices();
-    
+
+        object ProviderDetails(int Id);
+
+
     }
 }

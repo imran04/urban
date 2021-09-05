@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<app.Models.ViewModels.ProfileSearchModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Search ";
     Layout = "_IndexV2Layout";
 }
 
@@ -328,21 +328,21 @@
                             @foreach(var data in Model)
                             {
                             <div class="wt-userlistinghold wt-featured">
-                                <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                @*<span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>*@
                                 <figure class="wt-userlistingimg">
                                     <img gravatar-email="@data.Email" alt="image description" />
                                 </figure>
                                 <div class="wt-userlistingcontent">
                                     <div class="wt-contenthead">
                                         <div class="wt-title">
-                                            <a href="usersingle.html">
-                                                <i class="fa fa-check-circle"></i> @data.Name
+                                            <a asp-action="Professional" asp-controller="home" asp-route-id="@data.Id">
+                                                <i class="fa fa-check-circle"></i> @data.Name @data.Id
                                             </a>
-                                            <h2>Classifieds Posting, Data Entry, Typing</h2>
+                                            <h2>@data.HeadLine</h2>
                                         </div>
                                         <ul class="wt-userlisting-breadcrumb">
                                             @*<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>*@
-                                            <li><span><img src="images/flag/img-02.png" alt="img description">  @data.Email</span></li>
+                                            <li><span>  @data.Email</span></li>
                                             @if (User.Identity.IsAuthenticated)
                                             {
                                                 <li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
@@ -356,17 +356,24 @@
                                     </div>
                                     <div class="wt-rightarea">
                                         <span class="wt-starsvtwo">
+                                            @for (int i = 0; i < (int)data.AvgRating; i++)
+                                            {
+                                                <i class="fa fa-star fill"></i>
+                                            }
+                                            @for (int i = 0; i < 5 - (int)data.AvgRating; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+
+                                            @*<i class="fa fa-star fill"></i>
                                             <i class="fa fa-star fill"></i>
-                                            <i class="fa fa-star fill"></i>
-                                            <i class="fa fa-star fill"></i>
-                                            <i class="fa fa-star fill"></i>
-                                            <i class="fa fa-star fill"></i>
+                                            <i class="fa fa-star fill"></i>*@
                                         </span>
-                                        <span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
+                                        <span class="wt-starcontent">@data.AvgRating /<sub>5</sub> @*<em>(860 Feedback)</em>*@</span>
                                     </div>
                                 </div>
                                 <div class="wt-description">
-                                    <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
+                                    <p>@(data.About.Length>150?new string(data.About.Take(150).ToArray()):data.About) ...</p>
                                 </div>
                                 <div class="wt-tag wt-widgettag">
                                     @foreach (var s in data.Service.Select(o=> o.servicecategory).Distinct())
