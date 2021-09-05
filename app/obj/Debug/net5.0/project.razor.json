@@ -13566,6 +13566,187 @@
         }
       },
       {
+        "HashCode": 1116344986,
+        "Kind": "ITagHelper",
+        "Name": "NetEscapades.AspNetCore.SecurityHeaders.TagHelpers.HashTagHelper",
+        "AssemblyName": "NetEscapades.AspNetCore.SecurityHeaders.TagHelpers",
+        "Documentation": "\n            <summary>\n            Generates a Hash of the content of the script\n            </summary>\n        ",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "script",
+            "Attributes": [
+              {
+                "Name": "asp-add-content-to-csp"
+              }
+            ]
+          },
+          {
+            "TagName": "style",
+            "Attributes": [
+              {
+                "Name": "asp-add-content-to-csp"
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "csp-hash-type",
+            "TypeName": "NetEscapades.AspNetCore.SecurityHeaders.Infrastructure.CSPHashType",
+            "IsEnum": true,
+            "Documentation": "\n            <summary>\n            Add a <code>nonce</code> attribute to the element\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "CSPHashType"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "view-context",
+            "TypeName": "Microsoft.AspNetCore.Mvc.Rendering.ViewContext",
+            "Documentation": "\n            <summary>\n            Provides access to the <see cref=\"P:NetEscapades.AspNetCore.SecurityHeaders.TagHelpers.HashTagHelper.ViewContext\" />\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ViewContext"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "NetEscapades.AspNetCore.SecurityHeaders.TagHelpers.HashTagHelper"
+        }
+      },
+      {
+        "HashCode": -108727738,
+        "Kind": "ITagHelper",
+        "Name": "NetEscapades.AspNetCore.SecurityHeaders.TagHelpers.NonceTagHelper",
+        "AssemblyName": "NetEscapades.AspNetCore.SecurityHeaders.TagHelpers",
+        "Documentation": "\n            <summary>\n            Tag helper for adding a nonce to script and style tags.\n            </summary>\n        ",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "script",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "style",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "frame",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "iframe",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "img",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "audio",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "video",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "object",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "applet",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "embed",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "base",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          },
+          {
+            "TagName": "link",
+            "Attributes": [
+              {
+                "Name": "asp-add-nonce"
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "asp-add-nonce",
+            "TypeName": "System.Boolean",
+            "Documentation": "\n            <summary>\n            Add a <code>nonce</code> attribute to the element\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AddNonce"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "view-context",
+            "TypeName": "Microsoft.AspNetCore.Mvc.Rendering.ViewContext",
+            "Documentation": "\n            <summary>\n            Provides access to the <see cref=\"P:NetEscapades.AspNetCore.SecurityHeaders.TagHelpers.NonceTagHelper.ViewContext\" />\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ViewContext"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "NetEscapades.AspNetCore.SecurityHeaders.TagHelpers.NonceTagHelper"
+        }
+      },
+      {
         "HashCode": 141407075,
         "Kind": "Components.Bind",
         "Name": "Bind",

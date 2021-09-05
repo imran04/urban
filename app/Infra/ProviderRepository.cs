@@ -6,6 +6,7 @@ using System;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using System.Collections.Generic;
 
 namespace app.Infra
 {
@@ -77,7 +78,7 @@ namespace app.Infra
         public object Search(Search s)
         {
             Logger.LogInformation($"------------------------------Search--{s.Service}------------------------------------");
-            var serach =@"select distinct p.* from users u join
+            var serach =@"select distinct p.*,s.* from users u join
                 profile p on u.userid=p.userid join
                 selected_services ss on ss.uid=u.userid  join
                 services s on ss.service_id=s.service_id where servicesubcategory=@Service or servicecategory=@Service 
@@ -88,9 +89,21 @@ namespace app.Infra
             using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
                 {
                     Logger.LogInformation(serach);
-                    var count = cn.Query<Profile>(serach, new { s.Service,page=s.Page,size=s.Size }).Distinct().ToList();
+                    var hash = new Dictionary<int, ProfileSearchModel>();
+                    var count = cn.Query<ProfileSearchModel,Services, ProfileSearchModel>(serach,(s,d)=> {
+                        ProfileSearchModel p ;
+                        if(!hash.TryGetValue(s.UserId,out p))
+                        {
+                            p = s;
+                            p.Service = new List<Services>();
+                            hash.Add(p.UserId, p);
+                        }
+                        p.Service.Add(d);
+                        return p;
+                    
+                    } ,new { s.Service,page=s.Page,size=s.Size },splitOn: "service_id").Distinct().ToList();
 
-                Logger.LogInformation("--------------------------------------------------------------------");
+                    Logger.LogInformation("--------------------------------------------------------------------");
                     return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
 
                 }

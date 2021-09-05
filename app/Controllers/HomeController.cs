@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Dapper;
 using System.Data.SqlClient;
 using app.Models.ViewModels;
+using app.Infra;
 
 namespace app.Controllers
 {
@@ -18,12 +19,15 @@ namespace app.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public readonly IConfiguration configuration; 
+        public readonly IConfiguration configuration;
 
-        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration)
+        private IProviderRepository provider;
+
+        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider)
         {
             _logger = logger;
             configuration=_configuration;
+            provider = Provider;
         }
 
         public IActionResult Index()
@@ -53,10 +57,18 @@ namespace app.Controllers
 
                 
             }
-
-
-         //   return View();
         }
+
+        public IActionResult Search(string Search,int page=0,int size=30)
+        {
+            var data = provider.Search(new Models.ViewModels.Search { Service = Search, Page = page, Size = size }) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+                return View(data.Payload as IEnumerable<ProfileSearchModel>);
+            else
+                throw new Exception(message: data.Message);
+            
+        }
+
 
         public IActionResult Privacy()
         {

@@ -1,4 +1,6 @@
-﻿namespace app.Models.ViewModels
+﻿using System.Collections.Generic;
+
+namespace app.Models.ViewModels
 {
     public class Profile
     {
@@ -9,6 +11,11 @@
         public string Email { get; set; }
         public string AlternateMobile { get; set; }
 
+    }
+
+    public class ProfileSearchModel : Profile
+    {
+        public List<Services> Service { get; set; }
     }
 
 }

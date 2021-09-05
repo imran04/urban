@@ -1,179 +1,131 @@
-﻿ @model IEnumerable<app.Models.ViewModels.ServiceCategoryVM> 
+﻿@model IEnumerable<app.Models.ViewModels.ServiceCategoryVM>
 
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "_IndexV2Layout";
 }
-@section Crousel {
-   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
-                    aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"
-                    class=""></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
-                    class="active" aria-current="true"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"
-                    class="active" aria-current="true"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item">
-                   <img src="~/images/first.jpeg" >
+@section head {
 
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item active carousel-item-start">
-                    <img src="~/images/second.jpeg" >
-
-                    <div class="container">
-                        <div class="carousel-caption">
-                          
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item carousel-item-next carousel-item-start">
-                    <img src="~/images/third.jpeg" >
-
-
-                    <div class="container">
-                        <div class="carousel-caption text-end">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                   <img src="~/images/fourth.jpeg" >
-
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-}
-
-<div class="container marketing">
-
-            <!-- Three columns of text below the carousel -->
+    <div class="wt-haslayout wt-bannerholder">
+        <div class="container">
             <div class="row">
-
-                 @foreach (var item in Model)
-                { 
-                     <div class="col-lg-4">
-                    @*<svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                         <title>@item.CategoryName</title> 
-                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>*@
-                         <img src="@item.Image" class="" width="140" height="140" alt="@item.CategoryName" />
-                     <h2>@item.CategoryName</h2> 
-                     <p>@item.Display</p>
-                    <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                    <div class="wt-bannerimages">
+                        <figure class="wt-bannermanimg" data-tilt>
+                            <img src="/theme1/images/bannerimg/img-01.jpg" alt="img description">
+                            <img src="/theme1/images/bannerimg/img-01.jpg" class="wt-bannermanimgone" alt="img description">
+                            <img src="/theme1/images/bannerimg/img-01.jpg" class="wt-bannermanimgtwo" alt="img description">
+                        </figure>
+                    </div>
                 </div>
-                 } 
-             
-               
-            </div><!-- /.row -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                    <div class="wt-bannercontent">
+                        <div class="wt-bannerhead">
+                            <div class="wt-title">
+                                <h1><span>Hire experts </span> for any household work</h1>
+                            </div>
+                            <div class="wt-description">
+                                <p>Aatm nirbhar Bharat</p>
+                            </div>
+                        </div>
+                        <form class="wt-formtheme wt-formbanner" asp-controller="home" asp-action="search" method="get">
+                            <fieldset>
+                                <div class="form-group input-group">
 
+                                    <select class="form-control" name="Search">
+                                        @foreach (var i in Model)
+                                        {
+                                            <option value="@i.CategoryName">@i.CategoryName</option>
+                                        }
+                                    </select>
 
-            <!-- START THE FEATURETTES -->
-
-            <hr class="featurette-divider">
-
-            <div class="row featurette">
-                <div class="col-md-4 text-center">
-                    <h4  >
-                        Satisfied Consumers <span class="text-muted">
-                            
-                        </span>
-                    </h4>
-                    <span class="badge badge-info alert alert-info">
-                        @ViewBag.Consumer
-                     </span>
+                                    <div class="input-group-append">
+                                        <button class="wt-searchbtn"><i class="lnr lnr-magnifier"></i></button>
+                                    </div>
+                                    @*<input type="text" name="fullname" class="form-control" placeholder="I’m looking for">*@
+                                    @*<div class="wt-formoptions">
+            <div class="wt-dropdown">
+                <span>In: <em class="selected-search-type">Freelancers </em><i class="lnr lnr-chevron-down"></i></span>
+            </div>
+            <div class="wt-radioholder">
+                <span class="wt-radio">
+                    <input id="wt-freelancers" data-title="Freelancers" type="radio" name="searchtype" value="freelancer" checked>
+                    <label for="wt-freelancers">Freelancers</label>
+                </span>
+                <span class="wt-radio">
+                    <input id="wt-jobs" data-title="Jobs" type="radio" name="searchtype" value="job">
+                    <label for="wt-jobs">Jobs</label>
+                </span>
+                <span class="wt-radio">
+                    <input id="wt-company" data-title="Companies" type="radio" name="searchtype" value="job">
+                    <label for="wt-company">Companies</label>
+                </span>
+            </div>
+            <a href="userlisting.html" class="wt-searchbtn"><i class="lnr lnr-magnifier"></i></a>
+        </div>*@
+                                </div>
+                            </fieldset>
+                        </form>
+                        <div class="wt-videoholder">
+                            <div class="wt-videoshow">
+                                <a data-rel="prettyPhoto[video]" href="https://www.youtube.com/watch?v=J37W6DjqT3Q"><i class="fa fa-play"></i></a>
+                            </div>
+                            <div class="wt-videocontent">
+                                <span>See For Yourself!<em>How it works &amp; experience the ultimate joy.</em></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <h4 >
-                        Hard working Provider. <span class="text-muted">
-                            
-                        </span>
-                    </h4>
-                    <span class="badge badge-info alert alert-info">
-                        @ViewBag.Provider
-                    </span>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+
+<section class="wt-haslayout wt-main-section">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+                <div class="wt-sectionhead wt-textcenter">
+                    <div class="wt-sectiontitle">
+                        <h2>Explore Categories</h2>
+                        <span>Professional by categories</span>
+                    </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <h4 >
-                        Serivces <span class="text-muted">
-                            
-                        </span>
-                    </h4>
-                    <span class="badge badge-info alert alert-info">
-                        @ViewBag.Services
-                        </span>
-</div>
+            </div>
+            <div class="wt-categoryexpl">
+
+                @foreach (var i in Model)
+                {
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 float-left align-self-center">
+                        <div class="wt-categorycontent">
+                            <figure><img src="@i.Image" alt="image description"></figure>
+                            <div class="wt-cattitle">
+                                <h3><a href="javascrip:void(0);">@i.CategoryName</a></h3>
+                            </div>
+                            <div class="wt-categoryslidup">
+                                <p>@i.Display</p>
+                                <a href="javascript:void(0);">Explore <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
                 
             </div>
+        </div>
+    </div>
+</section>
 
-            <hr class="featurette-divider">
 
-            <div class="row featurette">
-                <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for
-                            yourself.</span></h2>
-                    <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of
-                        how this layout would work with some actual real-world content in place.</p>
-                </div>
-                <div class="col-md-5 order-md-1">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa"
-                            dy=".3em">500x500</text>
-                    </svg>
 
-                </div>
-            </div>
 
-            <hr class="featurette-divider">
 
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                    <p class="lead">And yes, this is the last block of representative placeholder content. Again, not
-                        really intended to be actually read, simply here to give you a better view of what this would
-                        look like with some actual content. Your content.</p>
-                </div>
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa"
-                            dy=".3em">500x500</text>
-                    </svg>
 
-                </div>
-            </div>
 
-            <hr class="featurette-divider">
 
-            <!-- /END THE FEATURETTES -->
 
-        </div><!-- /.container -->
+
 
