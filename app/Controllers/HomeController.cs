@@ -107,6 +107,35 @@ namespace app.Controllers
             throw new Exception(result.Message);
         }
 
+        [HttpPost]
+        public IActionResult Profile(Profile profile)
+        {
+
+            var result = Userprovider.Profile() as ResultObject;
+            if (result.status == ResultType.SUCCESS)
+            {
+                var data = result.Payload as Profile;
+                profile.UserId = data.UserId;
+                if (User.IsConsumer()) {
+                    profile.HeadLine = "";
+                    profile.Rate = 0;
+                }
+
+               result= Userprovider.UpdateProfile(profile) as ResultObject;
+                if(result.status==ResultType.SUCCESS)
+                {
+                    result = Userprovider.Profile() as ResultObject;
+                    if (result.status == ResultType.SUCCESS)
+                    {
+                        ViewData["Success"] = "Profile Update";
+                        return View(result.Payload as Profile);
+                    }
+                }
+            }
+            throw new Exception(result.Message);
+
+        }
+
 
         public IActionResult Bookings(){
             return View();

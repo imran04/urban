@@ -137,6 +137,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
             <div class="wt-haslayout wt-dbsectionspace">
+                
+
                 <div class="wt-dashboardbox wt-dashboardtabsholder">
                     <div class="wt-dashboardboxtitle">
                         <h2>My Profile</h2>
@@ -156,36 +158,54 @@
                                 <div class="wt-tabscontenttitle">
                                     <h2>Your Details</h2>
                                 </div>
-                                <form class="wt-formtheme wt-userform">
+                                
+                                <form class="wt-formtheme wt-userform" method="post">
+                                    <input type="hidden" asp-for="UserId" name="UserId" />
                                     <fieldset>
-                                        <div class="form-group form-group-half">
+                                        <div class="form-group ">
                                             <span class="wt-select">
-                                                <select>
+                                                <select asp-for="Gender" name="Gender">
                                                     <option value="" disabled="">Select Gender</option>
                                                     <option value="">Male</option>
                                                     <option value="">Female</option>
                                                 </select>
                                             </span>
                                         </div>
-                                        <div class="form-group form-group-half">
-                                            <input type="text" name="first name" class="form-control" placeholder="First Name">
+                                        <div class="form-group ">
+                                            <input type="text" asp-for="Name" name="Name" class="form-control" placeholder="Name">
+                                        </div>
+                                        <div class="form-group ">
+                                            <input type="email" asp-for="Email" name="Email" class="form-control" placeholder="Email" readonly>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="email" name="last name" class="form-control" placeholder="Last Name">
+                                            <input type="text" asp-for="Mobile" name="Mobile" class="form-control" readonly>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="number" name="rate" class="form-control" placeholder="Your Service Hourly Rate ($)">
+                                            <input type="text" asp-for="AlternateMobile" name="AlternateMobile" class="form-control" placeholder="Alternate Mobile">
                                         </div>
+                                        @if (User.IsServiceProvider())
+                                        {
+                                            <div class="form-group form-group-half">
+                                                <input type="number" asp-for="Rate" name="rate" class="form-control" placeholder="Your Service Hourly Rate (Rupees)">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" asp-for="HeadLine" name="HeadLine" class="form-control" placeholder="Add Your Tagline Here">
+                                            </div>
+                                        }
                                         <div class="form-group">
-                                            <input type="text" name="tagline" class="form-control" placeholder="Add Your Tagline Here">
+                                            <textarea asp-for="About" name="About" class="form-control" placeholder="Description"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <textarea name="message" class="form-control" placeholder="Description"></textarea>
-                                        </div>
+
                                     </fieldset>
+                                    <hr />
+                                    @if (ViewData["Success"] != null)
+                                    {
+                                        <div class="alert alert-success">@ViewData["Success"]</div>
+                                    }
+                                    <button class="wt-btn">Save &amp; Profile</button>
                                 </form>
                             </div>
-                            <div class="wt-profilephoto wt-tabsinfo">
+                            @*<div class="wt-profilephoto wt-tabsinfo">
                                 <div class="wt-tabscontenttitle">
                                     <h2>Profile Photo</h2>
                                 </div>
@@ -245,8 +265,8 @@
                                         </fieldset>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="wt-bannerphoto wt-tabsinfo">
+                            </div>*@
+                            @*<div class="wt-bannerphoto wt-tabsinfo">
                                 <div class="wt-tabscontenttitle">
                                     <h2>Banner Photo</h2>
                                 </div>
@@ -286,8 +306,8 @@
                                         </fieldset>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="wt-location wt-tabsinfo">
+                            </div>*@
+                            @*<div class="wt-location wt-tabsinfo">
                                 <div class="wt-tabscontenttitle">
                                     <h2>Your Location</h2>
                                 </div>
@@ -316,8 +336,8 @@
                                         </div>
                                     </fieldset>
                                 </form>
-                            </div>
-                            <div class="wt-tabcompanyinfo wt-tabsinfo">
+                            </div>*@
+                            @*<div class="wt-tabcompanyinfo wt-tabsinfo">
                                 <div class="wt-tabscontenttitle">
                                     <h2>Company Details</h2>
                                 </div>
@@ -381,8 +401,8 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="wt-skills">
+                            </div>*@
+                            @*<div class="wt-skills">
                                 <div class="wt-tabscontenttitle">
                                     <h2>My Skills</h2>
                                 </div>
@@ -535,9 +555,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
-                        <div class="wt-educationholder tab-pane fade" id="wt-education">
+                        @*<div class="wt-educationholder tab-pane fade" id="wt-education">
                             <div class="wt-userexperience wt-tabsinfo">
                                 <div class="wt-tabscontenttitle wt-addnew">
                                     <h2>Add Your Experience</h2>
@@ -752,8 +772,8 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="wt-awardsholder tab-pane fade" id="wt-awards">
+                        </div>*@
+                        @*<div class="wt-awardsholder tab-pane fade" id="wt-awards">
                             <div class="wt-addprojectsholder wt-tabsinfo">
                                 <div class="wt-tabscontenttitle wt-addnew">
                                     <h2>Add Your Projects</h2>
@@ -1112,21 +1132,21 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
-            <div class="wt-updatall">
+            @*<div class="wt-updatall">
                 <i class="ti-announcement"></i>
                 <span>Update all the latest changes made by you, by just clicking on “Save &amp; Continue” button.</span>
                 <a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
-            </div>
+            </div>*@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
             <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
                 <div class="tg-authorcodescan wt-codescanholder">
                     <figure class="tg-qrcodeimg">
-                        <img src="images/qrcode.png" alt="img description">
+                        <img src="/theme1/images/qrcode.png" alt="img description">
                     </figure>
                     <div class="tg-qrcodedetail">
                         <span class="lnr lnr-laptop-phone"></span>
@@ -1145,7 +1165,7 @@
                     </div>
                 </div>
                 <div class="wt-companyad">
-                    <figure class="wt-companyadimg"><img src="images/add-img.jpg" alt="img description"></figure>
+                    <figure class="wt-companyadimg"><img src="/theme1/images/add-img.jpg" alt="img description"></figure>
                     <span>Advertisement  255px X 255px</span>
                 </div>
             </div>

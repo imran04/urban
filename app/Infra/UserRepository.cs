@@ -157,7 +157,10 @@ namespace app.Infra
                                     About=@About,Gender=@Gender,Rate=@Rate
                                     where UserId = @UserId";
                     var l = connection.Execute(sql1, profile);
-                    return new ResultObject { status = ResultType.SUCCESS, Payload = true, Message = "Sccucess" };
+                    if(l==1)
+                        return new ResultObject { status = ResultType.SUCCESS, Payload = true, Message = "Sccucess" };
+                    else
+                        return new ResultObject { status = ResultType.FAILED, Payload = null, Message = "Failed:" };
                 }
             }
             catch (Exception ex)
