@@ -1,223 +1,81 @@
+@model app.Models.ViewModels.Users
+
+
 @{
-    Layout = "_LoginLayout";
+    Layout = "_IndexV2Layout";
 }
-
-
-<div class="row justify-content-center" id="app" v-cloak>
-    <div class="col-lg-6 col-md-8">
-        <div class="card  border-0">
-            @*<div class="card-header bg-transparent pb-5">
-                <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-                <div class="text-center">
-
-                    <a href="#" class="btn btn-neutral btn-icon">
-                        <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-                        <span class="btn-inner--text">Google</span>
-                    </a>
+@section head{
+<div class="wt-haslayout wt-innerbannerholder">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+                <div class="wt-innerbannercontent">
+                    <div class="wt-title"><h2>Register</h2></div>
                 </div>
-            </div>*@
-           
-            <div class="card-body px-lg-5 py-lg-5">
-                <div class="text-center text-muted mb-4">
-                    <small>Or sign up with credentials</small>
-                </div>
-                <form role="form" autocomplete="off">
-                    <input autocomplete="false" name="hidden" type="text" style="display:none;">
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
-                            </div>
-                            <select v-model="register.type" class="form-control">
-                                <option value="0">Consumer</option>
-                                <option value="1">Service Provider</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Username" type="text" v-model="register.username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Email" type="email" v-model="register.emailid">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="mobile" type="text" v-model="register.mobile">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Password" type="password" v-model="register.password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
-                            </div>
-                            <textarea class="form-control" v-model="register.address"></textarea>
-                        </div>
-                    </div>
-                    <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
-                    <div class="row my-4">
-                        <div class="col-12">
-                            <div class="custom-control custom-control-alternative custom-checkbox">
-                                <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                                <label class="custom-control-label" for="customCheckRegister">
-                                    <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="button" class="btn btn-primary mt-4" @@click="registeraction()">
-                            <b-spinner v-if="isProcessing" label="Loading..."></b-spinner>  Create account
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-@section scripts{
-
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
-    @*<script src="~/vue/vue.min.js"></script>
-    <script src="~/axios/axios.min.js"></script>*@
-    <script src="~/vee-validate/vee-validate.js"></script>
-    <script src="~/sweetalert/sweetalert.min.js"></script>
-    <script>
-    var app = new Vue({
-        el: "#app",
-        data: {
-            register: {
-                type:0,
-                username: null,
-                password: null,
-                latitute: 0,
-                longitude: 0,
-                address: "",
-                mobile: "",
-                emailid: "",
-
-            },
-            location: null,
-            gettingLocation: false,
-            errorStr: null,
-            isProcessing:false
-        },
-        created() {
-           /* //do we support geolocation
-            if (!("geolocation" in navigator)) {
-                this.errorStr = 'Geolocation is not available.';
-                return;
-            }
-
-            this.gettingLocation = true;
-            // get position
-            navigator.geolocation.getCurrentPosition(pos => {
-                this.gettingLocation = false;
-                this.location = pos;
-            }, err => {
-                this.gettingLocation = false;
-                this.errorStr = err.message;
-            }) */
-        },
-        methods: {
-            registeraction() {
-                //if (this.location.coords != null) {
-                //    this.register.latitute = this.location.coords.latitude;
-                //    this.register.longitude = this.location.coords.longitude;
-                //}
-                if (this.isProcessing)
-                    return;
-                this.isProcessing=true
-                var data = JSON.parse(JSON.stringify(this.register))
-                axios.post("/api/account/register", data).
-                then(data => {
-                    if (data.data.status == 0) {
-                       
-                        window.location.href = '/account/login';
-                    } if (data.data.status == 400) {
-                        alert("Please provide Correct Input")
-                    }
-                    else {
-                        swal(data.data.message)
-                        //alert(data.data.message)
-                    }
-                }).catch(e => {
-                    swal(e.message)
-                }).finally(_ => {
-                    this.isProcessing = false
-                })
-
-
-            },
-            //async getLocation() {
-
-            //    return new Promise((resolve, reject) => {
-
-            //        if (!("geolocation" in navigator)) {
-            //            reject(new Error('Geolocation is not available.'));
-            //        }
-
-            //        navigator.geolocation.getCurrentPosition(pos => {
-            //            resolve(pos);
-            //        }, err => {
-            //            reject(err);
-            //        });
-
-            //    });
-            //},
-            //async locateMe() {
-
-            //    this.gettingLocation = true;
-            //    try {
-            //        this.gettingLocation = false;
-            //        this.location = await this.getLocation();
-
-            //    } catch (e) {
-            //        this.gettingLocation = false;
-            //        this.errorStr = e.message;
-            //    }
-
-            //}
-        }
-        
-    })
-
-
-
-
-
-    </script>
-
-
-
 }
+
+<div class="wt-haslayout wt-main-section">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-10 push-md-1 col-lg-8 push-lg-2">
+                <div class="wt-registerformhold">
+                    <div class="wt-registerformmain">
+                        <div class="wt-registerhead">
+                            <div class="wt-title">
+                                <h3>Register</h3>
+                            </div>
+
+                        </div>
+                        <div class="wt-joinforms">
+
+                            <form class="wt-formtheme wt-formregister" method="post">
+                                <fieldset class="wt-registerformgroup">
+                                    @Html.ValidationSummary()
+                                    <div class="form-group ">
+                                        <label asp-for="type">User Type</label>
+                                        <select asp-for="type" name="type" class="form-control">
+                                            <option value="0">Consumer</option>
+                                            <option value="1">Service Provider</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="username">User Name *</label>
+                                        <input asp-for="username" name="username" class="form-control" placeholder="Username" type="text"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="emailid">Email id *</label>
+                                        <input asp-for="emailid" name="emailid" class="form-control" placeholder="Email" type="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="mobile">Mobile *</label>
+                                        <input asp-for="mobile" name="mobile" class="form-control" placeholder="mobile" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="password">Password</label>
+                                        <input class="form-control" asp-for="password" name="password" placeholder="Password" type="password" v-model="register.password">
+                                        @Html.ValidationMessageFor(o => Model.password)
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="address">Address</label>
+                                        <textarea class="form-control" asp-for="address" name="address" v-model="register.address"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="wt-btn">Register</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <div class="wt-registerformfooter">
+                        <span>Already Have an Account? <a href="/Account/Login">Login Now</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

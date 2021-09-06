@@ -14,6 +14,7 @@ namespace app.Models.ViewModels
         public string AlternateMobile { get; set; }
         public string HeadLine { get; set; }
         public string About { get; set; }
+        public string Gender { get; set; }
         public float Rate { get; set; }
 
         public string Id => WebUtility.HtmlDecode(new AESEncrytDecryt().EncriptStringAES(UserId.ToString()));

@@ -27,11 +27,13 @@ namespace app.Controllers
 
         private IProviderRepository provider;
 
-        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider)
+        private IUserRepository Userprovider;
+        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider, IUserRepository Userprovider)
         {
             _logger = logger;
             configuration=_configuration;
             provider = Provider;
+            this.Userprovider = Userprovider;
         }
        [AllowAnonymous]
         public IActionResult Index()
@@ -97,7 +99,12 @@ namespace app.Controllers
        
         public IActionResult Profile()
         {
-            return View();
+            var result = Userprovider.Profile() as ResultObject;
+            if (result.status == ResultType.SUCCESS)
+            {
+                return View(result.Payload as Profile);
+            }
+            throw new Exception(result.Message);
         }
 
 

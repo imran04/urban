@@ -8,8 +8,8 @@ namespace app.Infra
     {
         object AddUser(Users user);
         object Login(string UserName, string Password);
-
         object Profile();
 
+        object UpdateProfile(Profile profile);
     }
 }

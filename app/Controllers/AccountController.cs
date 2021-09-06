@@ -11,9 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Dapper;
 using app.Models.ViewModels;
 using app.Infra;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace app.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AccountController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -27,27 +30,41 @@ namespace app.Controllers
             configuration=_configuration;
             this.userRepository = userRepository;
         }
-
-
-
-
-        public IActionResult Provider(){
-                return View();
-        }
-
+        [AllowAnonymous]
         public IActionResult Register(){
+
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult Register(Users users)
+        {
+            if (ModelState.IsValid)
+            {
+                ResultObject data = userRepository.AddUser(users) as ResultObject;
 
+                if (data.status == ResultType.SUCCESS)
+                {
+                    return Redirect("/Account/RegisterSuccess/");
+                }
+                else
+                {
+                    ModelState.AddModelError("UserName", data.Message);
+                    return View(users);
+                }
+            }
+            return View(users);
 
+        }
+
+        [AllowAnonymous]
         public IActionResult Login()
         {
-                
-
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Login(LoginViewModel model)
         {
             ResultObject data =userRepository.Login(model.UserName,model.Password) as ResultObject;
@@ -61,20 +78,22 @@ namespace app.Controllers
                 return View(model);
             }
         }
+        [AllowAnonymous]
+        public IActionResult LogOut()
+        {
+            HttpContext.Response.Cookies.Delete("kjllasic");
+            return RedirectToAction("index", "Home");
+        }
 
-
-
-        public IActionResult Privacy()
+        [AllowAnonymous]
+        public IActionResult RegisterSuccess()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [AllowAnonymous]
+        public IActionResult AuthorizationFailed()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
-
-        
     }
 }

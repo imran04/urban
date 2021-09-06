@@ -13,11 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" href="/theme1/images/favicon.png" type="image/x-icon">
+   
     <link rel="stylesheet" href="/theme1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/theme1/css/normalize.css">
     <link rel="stylesheet" href="/theme1/css/scrollbar.css">
     <link rel="stylesheet" href="/theme1/css/fontawesome/fontawesome-all.css">
     <link rel="stylesheet" href="/theme1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/theme1/css/themify-icons.css">
     <link rel="stylesheet" href="/theme1/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/theme1/css/jquery-ui.css">
     <link rel="stylesheet" href="/theme1/css/linearicons.css">
@@ -25,14 +27,16 @@
     <link rel="stylesheet" href="/theme1/css/chosen.css">
     <link rel="stylesheet" href="/theme1/css/prettyPhoto.css">
     <link rel="stylesheet" href="/theme1/css/main.css">
+    <link rel="stylesheet" href="/theme1/css/dashboard.css">
     <link rel="stylesheet" href="/theme1/css/color.css">
     <link rel="stylesheet" href="/theme1/css/transitions.css">
     <link rel="stylesheet" href="/theme1/css/responsive.css">
+    <link rel="stylesheet" href="/theme1/css/dbresponsive.css">
     <script src="/theme1/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <style>
         .wt-logo > a > img {
-            height:22px;
+            height: 22px;
         }
     </style>
 </head>
@@ -44,22 +48,24 @@
     <div class="preloader-outer">
         <div class="loader"></div>
     </div>
-   
+
     <div id="wt-wrapper" class="wt-wrapper wt-haslayout">
-       
+
         <div class="wt-contentwrapper">
-           
+
             <partial name="_IndexV2Navigation">
-                
-               
-               @RenderSection("head",false)
-               
+
+
+                @RenderSection("head", false)
+
                 <main id="wt-main" class="wt-main wt-haslayout">
 
+                    @RenderSection("sidebar", false)
+
                     @RenderBody()
-                   
+
                 </main>
-              
+
                 <footer id="wt-footer" class="wt-footer wt-haslayout">
                     <div class="wt-footerholder wt-haslayout">
                         <div class="container">
@@ -149,10 +155,13 @@
         <!--Content Wrapper End-->
     </div>
     <!--Wrapper End-->
+    
     <script src="/theme1/js/vendor/jquery-3.3.1.js"></script>
     <script src="/theme1/js/vendor/jquery-library.js"></script>
     <script src="/theme1/js/vendor/bootstrap.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&language=en"></script>
     <script src="/theme1/js/owl.carousel.min.js"></script>
+    <script src="/theme1/js/jquery.sortable.js"></script>
     <script src="/theme1/js/chosen.jquery.js"></script>
     <script src="/theme1/js/tilt.jquery.js"></script>
     <script src="/theme1/js/scrollbar.min.js"></script>
@@ -162,7 +171,17 @@
     <script src="/theme1/js/countTo.js"></script>
     <script src="/theme1/js/appear.js"></script>
     <script src="/theme1/js/tipso.js"></script>
+    <script src="/theme1/js/gmap3.js"></script>
     <script src="/theme1/js/jRate.js"></script>
     <script src="/theme1/js/main.js"></script>
+    <script>
+        const menu_icon = document.querySelector('.menu-icon');
+        function addClassFunThree() {
+            this.classList.toggle("click-menu-icon");
+        }
+        menu_icon.addEventListener('click', addClassFunThree);
+    </script>
+
+    @RenderSection("scripts", false)
 </body>
 </html>

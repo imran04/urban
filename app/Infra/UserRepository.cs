@@ -138,5 +138,26 @@ namespace app.Infra
             return JWTHelper.GenerateJwtToken(cliams.ToArray());
 
         }
-    }
-}
+
+        public object UpdateProfile(Profile profile)
+        {
+            try
+            {
+                //var UserId = HttpContext.HttpContext.User.Identity.Name;
+               
+                using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
+                {   
+                    var sql1 = @"Update profile Set Name=@Name,AvgRating=@AvgRating,Mobile=@Mobile,Email=@Email,
+                                    AlternateMobile=@AlternateMobile,HeadLine=@Headline,
+                                    About=@About,Gender=@Gender,Rate=@Rate
+                                    where UserId = @UserId";
+                    var l=connection.Execute(sql1, profile);
+                    return new ResultObject { status = ResultType.SUCCESS, Payload = true, Message = "Sccucess" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResultObject { status = ResultType.FAILED, Payload = null, Message = "Failed:" + ex.Message };
+            }
+
+        }

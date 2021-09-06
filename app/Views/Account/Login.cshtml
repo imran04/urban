@@ -1,63 +1,81 @@
+@model app.Models.ViewModels.LoginViewModel
+
 @{
-    Layout = "_LoginLayout";
+    Layout = "_IndexV2Layout";
 }
 
-<div class="row justify-content-center" id="app" v-cloak>
-    <div class="col-lg-5 col-md-7">
-        <div class="card  border-0 mb-0">
-            <div class="card-header bg-transparent pb-5">
-                <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-                <div class="btn-wrapper text-center">
 
+@section head{
+
+    <div class="wt-haslayout wt-innerbannerholder">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+                    <div class="wt-innerbannercontent">
+                        <div class="wt-title"><h2>Login</h2></div>
+                        @*<ol class="wt-breadcrumb">
+                            <li><a href="/">Home</a></li>
+                            <li class="wt-active bg-white">Professionals</li>
+                        </ol>*@
+                    </div>
                 </div>
-            </div>
-            <div class="card-body px-lg-5 py-lg-5">
-                <div class="text-center text-muted mb-4">
-                    <small>Or sign in with credentials</small>
-                </div>
-                <form role="form">
-                    @*<div class="form-group mb-3">
-                          <div class="input-group input-group-merge input-group-alternative">
-
-                            <input class="radio-control"  type="radio" name="type" value="consumer"> Consumer
-                            <input class="radio-control" checked  type="radio" name="type" value="provider"> Provider
-                          </div>
-                        </div>*@
-                    <div class="form-group mb-3">
-                        <div class="input-group input-group-merge input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Username" type="text" v-model="login.username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-merge input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Password" type="password" v-model="login.password">
-                        </div>
-                    </div>
-                    @*<div class="custom-control custom-control-alternative custom-checkbox">
-                          <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                          <label class="custom-control-label" for=" customCheckLogin">
-                            <span class="text-muted">Remember me</span>
-                          </label>
-                        </div>*@
-                    <div class="text-center">
-
-                        <button type="button" class="btn btn-primary my-4" @@click="loginaction()" v-bind:disabled="isProcessing">    <b-spinner v-if="isProcessing" label="Loading..."></b-spinner>  Sign in</button>
-                    </div>
-                </form>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-6">
-                <a href="#" class="text-light"><small>Forgot password?</small></a>
-            </div>
-            <div class="col-6 text-right">
-                <a href="#" class="text-light"><small>Create new account</small></a>
+    </div>
+
+}
+
+
+<div class="wt-haslayout wt-main-section">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-10 push-md-1 col-lg-8 push-lg-2">
+                <div class="wt-registerformhold">
+                    <div class="wt-registerformmain">
+                        <div class="wt-registerhead">
+                            <div class="wt-title">
+                                <h3>Login</h3>
+                            </div>
+                            
+                        </div>
+                        <div class="wt-joinforms">
+                            
+                            <form class="wt-formtheme wt-formregister" method="post">
+                                <fieldset class="wt-registerformgroup">
+                                    @Html.ValidationSummary()
+                                    <div class="form-group ">
+                                        <input type="text" asp-for="UserName" name="UserName" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" asp-for="Password" name="password" class="form-control" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <button  class="wt-btn">Login</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            @*<div class="wt-joinnowholder">
+                                <div class="wt-title">
+                                    <h4>Join Now With</h4>
+                                </div>
+                                <div class="wt-description">
+                                    <p>Use a social account for faster login or easy registration to directly get in to your account and start a good business</p>
+                                </div>
+                                <ul class="wt-socialicons wt-iconwithtext">
+                                    <li class="wt-facebook">
+                                        <a href="javascript:void(0);"><i class="fa fa-facebook-f"></i><em>Facebook</em></a>
+                                    </li>
+                                    <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i><em>Twitter</em></a></li>
+                                    <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i><em>Google</em></a></li>
+                                    <li class="wt-instagram"><a href="javascript:void(0);"><i class="fab fa-instagram"></i><em>Instagram</em></a></li>
+                                </ul>
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="wt-registerformfooter">
+                        <span>Don't Have an Account? <a href="/Account/Register">Register Now</a></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -65,70 +83,3 @@
 
 
 
-
-
-
-@section scripts {
-
-    @*<script src="~/vue-sweetalert2/dist/vue-sweetalert.umd.js"></script>*@
-
-    <script src="~/sweetalert/sweetalert.min.js"></script>
-    <script>
-
-       
-        var app = new Vue({
-            el: "#app",
-            data: {
-                login: {
-                    username: null,
-                    password: null
-                },
-                isProcessing: false
-            },
-            methods: {
-                loginaction() {
-                    if (this.isProcessing)
-                        return;
-
-                    this.isProcessing = true;
-                    var data = JSON.parse(JSON.stringify(this.login))
-                    axios.post("/api/account/login", data).
-                        then(data => {
-                            if (data.data.status == 0) {
-                                localStorage.setItem("token", "bearer " + data.data.payload.token)
-                                localStorage.setItem("data", JSON.stringify(data.data.payload))
-                                window.location.href = '/home/profile';
-                            }
-                            else {
-                                debugger
-                                swal(data.data.message);
-
-
-
-                            }
-                        }).catch(e => {
-                            debugger
-                            swal(e.message);
-
-
-                        })
-                        .finally(_ => {
-                            debugger
-                            this.isProcessing = false;
-
-                        })
-
-
-
-                }
-            }
-        })
-
-
-
-
-
-    </script>
-
-
-} 

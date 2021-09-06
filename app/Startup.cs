@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using app.Infra;
@@ -35,6 +36,7 @@ namespace app
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                
                 options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                
             })
 
             .AddJwtBearer(options =>
@@ -65,7 +67,12 @@ namespace app
 
 
 
-            }).AddCookie()
+            }).AddCookie(o=>
+            {
+                o.LoginPath = "/Account/Login";
+                o.LogoutPath = "/Account/Logout";
+
+            })
             ;
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserRepository,UserRepository>();
@@ -88,13 +95,24 @@ namespace app
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePages(
+                    "text/html", "Status code page, status code: {0} <a href='/'>Home</a>");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
-
+            //app.Use((context, next) =>
+            //{
+            //   // context.Response.StatusCode = (int)HttpStatusCode.InternalServerError; ;
+            //    if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+            //    {
+            //        throw new Exception("Unauthorized");
+            //      // context.Response.Redirect("/Account/AuthorizationFailed");
+            //    }
+            //   return next();
+            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

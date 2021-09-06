@@ -12,7 +12,7 @@ namespace app.Models.ViewModels
         [Required]
         public string username { get; set; }
         [Required]
-        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",ErrorMessage ="One Special Charater,One Lower case,One Upper case,One Number and atleast 8 charater Required")]
         public string password { get; set; }
         public float latitute { get; set; }
         public float longitude { get; set; }
