@@ -94,7 +94,17 @@
 
                                 <div class="wt-description">
                                     <p>Book an Appointment</p>
-                                    <a href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Book</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+
+
+                                <a href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Book</a>
+                                }
+                                else
+                                {
+                                <a href="/account/login" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Login to Book</a>
+                                }
+
                                 </div>
 
                             </div>

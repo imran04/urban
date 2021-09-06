@@ -91,10 +91,13 @@ namespace app.Infra
                 Logger.LogInformation($@"{Page*Size} :{Page} :{Size}");
                 if (UserType == 0)
                 {
-                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,b.complete_status complete from booking b join 
-                                
+                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,
+                                pu.Address as ProviderAddress,cu.Address as ConsumerAddress,
+                                b.complete_status complete from booking b join 
                                 profile p on p.userid=b.provider_id join
-                                profile c on c.UserId=b.consumer_id 
+                                Users pu on pu.userid=b.provider_id join
+                                profile c on c.UserId=b.consumer_id join
+                                Users cu on cu.userid=b.provider_id 
                                 where b.consumer_id=@UserId order by booking_id desc 
                                 offset @page*@size rows
                                 fetch next @size rows only";
@@ -102,10 +105,13 @@ namespace app.Infra
                 }
                 else
                 {
-                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,b.complete_status complete from booking b join 
-                             
+                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,
+                                pu.Address as ProviderAddress,cu.Address as ConsumerAddress,
+                                b.complete_status complete from booking b join 
                                 profile p on p.userid=b.provider_id join
-                                profile c on c.UserId=b.consumer_id 
+                                Users pu on pu.userid=b.provider_id join
+                                profile c on c.UserId=b.consumer_id join
+                                Users cu on cu.userid=b.provider_id  
                                 where b.provider_id=@UserId order by booking_id desc 
                                 offset @page*@size rows
                                 fetch next @size rows only";

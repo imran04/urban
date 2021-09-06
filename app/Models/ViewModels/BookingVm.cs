@@ -8,9 +8,11 @@ namespace app.Models.ViewModels
         public string instruction { get; set; }
         public string ConsumerName{get;set;}
         public string ConsumerEmail{get;set;}
+        public string ConsumerAddress { get; set; }
         public float consumerrating { get; set; }
         public string ProviderName {get;set;}
         public string ProviderEmail {get;set;}
+        public string ProviderAddress { get; set; }
         public float providerrating { get; set; }
         public bool completed { get; set; }
         public DateTime OnDate{get;set;}

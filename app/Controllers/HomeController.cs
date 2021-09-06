@@ -28,12 +28,14 @@ namespace app.Controllers
         private IProviderRepository provider;
 
         private IUserRepository Userprovider;
-        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider, IUserRepository Userprovider)
+        private IBookingRepository BookingRepository;
+        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider, IUserRepository Userprovider,IBookingRepository bookingRepository)
         {
             _logger = logger;
             configuration=_configuration;
             provider = Provider;
             this.Userprovider = Userprovider;
+            BookingRepository = bookingRepository;
         }
        [AllowAnonymous]
         public IActionResult Index()
@@ -137,8 +139,14 @@ namespace app.Controllers
         }
 
 
-        public IActionResult Bookings(){
-            return View();
+        public IActionResult Bookings(int page=0,int size=20)
+        {
+            var result = BookingRepository.ListAllBooking(page,size) as ResultObject;
+            if (result.status == ResultType.SUCCESS)
+            {
+                return View(result.Payload as IEnumerable<BookingVm>);
+            }
+            throw new Exception(result.Message);
         }
         
     }
