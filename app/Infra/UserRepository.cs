@@ -27,28 +27,28 @@ namespace app.Infra
 
         public object AddUser(Users user)
         {
-           
+
 
 
             int insertCount = 0;
             var CountCheck = "select count(*) from [users] where emailid=@email or username=@username or mobile=@mobile";
             var insertCommand = @"INSERT INTO[dbo].[users] ([type],[username],[password],[latitute],[longitude],[address],[mobile],[emailid],[last_login_datetime],[status],[securitystamp]) VALUES
             (@type,@username,@password,@latitute,@longitude,@address,@mobile,@emailid,@last_login_datetime,@status,@securitystamp)";
-            var ( password,secu) = user.password.HashPassword();
+            var (password, secu) = user.password.HashPassword();
 
             user.password = password;
             user.securitystamp = secu;
-            using(var cn= new SqlConnection(configuration.GetConnectionString("default")))
+            using (var cn = new SqlConnection(configuration.GetConnectionString("default")))
             {
-                var count = cn.QueryFirst<int>(CountCheck,new {username=user.username,email=user.emailid,mobile=user.mobile });
+                var count = cn.QueryFirst<int>(CountCheck, new { username = user.username, email = user.emailid, mobile = user.mobile });
                 if (count == 0)
                 {
                     cn.Open();
-                    using(var tra= cn.BeginTransaction())
+                    using (var tra = cn.BeginTransaction())
                     {
                         user.last_login_datetime = DateTime.Now;
 
-                        insertCount = cn.Execute(insertCommand, user,transaction:tra);
+                        insertCount = cn.Execute(insertCommand, user, transaction: tra);
                         if (insertCount == 1)
                         {
                             tra.Commit();
@@ -59,7 +59,7 @@ namespace app.Infra
                         {
                             tra.Rollback();
                             return new ResultObject { status = ResultType.FAILED, Message = "User was not Created! Please try again" };
-                           
+
                         }
 
                     }
@@ -75,14 +75,14 @@ namespace app.Infra
         {
             string Query = "Select * from Users where username=@UserName or emailid=@UserName or mobile=@UserName";
             var ProfileComplete = false;
-            
+
             using (var cn = new SqlConnection(configuration.GetConnectionString("default")))
             {
                 cn.Execute(@"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
                                 select userid,username,0,mobile,emailid,mobile from users where userid not in
 								( select userid from profile)");
-                var count = cn.QueryFirst<Users>(Query, new { UserName});
-                if (count !=null)
+                var count = cn.QueryFirst<Users>(Query, new { UserName });
+                if (count != null)
                 {
                     if (Password.CheckValidPasswprd(count.securitystamp, count.password))
                     {
@@ -92,36 +92,41 @@ namespace app.Infra
                             var r = cn.QueryFirst<int>(query1, new { uid = count.userid });
                             ProfileComplete = r > 1;
                         }
-                        
+
                         var token = GenrateToken(count);
                         HttpContext.HttpContext.Response.Cookies.Append("kjllasic", token);
-                        return new ResultObject { status = ResultType.SUCCESS, Payload = new { token, count.username, count.address, count.emailid, count.latitute, count.longitude, count.userid, profile_complete=ProfileComplete, count.type }, Message = "Login Complete" };
+                        return new ResultObject { status = ResultType.SUCCESS, Payload = new { token, count.username, count.address, count.emailid, count.latitute, count.longitude, count.userid, profile_complete = ProfileComplete, count.type }, Message = "Login Complete" };
                     }
                 }
-                
+
                 return new ResultObject { status = ResultType.FAILED, Message = "Invalid User/Password" };
-                
+
             }
         }
 
-        public object Profile(){
-            try{
+        public object Profile()
+        {
+            try
+            {
                 var UserId = HttpContext.HttpContext.User.Identity.Name;
-                var Sql ="Select * from Profile where UserId=@UserId";
-                using(var connection=new SqlConnection(configuration.GetConnectionString("default"))){
-                        var data = connection.QueryFirstOrDefault<Profile>(Sql,new{UserId});
-                        if(data==null){
-                            var sql1=@"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
+                var Sql = "Select * from Profile where UserId=@UserId";
+                using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
+                {
+                    var data = connection.QueryFirstOrDefault<Profile>(Sql, new { UserId });
+                    if (data == null)
+                    {
+                        var sql1 = @"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
                                 select userid,username,0,mobile,emailid,mobile from users where userid = @UserId";
-                           connection.Execute(sql1,new{UserId});
-                           data = connection.QueryFirstOrDefault<Profile>(Sql,new{UserId});
-                        }
+                        connection.Execute(sql1, new { UserId });
+                        data = connection.QueryFirstOrDefault<Profile>(Sql, new { UserId });
+                    }
 
-                        return new ResultObject {status = ResultType.SUCCESS,Payload=data,Message="Sccucess"};
+                    return new ResultObject { status = ResultType.SUCCESS, Payload = data, Message = "Sccucess" };
                 }
             }
-            catch(Exception ex){
-                return new ResultObject {status = ResultType.FAILED,Payload=null,Message="Failed:" + ex.Message};
+            catch (Exception ex)
+            {
+                return new ResultObject { status = ResultType.FAILED, Payload = null, Message = "Failed:" + ex.Message };
             }
 
         }
@@ -144,14 +149,14 @@ namespace app.Infra
             try
             {
                 //var UserId = HttpContext.HttpContext.User.Identity.Name;
-               
+
                 using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
-                {   
+                {
                     var sql1 = @"Update profile Set Name=@Name,AvgRating=@AvgRating,Mobile=@Mobile,Email=@Email,
                                     AlternateMobile=@AlternateMobile,HeadLine=@Headline,
                                     About=@About,Gender=@Gender,Rate=@Rate
                                     where UserId = @UserId";
-                    var l=connection.Execute(sql1, profile);
+                    var l = connection.Execute(sql1, profile);
                     return new ResultObject { status = ResultType.SUCCESS, Payload = true, Message = "Sccucess" };
                 }
             }
@@ -161,3 +166,5 @@ namespace app.Infra
             }
 
         }
+    }
+}
