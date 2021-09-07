@@ -335,7 +335,7 @@
                                 <div class="wt-userlistingcontent">
                                     <div class="wt-contenthead">
                                         <div class="wt-title">
-                                            <a asp-action="Professional" asp-controller="home" asp-route-id="@data.Id">
+                                            <a asp-action="Professional" asp-controller="home" asp-route-id="@data.UserId">
                                                 <i class="fa fa-check-circle"></i> @data.Name 
                                             </a>
                                             <h2>@data.HeadLine</h2>
@@ -379,7 +379,7 @@
                                     }
                                 </div>
                                 <div class="wt-tag wt-widgettag">
-                                    @foreach (var s in data.Service.Select(o=> o.servicecategory).Distinct())
+                                    @foreach (var s in data.Service.Select(o => o.servicecategory).Distinct())
                                     {
                                         <a href="javascript:void(0);">@s</a>
                                     }
@@ -388,7 +388,9 @@
                                         <a href="javascript:void(0);">@s.servicesubcategory</a>
                                     }
 
-
+                                    <a asp-action="Professional" asp-controller="home" asp-route-id="@data.UserId" class="btn btn-success">
+                                        <i class="fa fa-check-circle"></i> Continue
+                                    </a>
                                 </div>
                             </div>
                             }
