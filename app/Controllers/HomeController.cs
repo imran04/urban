@@ -77,8 +77,8 @@ namespace app.Controllers
         [AllowAnonymous]
         public IActionResult Professional(string id)
         {
-            _logger.LogInformation(WebUtility.HtmlDecode(id));
-            var par =int.Parse(new AESEncrytDecryt().DecryptStringAES(WebUtility.HtmlDecode(id)));
+            //_logger.LogInformation(WebUtility.HtmlDecode(id));
+            //var par =int.Parse(new AESEncrytDecryt().DecryptStringAES(WebUtility.HtmlDecode(id)));
             var data = provider.ProviderDetails(int.Parse(id)) as ResultObject;
             if (data.status == ResultType.SUCCESS)
                 return View(data.Payload as ProfileSearchModel);
