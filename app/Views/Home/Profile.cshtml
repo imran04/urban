@@ -137,7 +137,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
             <div class="wt-haslayout wt-dbsectionspace">
-                
+
 
                 <div class="wt-dashboardbox wt-dashboardtabsholder">
                     <div class="wt-dashboardboxtitle">
@@ -148,8 +148,12 @@
                             <li class="nav-item">
                                 <a class="active" data-toggle="tab" href="#wt-skills">Personal Details &amp; Skills</a>
                             </li>
-                            @*<li class="nav-item"><a data-toggle="tab" href="#wt-education">Experience &amp; Education</a></li>
-                            <li class="nav-item"><a data-toggle="tab" href="#wt-awards">Projects &amp; Awards</a></li>*@
+                            @if (User.IsServiceProvider())
+                            {
+                                <li class="nav-item"><a data-toggle="tab" href="#wt-education">Services Provided</a></li>
+                            }
+
+
                         </ul>
                     </div>
                     <div class="wt-tabscontent tab-content">
@@ -158,7 +162,7 @@
                                 <div class="wt-tabscontenttitle">
                                     <h2>Your Details</h2>
                                 </div>
-                                
+
                                 <form class="wt-formtheme wt-userform" method="post">
                                     <input type="hidden" asp-for="UserId" name="UserId" />
                                     <fieldset>
@@ -205,942 +209,44 @@
                                     <button class="wt-btn">Save &amp; Profile</button>
                                 </form>
                             </div>
-                            @*<div class="wt-profilephoto wt-tabsinfo">
-                                <div class="wt-tabscontenttitle">
-                                    <h2>Profile Photo</h2>
-                                </div>
-                                <div class="wt-profilephotocontent">
-                                    <div class="wt-description">
-                                        <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua aut enim ad minim veniamac quis nostrud exercitation ullamco laboris.</p>
-                                    </div>
-                                    <form class="wt-formtheme wt-formprojectinfo wt-formcategory">
-                                        <fieldset>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <label for="filep">
-                                                        <span class="wt-btn">Select Files</span>
-                                                        <input type="file" name="file" id="filep">
-                                                    </label>
-                                                    <span>Drop files here to upload</span>
-                                                    <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <ul class="wt-attachfile wt-attachfilevtwo">
-                                                    <li class="wt-uploadingholder wt-companyimg-uploading">
-                                                        <div class="wt-uploadingbox">
-                                                            <figure><img src="images/company/img-07.jpg" alt="img description"></figure>
-                                                            <div class="wt-uploadingbar wt-uploading">
-                                                                <span class="uploadprogressbar"></span>
-                                                                <span>Profile Photo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="wt-uploadingholder wt-companyimg-user">
-                                                        <div class="wt-uploadingbox">
-                                                            <figure><img src="images/company/img-08.jpg" alt="img description"></figure>
-                                                            <div class="wt-uploadingbar wt-uploading">
-                                                                <span class="uploadprogressbar"></span>
-                                                                <span>Profile Photo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="wt-uploadingholder">
-                                                        <div class="wt-uploadingbox">
-                                                            <div class="wt-designimg">
-                                                                <input id="demoz" type="radio" name="employees" value="company" checked="">
-                                                                <label for="demoz"><img src="images/company/img-09.jpg" alt="img description"><i class="fa fa-check"></i></label>
-                                                            </div>
-                                                            <div class="wt-uploadingbar wt-uploading">
-                                                                <span class="uploadprogressbar"></span>
-                                                                <span>Profile Photo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>*@
-                            @*<div class="wt-bannerphoto wt-tabsinfo">
-                                <div class="wt-tabscontenttitle">
-                                    <h2>Banner Photo</h2>
-                                </div>
-                                <div class="wt-profilephotocontent">
-                                    <div class="wt-description">
-                                        <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua aut enim ad minim veniamac quis nostrud exercitation ullamco laboris.</p>
-                                    </div>
-                                    <form class="wt-formtheme wt-formprojectinfo wt-formcategory">
-                                        <fieldset>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <label for="filew">
-                                                        <span class="wt-btn">Select Files</span>
-                                                        <input type="file" name="file" id="filew">
-                                                    </label>
-                                                    <span>Drop files here to upload</span>
-                                                    <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <ul class="wt-attachfile wt-attachfilevtwo">
-                                                    <li class="wt-uploadingholder">
-                                                        <div class="wt-uploadingbox">
-                                                            <div class="wt-designimg">
-                                                                <input id="demoq" type="radio" name="employees" value="company" checked="">
-                                                                <label for="demoq"><img src="images/company/img-10.jpg" alt="img description"><i class="fa fa-check"></i></label>
-                                                            </div>
-                                                            <div class="wt-uploadingbar">
-                                                                <span class="uploadprogressbar"></span>
-                                                                <span>Banner Photo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>*@
-                            @*<div class="wt-location wt-tabsinfo">
-                                <div class="wt-tabscontenttitle">
-                                    <h2>Your Location</h2>
-                                </div>
-                                <form class="wt-formtheme wt-userform">
-                                    <fieldset>
-                                        <div class="form-group form-group-half">
-                                            <span class="wt-select">
-                                                <select>
-                                                    <option value="">United States</option>
-                                                    <option value="">China</option>
-                                                    <option value="">India</option>
-                                                </select>
-                                            </span>
-                                        </div>
-                                        <div class="form-group form-group-half">
-                                            <input type="text" name="address" class="form-control" placeholder="Your Address">
-                                        </div>
-                                        <div class="form-group wt-formmap">
-                                            <div id="wt-locationmap" class="wt-locationmap"></div>
-                                        </div>
-                                        <div class="form-group form-group-half">
-                                            <input type="text" name="text" class="form-control" placeholder="Enter Longitude (Optional)">
-                                        </div>
-                                        <div class="form-group form-group-half">
-                                            <input type="text" name="text" class="form-control" placeholder="Enter Latitude (Optional)">
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>*@
-                            @*<div class="wt-tabcompanyinfo wt-tabsinfo">
-                                <div class="wt-tabscontenttitle">
-                                    <h2>Company Details</h2>
-                                </div>
-                                <div class="wt-accordiondetails">
-                                    <div class="wt-radioboxholder">
-                                        <div class="wt-title">
-                                            <h4>No. of employees you have</h4>
-                                        </div>
-                                        <span class="wt-radio">
-                                            <input id="wt-just" type="radio" name="employees" value="company" checked>
-                                            <label for="wt-just">It's just me</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-employees" type="radio" name="employees" value="company">
-                                            <label for="wt-employees">2 - 9 employees</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-employees1" type="radio" name="employees" value="company">
-                                            <label for="wt-employees1">10 - 99 employees</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-employees2" type="radio" name="employees" value="company">
-                                            <label for="wt-employees2">100 - 499 employees</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-employees3" type="radio" name="employees" value="company">
-                                            <label for="wt-employees3">500 - 1000 employees</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-employees4" type="radio" name="employees" value="company">
-                                            <label for="wt-employees4">More than 1000 employees</label>
-                                        </span>
-                                    </div>
-                                    <div class="wt-radioboxholder">
-                                        <div class="wt-title">
-                                            <h4>Your Department?</h4>
-                                        </div>
-                                        <span class="wt-radio">
-                                            <input id="wt-department" type="radio" name="department" value="department" checked>
-                                            <label for="wt-department">Customer Service or Operations</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-department1" type="radio" name="department" value="department">
-                                            <label for="wt-department1">Finance or Legal</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-department2" type="radio" name="department" value="department">
-                                            <label for="wt-department2">Engineering or Product Management</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-department3" type="radio" name="department" value="department">
-                                            <label for="wt-department3">Marketing or Sales</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-department4" type="radio" name="department" value="department">
-                                            <label for="wt-department4">Human Resources</label>
-                                        </span>
-                                        <span class="wt-radio">
-                                            <input id="wt-department5" type="radio" name="department" value="department">
-                                            <label for="wt-department5">Other</label>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>*@
-                            @*<div class="wt-skills">
-                                <div class="wt-tabscontenttitle">
-                                    <h2>My Skills</h2>
-                                </div>
-                                <div class="wt-skillscontent-holder">
-                                    <form class="wt-formtheme wt-skillsform">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <div class="form-group-holder">
-                                                    <span class="wt-select">
-                                                        <select>
-                                                            <option value="">Select Your Skill</option>
-                                                            <option value="">HTML</option>
-                                                            <option value="">PHP</option>
-                                                            <option value="">JQUERY</option>
-                                                        </select>
-                                                    </span>
-                                                    <input type="number" name="rate" class="form-control" placeholder="Rate Your Skill (0% to 100%)">
-                                                </div>
-                                            </div>
-                                            <div class="form-group wt-btnarea">
-                                                <a href="javascript:void(0);" class="wt-btn">Add Skills</a>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                    <div class="wt-myskills">
-                                        <ul class="sortable list">
-                                            <li>
-                                                <div class="wt-dragdroptool">
-                                                    <a href="javascript:void(0)" class="lnr lnr-menu"></a>
-                                                </div>
-                                                <span class="skill-dynamic-html">PHP (<em class="skill-val">90</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">Website Design (<em class="skill-val">55</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">HTML 5 (<em class="skill-val">90</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">Graphic Design (<em class="skill-val">80</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">Rate Your Skill (<em class="skill-val">10</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">SEO (<em class="skill-val">35</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">My SQL (<em class="skill-val">40</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">Content Writing (<em class="skill-val">80</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">CSS (<em class="skill-val">80</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">Jquery (<em class="skill-val">75</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="wt-dragdroptool handle"><a href="javascript:void(0)" class="lnr lnr-menu"></a></div>
-                                                <span class="skill-dynamic-html">Bootstrap (<em class="skill-val">96</em>%)</span>
-                                                <span class="skill-dynamic-field">
-                                                    <input type="text" name="skills[1][percentage]" value="90">
-                                                </span>
-                                                <div class="wt-rightarea">
-                                                    <a href="javascript:void(0);" class="wt-addinfo"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>*@
+
+
+
+
+
                         </div>
-                        @*<div class="wt-educationholder tab-pane fade" id="wt-education">
-                            <div class="wt-userexperience wt-tabsinfo">
-                                <div class="wt-tabscontenttitle wt-addnew">
-                                    <h2>Add Your Experience</h2>
-                                    <a href="javascript:void(0);">Add New</a>
+                        @if (User.IsServiceProvider())
+                        {
+                            <div class="wt-educationholder tab-pane fade" id="wt-education">
+                                <div class="wt-userexperience wt-tabsinfo">
+                                    <div class="wt-tabscontenttitle wt-addnew">
+                                        <h2>Add Your Experience</h2>
+
+                                    </div>
+                                    Select Multiple Services
+                                    <ul class="list-group list-group-horizontal" v-for="a in Services">
+                                        <li class="list-group list-group-heading">
+                                            <h3>{{a.category_name}}</h3>
+                                        </li>
+                                        <li class="list-group list-group-item" v-for="a1 in a.services">
+                                            <input type="checkbox" v-bind:value="a1.service_id" @@click="AddRmService(a1.service_id)" v-bind:checked="selected(a1.service_id)">
+                                            {{a1.servicesubcategory}}
+
+                                        </li>
+                                    </ul>
+                                    <div class="mt-1">
+
+                                    </div>
+                                    <button class="btn btn-success" @@click="saveData()">Complete</button>
                                 </div>
-                                <ul class="wt-experienceaccordion accordion">
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <span id="accordioninnertitle" data-toggle="collapse" data-target="#innertitle">Web &amp; Apps Project Manager<em>(Jun 2017 - Jul 2018)</em></span>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitle" data-toggle="collapse" data-target="#innertitle" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse show" id="innertitle" aria-labelledby="accordioninnertitle" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <span>* Leave ending date empty if its your current job</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <span id="accordioninnertitlea" data-toggle="collapse" data-target="#innertitlea">Sr. PHP &amp; Laravel Developer<em>(Jun 2017 - Jul 2018)</em></span>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitlea" data-toggle="collapse" data-target="#innertitlea" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse hide" id="innertitlea" aria-labelledby="accordioninnertitleaa" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <span>* Leave ending date empty if its your current job</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <span id="accordioninnertitleb" data-toggle="collapse" data-target="#innertitleb">PHP &amp; Laravel Developer <em>(Apr 2016 - Jul 2017)</em></span>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitleb" data-toggle="collapse" data-target="#innertitleb" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse hide" id="innertitleb" aria-labelledby="accordioninnertitleb" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <span>* Leave ending date empty if its your current job</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
+
                             </div>
-                            <div class="wt-userexperience">
-                                <div class="wt-tabscontenttitle wt-addnew">
-                                    <h2>Add Your Education</h2>
-                                    <a href="javascript:void(0);">Add New</a>
-                                </div>
-                                <ul class="wt-experienceaccordion accordion">
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <span id="accordioninnertitle1" data-toggle="collapse" data-target="#innertitle1">Web &amp; Apps Project Manager<em>(Jun 2017 - Jul 2018)</em></span>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitle1" data-toggle="collapse" data-target="#innertitle1" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse show" id="innertitle1" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <span>* Leave ending date empty if its your current job</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <span id="accordioninnertitlea2" data-toggle="collapse" data-target="#innertitlea2">Sr. PHP &amp; Laravel Developer<em>(Jun 2017 - Jul 2018)</em></span>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitlea2" data-toggle="collapse" data-target="#innertitlea2" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse hide" id="innertitlea2" aria-labelledby="accordioninnertitleaa" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <span>* Leave ending date empty if its your current job</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <span id="accordioninnertitleb3" data-toggle="collapse" data-target="#innertitleb3">PHP &amp; Laravel Developer <em>(Apr 2016 - Jul 2017)</em></span>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitleb" data-toggle="collapse" data-target="#innertitleb" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse hide" id="innertitleb3" aria-labelledby="accordioninnertitleb3" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <span>* Leave ending date empty if its your current job</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>*@
-                        @*<div class="wt-awardsholder tab-pane fade" id="wt-awards">
-                            <div class="wt-addprojectsholder wt-tabsinfo">
-                                <div class="wt-tabscontenttitle wt-addnew">
-                                    <h2>Add Your Projects</h2>
-                                    <a href="javascript:void(0);">Add New</a>
-                                </div>
-                                <ul class="wt-experienceaccordion accordion">
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitleaone">
-                                                <figure><img src="images/thumbnail/img-11.jpg" alt="img description"></figure>
-                                                <h3>Project Title Here<span>www.themeforest.net</span></h3>
-                                            </div>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-toggle="collapse" data-target="#innertitleaone"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse" id="innertitleaone" aria-labelledby="accordioninnertitle" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform wt-formprojectinfo">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Project Title" class="form-control" placeholder="Project Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Project URL" class="form-control" placeholder="Project URL">
-                                                    </div>
-                                                    <div class="form-group form-group-label wt-infouploading">
-                                                        <div class="wt-labelgroup">
-                                                            <label for="filen">
-                                                                <span class="wt-btn">Select Files</span>
-                                                                <input type="file" name="file" id="filen">
-                                                            </label>
-                                                            <span>Drop files here to upload</span>
-                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <ul class="wt-attachfile">
-                                                            <li class="wt-uploading">
-                                                                <span>Logo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Wireframe Document.doc</span>
-                                                                <em>File size: 512 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Requirments.pdf</span>
-                                                                <em>File size: 110 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Intro.docx</span>
-                                                                <em>File size: 224 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="form-group wt-btnarea">
-                                                        <a href="javascript:void(0);" class="wt-btn">Save</a>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitlebone">
-                                                <figure><img src="images/thumbnail/img-12.jpg" alt="img description"></figure>
-                                                <h3>Project Title Here<span>www.themeforest.net</span></h3>
-                                            </div>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-toggle="collapse" data-target="#innertitlebone"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse show" id="innertitlebone" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform wt-formprojectinfo">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Project Title" class="form-control" placeholder="Project Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Project URL" class="form-control" placeholder="Project URL">
-                                                    </div>
-                                                    <div class="form-group form-group-label wt-infouploading">
-                                                        <div class="wt-labelgroup">
-                                                            <label for="filet">
-                                                                <span class="wt-btn">Select Files</span>
-                                                                <input type="file" name="file" id="filet">
-                                                            </label>
-                                                            <span>Drop files here to upload</span>
-                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <ul class="wt-attachfile">
-                                                            <li class="wt-uploading">
-                                                                <span>Logo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Wireframe Document.doc</span>
-                                                                <em>File size: 512 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Requirments.pdf</span>
-                                                                <em>File size: 110 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Intro.docx</span>
-                                                                <em>File size: 224 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="form-group wt-btnarea">
-                                                        <a href="javascript:void(0);" class="wt-btn">Save</a>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitlecone">
-                                                <figure><img src="images/thumbnail/img-13.jpg" alt="img description"></figure>
-                                                <h3>Project Title Here<span>www.themeforest.net</span></h3>
-                                            </div>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-toggle="collapse" data-target="#innertitlecone"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse" id="innertitlecone" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform wt-formprojectinfo">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Project Title" class="form-control" placeholder="Project Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Project URL" class="form-control" placeholder="Project URL">
-                                                    </div>
-                                                    <div class="form-group form-group-label wt-infouploading">
-                                                        <div class="wt-labelgroup">
-                                                            <label for="fileb">
-                                                                <span class="wt-btn">Select Files</span>
-                                                                <input type="file" name="file" id="fileb">
-                                                            </label>
-                                                            <span>Drop files here to upload</span>
-                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <ul class="wt-attachfile">
-                                                            <li class="wt-uploading">
-                                                                <span>Logo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Wireframe Document.doc</span>
-                                                                <em>File size: 512 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Requirments.pdf</span>
-                                                                <em>File size: 110 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Intro.docx</span>
-                                                                <em>File size: 224 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="form-group wt-btnarea">
-                                                        <a href="javascript:void(0);" class="wt-btn">Save</a>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="wt-addprojectsholder">
-                                <div class="wt-tabscontenttitle wt-addnew">
-                                    <h2>Add Your Awards</h2>
-                                    <a href="javascript:void(0);">Add New</a>
-                                </div>
-                                <ul class="wt-experienceaccordion accordion">
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitleawone">
-                                                <figure><img src="images/thumbnail/img-08.jpg" alt="img description"></figure>
-                                                <h3>Awards Title Here<samp>Apr 27, 2016</samp></h3>
-                                            </div>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-toggle="collapse" data-target="#innertitleawone"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse" id="innertitleawone" aria-labelledby="accordioninnertitle" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform wt-formprojectinfo">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Awards" class="form-control" placeholder="Award Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="awards" class="form-control" placeholder="Award Date">
-                                                    </div>
-                                                    <div class="form-group form-group-label wt-infouploading">
-                                                        <div class="wt-labelgroup">
-                                                            <label for="file">
-                                                                <span class="wt-btn">Select Files</span>
-                                                                <input type="file" name="file" id="file">
-                                                            </label>
-                                                            <span>Drop files here to upload</span>
-                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <ul class="wt-attachfile">
-                                                            <li class="wt-uploading">
-                                                                <span>Logo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Wireframe Document.doc</span>
-                                                                <em>File size: 512 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Requirments.pdf</span>
-                                                                <em>File size: 110 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Intro.docx</span>
-                                                                <em>File size: 224 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="form-group wt-btnarea">
-                                                        <a href="javascript:void(0);" class="wt-btn">Save</a>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitlebwone">
-                                                <figure><img src="images/thumbnail/img-08.jpg" alt="img description"></figure>
-                                                <h3>Awards Title Here<samp>Apr 27, 2016</samp></h3>
-                                            </div>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-toggle="collapse" data-target="#innertitlebwone"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse show" id="innertitlebwone" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform wt-formprojectinfo">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Award Title" class="form-control" placeholder="Award Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Award Date" class="form-control" placeholder="Award Date">
-                                                    </div>
-                                                    <div class="form-group form-group-label wt-infouploading">
-                                                        <div class="wt-labelgroup">
-                                                            <label for="filea">
-                                                                <span class="wt-btn">Select Files</span>
-                                                                <input type="file" name="file" id="filea">
-                                                            </label>
-                                                            <span>Drop files here to upload</span>
-                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <ul class="wt-attachfile">
-                                                            <li class="wt-uploading">
-                                                                <span>Logo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Wireframe Document.doc</span>
-                                                                <em>File size: 512 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Requirments.pdf</span>
-                                                                <em>File size: 110 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Intro.docx</span>
-                                                                <em>File size: 224 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="form-group wt-btnarea">
-                                                        <a href="javascript:void(0);" class="wt-btn">Save</a>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wt-accordioninnertitle">
-                                            <div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitlecwone">
-                                                <figure><img src="images/thumbnail/img-09.jpg" alt="img description"></figure>
-                                                <h3>Awards Title Here<samp>Apr 27, 2016</samp></h3>
-                                            </div>
-                                            <div class="wt-rightarea">
-                                                <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-toggle="collapse" data-target="#innertitlecwone"><i class="lnr lnr-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="wt-collapseexp collapse" id="innertitlecwone" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
-                                            <form class="wt-formtheme wt-userform wt-formprojectinfo">
-                                                <fieldset>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Award Title" class="form-control" placeholder="Award Title">
-                                                    </div>
-                                                    <div class="form-group form-group-half">
-                                                        <input type="text" name="Award Date" class="form-control" placeholder="Award Date">
-                                                    </div>
-                                                    <div class="form-group form-group-label wt-infouploading">
-                                                        <div class="wt-labelgroup">
-                                                            <label for="filec">
-                                                                <span class="wt-btn">Select Files</span>
-                                                                <input type="file" name="file" id="filec">
-                                                            </label>
-                                                            <span>Drop files here to upload</span>
-                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <ul class="wt-attachfile">
-                                                            <li class="wt-uploading">
-                                                                <span>Logo.jpg</span>
-                                                                <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Wireframe Document.doc</span>
-                                                                <em>File size: 512 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Requirments.pdf</span>
-                                                                <em>File size: 110 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                            <li>
-                                                                <span>Company Intro.docx</span>
-                                                                <em>File size: 224 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="form-group wt-btnarea">
-                                                        <a href="javascript:void(0);" class="wt-btn">Save</a>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>*@
+                        }
+
                     </div>
                 </div>
             </div>
-            @*<div class="wt-updatall">
-                <i class="ti-announcement"></i>
-                <span>Update all the latest changes made by you, by just clicking on “Save &amp; Continue” button.</span>
-                <a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
-            </div>*@
+
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
             <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
@@ -1174,53 +280,7 @@
 </section>
 
 
-<!--<div id="app" v-cloak v-if="pdata">
 
-    <div class="row">-->
-@* <div class="col-md-12" >
-        <div class="card" >
-            <div class="card-body">
-
-                <h2>Bookings <span class="badge badge-info float-right">{{(Bookings.length==0)?"No":Bookings.length}}  Booking(s)</span></h2>
-
-
-            </div>
-        </div>
-    </div> *@
-<!--<div class="col-md-4">
-            <div class="card" v-if="pdata && isProvider">
-
-                <div class="card-body">
-                    <div class="alert alert-danger">
-                        <p>Complete Profile</p>
-                    </div>
-                    Select Multiple Services
-                    <ul class="list-group" v-for="a in Services">
-                        <li class="list-group list-group-heading">
-                            <h3>{{a.category_name}}</h3>
-                        </li>
-                        <li class="list-group list-group-item" v-for="a1 in a.services">
-                            <input type="checkbox" v-bind:value="a1.service_id" @@click="AddRmService(a1.service_id)" v-bind:checked="selected(a1.service_id)">
-                            {{a1.servicesubcategory}}
-
-                        </li>
-                    </ul>
-                    <div class="mt-1">
-
-                    </div>
-                    <button class="btn btn-success" @@click="saveData()">Complete</button>
-
-                </div>
-
-
-
-
-            </div>
-        </div>
-    </div>
-
-
-</div>
 
 
 @section scripts {
@@ -1229,9 +289,25 @@
             min-height: 400px;
         }
     </style>
+    <script src="~/vue/vue.js"></script>
+    <script src="~/axios/axios.min.js"></script>
+    <script src="~/bootstrap-vue/bootstrap-vue.min.js" asp-add-nonce></script>
+    <script src="~/bootstrap-vue/bootstrap-vue-icons.js" asp-add-nonce></script>
+    <link href="~/bootstrap-vue/bootstrap-vue.css" rel="stylesheet" asp-add-content-to-csp csp-hash-type="SHA384" />
+    <link href="~/bootstrap-vue/bootstrap-vue-icons.css" rel="stylesheet" asp-add-content-to-csp csp-hash-type="SHA384" />
+
+    <script src="~/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.umd.js"></script>
+    <link href="~/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.css" type="text/css" rel="stylesheet" />
     <script>
+        var MD5 = function (d) { var r = M(V(Y(X(d), 8 * d.length))); return r.toLowerCase() }; function M(d) { for (var _, m = "0123456789ABCDEF", f = "", r = 0; r < d.length; r++)_ = d.charCodeAt(r), f += m.charAt(_ >>> 4 & 15) + m.charAt(15 & _); return f } function X(d) { for (var _ = Array(d.length >> 2), m = 0; m < _.length; m++)_[m] = 0; for (m = 0; m < 8 * d.length; m += 8)_[m >> 5] |= (255 & d.charCodeAt(m / 8)) << m % 32; return _ } function V(d) { for (var _ = "", m = 0; m < 32 * d.length; m += 8)_ += String.fromCharCode(d[m >> 5] >>> m % 32 & 255); return _ } function Y(d, _) { d[_ >> 5] |= 128 << _ % 32, d[14 + (_ + 64 >>> 9 << 4)] = _; for (var m = 1732584193, f = -271733879, r = -1732584194, i = 271733878, n = 0; n < d.length; n += 16) { var h = m, t = f, g = r, e = i; f = md5_ii(f = md5_ii(f = md5_ii(f = md5_ii(f = md5_hh(f = md5_hh(f = md5_hh(f = md5_hh(f = md5_gg(f = md5_gg(f = md5_gg(f = md5_gg(f = md5_ff(f = md5_ff(f = md5_ff(f = md5_ff(f, r = md5_ff(r, i = md5_ff(i, m = md5_ff(m, f, r, i, d[n + 0], 7, -680876936), f, r, d[n + 1], 12, -389564586), m, f, d[n + 2], 17, 606105819), i, m, d[n + 3], 22, -1044525330), r = md5_ff(r, i = md5_ff(i, m = md5_ff(m, f, r, i, d[n + 4], 7, -176418897), f, r, d[n + 5], 12, 1200080426), m, f, d[n + 6], 17, -1473231341), i, m, d[n + 7], 22, -45705983), r = md5_ff(r, i = md5_ff(i, m = md5_ff(m, f, r, i, d[n + 8], 7, 1770035416), f, r, d[n + 9], 12, -1958414417), m, f, d[n + 10], 17, -42063), i, m, d[n + 11], 22, -1990404162), r = md5_ff(r, i = md5_ff(i, m = md5_ff(m, f, r, i, d[n + 12], 7, 1804603682), f, r, d[n + 13], 12, -40341101), m, f, d[n + 14], 17, -1502002290), i, m, d[n + 15], 22, 1236535329), r = md5_gg(r, i = md5_gg(i, m = md5_gg(m, f, r, i, d[n + 1], 5, -165796510), f, r, d[n + 6], 9, -1069501632), m, f, d[n + 11], 14, 643717713), i, m, d[n + 0], 20, -373897302), r = md5_gg(r, i = md5_gg(i, m = md5_gg(m, f, r, i, d[n + 5], 5, -701558691), f, r, d[n + 10], 9, 38016083), m, f, d[n + 15], 14, -660478335), i, m, d[n + 4], 20, -405537848), r = md5_gg(r, i = md5_gg(i, m = md5_gg(m, f, r, i, d[n + 9], 5, 568446438), f, r, d[n + 14], 9, -1019803690), m, f, d[n + 3], 14, -187363961), i, m, d[n + 8], 20, 1163531501), r = md5_gg(r, i = md5_gg(i, m = md5_gg(m, f, r, i, d[n + 13], 5, -1444681467), f, r, d[n + 2], 9, -51403784), m, f, d[n + 7], 14, 1735328473), i, m, d[n + 12], 20, -1926607734), r = md5_hh(r, i = md5_hh(i, m = md5_hh(m, f, r, i, d[n + 5], 4, -378558), f, r, d[n + 8], 11, -2022574463), m, f, d[n + 11], 16, 1839030562), i, m, d[n + 14], 23, -35309556), r = md5_hh(r, i = md5_hh(i, m = md5_hh(m, f, r, i, d[n + 1], 4, -1530992060), f, r, d[n + 4], 11, 1272893353), m, f, d[n + 7], 16, -155497632), i, m, d[n + 10], 23, -1094730640), r = md5_hh(r, i = md5_hh(i, m = md5_hh(m, f, r, i, d[n + 13], 4, 681279174), f, r, d[n + 0], 11, -358537222), m, f, d[n + 3], 16, -722521979), i, m, d[n + 6], 23, 76029189), r = md5_hh(r, i = md5_hh(i, m = md5_hh(m, f, r, i, d[n + 9], 4, -640364487), f, r, d[n + 12], 11, -421815835), m, f, d[n + 15], 16, 530742520), i, m, d[n + 2], 23, -995338651), r = md5_ii(r, i = md5_ii(i, m = md5_ii(m, f, r, i, d[n + 0], 6, -198630844), f, r, d[n + 7], 10, 1126891415), m, f, d[n + 14], 15, -1416354905), i, m, d[n + 5], 21, -57434055), r = md5_ii(r, i = md5_ii(i, m = md5_ii(m, f, r, i, d[n + 12], 6, 1700485571), f, r, d[n + 3], 10, -1894986606), m, f, d[n + 10], 15, -1051523), i, m, d[n + 1], 21, -2054922799), r = md5_ii(r, i = md5_ii(i, m = md5_ii(m, f, r, i, d[n + 8], 6, 1873313359), f, r, d[n + 15], 10, -30611744), m, f, d[n + 6], 15, -1560198380), i, m, d[n + 13], 21, 1309151649), r = md5_ii(r, i = md5_ii(i, m = md5_ii(m, f, r, i, d[n + 4], 6, -145523070), f, r, d[n + 11], 10, -1120210379), m, f, d[n + 2], 15, 718787259), i, m, d[n + 9], 21, -343485551), m = safe_add(m, h), f = safe_add(f, t), r = safe_add(r, g), i = safe_add(i, e) } return Array(m, f, r, i) } function md5_cmn(d, _, m, f, r, i) { return safe_add(bit_rol(safe_add(safe_add(_, d), safe_add(f, i)), r), m) } function md5_ff(d, _, m, f, r, i, n) { return md5_cmn(_ & m | ~_ & f, d, _, r, i, n) } function md5_gg(d, _, m, f, r, i, n) { return md5_cmn(_ & f | m & ~f, d, _, r, i, n) } function md5_hh(d, _, m, f, r, i, n) { return md5_cmn(_ ^ m ^ f, d, _, r, i, n) } function md5_ii(d, _, m, f, r, i, n) { return md5_cmn(m ^ (_ | ~f), d, _, r, i, n) } function safe_add(d, _) { var m = (65535 & d) + (65535 & _); return (d >> 16) + (_ >> 16) + (m >> 16) << 16 | 65535 & m } function bit_rol(d, _) { return d << _ | d >>> 32 - _ }
+    </script>
+    <script>
+        Vue.use(BootstrapVue);
+        Vue.use(VueBootstrapTypeahead);
+        Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
         var app = new Vue({
-            el: "#app",
+            el: "#wt-education",
             data: {
                 token: null,
                 pdata: null,
@@ -1240,12 +316,7 @@
                 selectedService: []
             },
             mounted() {
-                this.pdata = JSON.parse(localStorage.getItem("data"))
-                var token = localStorage.getItem("token");
-                if (token == null || token == undefined) {
-                    window.location.href = '/Account/Login'
-                }
-                this.token = token;
+                
                 axios.get("/api/services/AllServices").then(data => {
                     if (data.data.status == 0) {
                         this.Services = data.data.payload;
@@ -1253,7 +324,7 @@
                         alert(data.data.message)
                     }
                 });
-                axios.get("/api/Provider/Services", { headers: { 'Authorization': this.token } }).then(data => {
+                axios.get("/api/Provider/Services").then(data => {
                     if (data.data.status == 0) {
                         this.selectedService = data.data.payload.map(i => i.serviceId);
                     } else {
@@ -1320,12 +391,5 @@
 
 
     </script>
+}
 
-
-
-
-
-
-
-
-}-->
