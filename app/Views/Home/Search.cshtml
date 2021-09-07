@@ -373,7 +373,10 @@
                                     </div>
                                 </div>
                                 <div class="wt-description">
-                                    <p>@(data.About.Length>150?new string(data.About.Take(150).ToArray()):data.About) ...</p>
+                                    @if (data.About.Length > 0)
+                                    {
+                                    <p>@(data.About.Length > 150 ? new string(data.About.Take(150).ToArray()) : data.About) ...</p>
+                                    }
                                 </div>
                                 <div class="wt-tag wt-widgettag">
                                     @foreach (var s in data.Service.Select(o=> o.servicecategory).Distinct())
