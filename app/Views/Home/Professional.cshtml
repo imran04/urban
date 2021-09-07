@@ -25,7 +25,7 @@
 
 }
 
-<div class="wt-main-section wt-paddingtopnull wt-haslayout">
+<div class="wt-main-section wt-paddingtopnull wt-haslayout" @((User.Identity.IsAuthenticated && User.IsConsumer()) ? "id=app" : "")>
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
@@ -56,29 +56,13 @@
                                     <li></li>
                                 </ul>
                                 <div class="wt-description">
-                                   <p>@Html.Encode(Model.About)</p>
+                                    <p>@Html.Encode(Model.About)</p>
 
 
                                 </div>
                             </div>
                             <div id="wt-statistics" class="wt-statistics wt-profilecounter">
-                                @*<div class="wt-statisticcontent wt-countercolor1">
-            <h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">03</h3>
-            <h4>Services</h4>
-        </div>*@
-        @*<div class="wt-statisticcontent wt-countercolor2">
-            <h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">1503</h3>
-            <h4>Completed <br>Projects</h4>
-        </div>
-        <div class="wt-statisticcontent wt-countercolor4">
-            <h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">02</h3>
-            <h4>Cancelled <br>Projects</h4>
-        </div>
-        <div class="wt-statisticcontent wt-countercolor3">
-            <h3 data-from="0" data-to="25" data-speed="8000" data-refresh-interval="100">25</h3>
-            <em>k</em>
-            <h4>Served <br>Hours</h4>
-        </div>*@
+
 
                                 <hr />
                                 <div class="wt-widgettag wt-widgettagvtwo">
@@ -97,13 +81,14 @@
                                     @if (User.Identity.IsAuthenticated)
                                     {
 
+                                        <button @@click="bookuser()" class="wt-btn">Book</button>
 
-                                <a href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Book</a>
-                                }
-                                else
-                                {
-                                <a href="/account/login" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Login to Book</a>
-                                }
+
+                                    }
+                                    else
+                                    {
+                                        <a href="/account/login" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Login to Book</a>
+                                    }
 
                                 </div>
 
@@ -114,427 +99,114 @@
             </div>
         </div>
     </div>
-    <!-- User Profile End-->
-    <!-- User Listing Start-->
-    @*<div class="container">
-        <div class="row">
-            <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
-                    <div class="wt-usersingle">
-                        <div class="wt-clientfeedback">
-                            <div class="wt-usertitle wt-titlewithselect">
-                                <h2>Client Feedback</h2>
-                                <div class="form-group">
-                                    <span class="wt-select">
-                                        <select>
-                                            <option value="Show All">Show All</option>
-                                            <option value="One Page">One Page </option>
-                                            <option value="Two Page">Two Page</option>
-                                        </select>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
-                                <figure class="wt-userlistingimg">
-                                    <img src="images/client/img-01.jpg" alt="image description">
-                                </figure>
-                                <div class="wt-userlistingcontent">
-                                    <div class="wt-contenthead">
-                                        <div class="wt-title">
-                                            <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Themeforest Company</a>
-                                            <h3>Translation and Proof Reading (Multi Language)</h3>
-                                        </div>
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="fa fa-dollar-sign"></i> Beginner</span></li>
-                                            <li><span><img src="images/flag/img-04.png" alt="img description"> England</span></li>
-                                            <li><span><i class="fas fa-spinner fa-spin"></i> In Progress</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wt-userlistinghold wt-userlistingsingle">
-                                <figure class="wt-userlistingimg">
-                                    <img src="images/client/img-02.jpg" alt="image description">
-                                </figure>
-                                <div class="wt-userlistingcontent">
-                                    <div class="wt-contenthead">
-                                        <div class="wt-title">
-                                            <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Videohive Studio</a>
-                                            <h3>Need help translating app stringlist from English to Arabic</h3>
-                                        </div>
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Intermediate</span></li>
-                                            <li><span><img src="images/flag/img-03.png" alt="img description">  Canada</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2017</span></li>
-                                            <li><span class="wt-stars"><span></span></span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="wt-description">
-                                    <p>“ Eiusmod tempor incididunt ut labore et dolore magna quis nostrud exercitation ullamco laboris. ”</p>
-                                </div>
-                            </div>
-                            <div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
-                                <figure class="wt-userlistingimg">
-                                    <img src="images/client/img-03.jpg" alt="image description">
-                                </figure>
-                                <div class="wt-userlistingcontent">
-                                    <div class="wt-contenthead">
-                                        <div class="wt-title">
-                                            <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Photodune Professionals</a>
-                                            <h3>Blog Post Writing in English Language</h3>
-                                        </div>
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                            <li><span><img src="images/flag/img-02.png" alt="img description"> United States</span></li>
-                                            <li><span><i class="far fa-calendar"></i>  Jun 2017</span></li>
-                                            <li><span class="wt-stars"><span></span></span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="wt-description">
-                                    <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                </div>
-                            </div>
-                            <div class="wt-btnarea">
-                                <a href="javascript:void(0);" class="wt-btn">Load More</a>
-                            </div>
-                        </div>
-                        <div class="wt-craftedprojects">
-                            <div class="wt-usertitle">
-                                <h2>Crafted Projects</h2>
-                            </div>
-                            <div class="wt-projects">
-                                <div class="wt-project">
-                                    <figure>
-                                        <img src="images/projects/img-01.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-projectcontent">
-                                        <h3>Themeforest</h3>
-                                        <a href="javascript:void(0);">www.themeforest.net</a>
-                                    </div>
-                                </div>
-                                <div class="wt-project">
-                                    <figure>
-                                        <img src="images/projects/img-02.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-projectcontent">
-                                        <h3>Videohive</h3>
-                                        <a href="javascript:void(0);">www.videohive.net</a>
-                                    </div>
-                                </div>
-                                <div class="wt-project">
-                                    <figure>
-                                        <img src="images/projects/img-03.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-projectcontent">
-                                        <h3>Codecanyon</h3>
-                                        <a href="javascript:void(0);">www.codecanyon.net</a>
-                                    </div>
-                                </div>
-                                <div class="wt-project">
-                                    <figure>
-                                        <img src="images/projects/img-04.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-projectcontent">
-                                        <h3>Graphicriver</h3>
-                                        <a href="javascript:void(0);">www.graphicriver.net</a>
-                                    </div>
-                                </div>
-                                <div class="wt-project">
-                                    <figure>
-                                        <img src="images/projects/img-05.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-projectcontent">
-                                        <h3>Photodune</h3>
-                                        <a href="javascript:void(0);">www.photodune.net</a>
-                                    </div>
-                                </div>
-                                <div class="wt-project">
-                                    <figure>
-                                        <img src="images/projects/img-06.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-projectcontent">
-                                        <h3>Audiojungle</h3>
-                                        <a href="javascript:void(0);">www.audiojungle.net</a>
-                                    </div>
-                                </div>
-                                <div class="wt-btnarea">
-                                    <a href="javascript:void(0);" class="wt-btn">Load More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wt-experience">
-                            <div class="wt-usertitle">
-                                <h2>Experience</h2>
-                            </div>
-                            <div class="wt-experiencelisting-hold">
-                                <div class="wt-experiencelisting wt-bgcolor">
-                                    <div class="wt-title">
-                                        <h3>Web &amp; Apps Project Manager</h3>
-                                    </div>
-                                    <div class="wt-experiencecontent">
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="far fa-building"></i> Amento Tech</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Aug 2017 - Till Now</span></li>
-                                        </ul>
-                                        <div class="wt-description">
-                                            <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-experiencelisting">
-                                    <div class="wt-title">
-                                        <h3>Sr. PHP &amp; Laravel Developer</h3>
-                                    </div>
-                                    <div class="wt-experiencecontent">
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="far fa-building"></i> Amento Tech</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2018</span></li>
-                                        </ul>
-                                        <div class="wt-description">
-                                            <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-experiencelisting wt-bgcolor">
-                                    <div class="wt-title">
-                                        <h3>PHP Developer</h3>
-                                    </div>
-                                    <div class="wt-experiencecontent">
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="far fa-building"></i> Amento Tech</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Apr 2016 - Jul 2017</span></li>
-                                        </ul>
-                                        <div class="wt-description">
-                                            <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="divheight"></div>
-                            </div>
-                        </div>
-                        <div class="wt-experience wt-education">
-                            <div class="wt-usertitle">
-                                <h2>Education</h2>
-                            </div>
-                            <div class="wt-experiencelisting-hold">
-                                <div class="wt-experiencelisting wt-bgcolor">
-                                    <div class="wt-title">
-                                        <h3>Web &amp; Apps Project Manager</h3>
-                                    </div>
-                                    <div class="wt-experiencecontent">
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="far fa-building"></i> Amento Tech</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Aug 2017 - Till Now</span></li>
-                                        </ul>
-                                        <div class="wt-description">
-                                            <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-experiencelisting">
-                                    <div class="wt-title">
-                                        <h3>Sr. PHP &amp; Laravel Developer</h3>
-                                    </div>
-                                    <div class="wt-experiencecontent">
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="far fa-building"></i> Amento Tech</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2018</span></li>
-                                        </ul>
-                                        <div class="wt-description">
-                                            <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-experiencelisting wt-bgcolor">
-                                    <div class="wt-title">
-                                        <h3>PHP Developer</h3>
-                                    </div>
-                                    <div class="wt-experiencecontent">
-                                        <ul class="wt-userlisting-breadcrumb">
-                                            <li><span><i class="far fa-building"></i> Amento Tech</span></li>
-                                            <li><span><i class="far fa-calendar"></i> Apr 2016 - Jul 2017</span></li>
-                                        </ul>
-                                        <div class="wt-description">
-                                            <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="divheight"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                    <aside id="wt-sidebar" class="wt-sidebar">
-                        <div id="wt-ourskill" class="wt-widget">
-                            <div class="wt-widgettitle">
-                                <h2>My Skills</h2>
-                            </div>
-                            <div class="wt-widgetcontent wt-skillscontent">
-                                <div class="wt-skillholder" data-percent="90%">
-                                    <span>PHP <em>90%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="55%">
-                                    <span>Website Design <em>55%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="99%">
-                                    <span>HTML 5 <em>99%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="80%">
-                                    <span>Graphic Design <em>80%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="75%">
-                                    <span>WordPress <em>75%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="35%">
-                                    <span>SEO <em>35%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="40%">
-                                    <span>My SQL <em>40%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="80%">
-                                    <span>Content Writing <em>80%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="80%">
-                                    <span>CSS <em>80%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-skillholder" data-percent="75%">
-                                    <span>Jquery <em>75%</em></span>
-                                    <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-                                </div>
-                                <div class="wt-btnarea">
-                                    <a href="javascript:void(0)">View More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wt-widget wt-widgetarticlesholder wt-articlesuser">
-                            <div class="wt-widgettitle">
-                                <h2>Awards &amp; Certifications</h2>
-                            </div>
-                            <div class="wt-widgetcontent">
-                                <div class="wt-particlehold">
-                                    <figure>
-                                        <img src="images/thumbnail/img-07.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-particlecontent">
-                                        <h3><a href="javascript:void(0);">Top PHP Excel Skills</a></h3>
-                                        <span><i class="lnr lnr-calendar"></i> Jun 27, 2018</span>
-                                    </div>
-                                </div>
-                                <div class="wt-particlehold">
-                                    <figure>
-                                        <img src="images/thumbnail/img-08.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-particlecontent">
-                                        <h3><a href="javascript:void(0);">Monster Developer Award</a></h3>
-                                        <span><i class="lnr lnr-calendar"></i> Apr 27, 2018</span>
-                                    </div>
-                                </div>
-                                <div class="wt-particlehold">
-                                    <figure>
-                                        <img src="images/thumbnail/img-09.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-particlecontent">
-                                        <h3><a href="javascript:void(0);">Best Communication 2015</a></h3>
-                                        <span><i class="lnr lnr-calendar"></i> May 27, 2018</span>
-                                    </div>
-                                </div>
-                                <div class="wt-particlehold">
-                                    <figure>
-                                        <img src="images/thumbnail/img-10.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-particlecontent">
-                                        <h3><a href="javascript:void(0);">Best Logo Design Winner</a></h3>
-                                        <span><i class="lnr lnr-calendar"></i> Aug 27, 2018</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wt-proposalsr">
-                            <div class="tg-authorcodescan tg-authorcodescanvtwo">
-                                <figure class="tg-qrcodeimg">
-                                    <img src="images/qrcode.png" alt="img description">
-                                </figure>
-                                <div class="tg-qrcodedetail">
-                                    <span class="lnr lnr-laptop-phone"></span>
-                                    <div class="tg-qrcodefeat">
-                                        <h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wt-widget">
-                            <div class="wt-widgettitle">
-                                <h2>Similar Freelancers</h2>
-                            </div>
-                            <div class="wt-widgetcontent">
-                                <div class="wt-widgettag wt-widgettagvtwo">
-                                    <a href="javascript:void(0);">PHP Developer</a>
-                                    <a href="javascript:void(0);">PHP</a>
-                                    <a href="javascript:void(0);">My SQL</a>
-                                    <a href="javascript:void(0);">Business</a>
-                                    <a href="javascript:void(0);">Website Development</a>
-                                    <a href="javascript:void(0);">Collaboration</a>
-                                    <a href="javascript:void(0);">Decent</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wt-widget wt-sharejob">
-                            <div class="wt-widgettitle">
-                                <h2>Share This User</h2>
-                            </div>
-                            <div class="wt-widgetcontent">
-                                <ul class="wt-socialiconssimple">
-                                    <li class="wt-facebook"><a href="javascript:void(0);"><i class="fab fa-facebook-f"></i>Share on Facebook</a></li>
-                                    <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i>Share on Twitter</a></li>
-                                    <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i>Share on Linkedin</a></li>
-                                    <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i>Share on Google Plus</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="wt-widget wt-reportjob">
-                            <div class="wt-widgettitle">
-                                <h2>Report This User</h2>
-                            </div>
-                            <div class="wt-widgetcontent">
-                                <form class="wt-formtheme wt-formreport">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <span class="wt-select">
-                                                <select>
-                                                    <option value="reason">Select Reason</option>
-                                                    <option value="reason1">Reason1</option>
-                                                    <option value="reason2">Reason2</option>
-                                                    <option value="reason3">Reason3</option>
-                                                    <option value="reason4">Reason4</option>
-                                                </select>
-                                            </span>
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea class="form-control" placeholder="Description"></textarea>
-                                        </div>
-                                        <div class="form-group wt-btnarea">
-                                            <a href="javascrip:void(0);" class="wt-btn">Submit</a>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
+
+    @if (User.Identity.IsAuthenticated&& User.IsConsumer())
+    {
+        <b-modal id="modal-2" ref="bookingDialog" title="Book Service" hide-footer no-close-on-esc no-close-on-backdrop hide-header-close>
+            <div>
+                Book @Model.Name
             </div>
-        </div>
-    </div>*@
-    <!-- User Listing End-->
+
+            <div class="form-group">
+
+                <label for="example-datepicker">Choose a date for service</label>
+                <input type="datetime-local" v-model="servicebook.request_datetime" class="mb-2" />
+               
+
+
+            </div>
+            <div class="form-group">
+                <label>Instructions</label>
+                <b-form-textarea v-model="servicebook.instruction"
+                                 placeholder="Enter something..."
+                                 rows="3"
+                                 max-rows="6"></b-form-textarea>
+            </div>
+
+
+
+            <button type="button" class="btn btn-info" @@click="book()">Book</button>
+            <button type="button" class="btn btn-warning" @@click="cancel()"> Close </button>
+        </b-modal>
+    }
+
 </div>
+
+@section scripts {
+    <script src="~/vue/vue.js"></script>
+    <script src="~/axios/axios.min.js"></script>
+    <script src="~/bootstrap-vue/bootstrap-vue.min.js" asp-add-nonce></script>
+    <script src="~/bootstrap-vue/bootstrap-vue-icons.js" asp-add-nonce></script>
+    <link href="~/bootstrap-vue/bootstrap-vue.css" rel="stylesheet" asp-add-content-to-csp csp-hash-type="SHA384" />
+    <link href="~/bootstrap-vue/bootstrap-vue-icons.css" rel="stylesheet" asp-add-content-to-csp csp-hash-type="SHA384" />
+
+    <script src="~/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.umd.js"></script>
+    <link href="~/vue-bootstrap-typeahead/dist/VueBootstrapTypeahead.css" type="text/css" rel="stylesheet" />
+    <script>
+    var MD5 = function(d){var r = M(V(Y(X(d),8*d.length)));return r.toLowerCase()};function M(d){for(var _,m="0123456789ABCDEF",f="",r=0;r<d.length;r++)_=d.charCodeAt(r),f+=m.charAt(_>>>4&15)+m.charAt(15&_);return f}function X(d){for(var _=Array(d.length>>2),m=0;m<_.length;m++)_[m]=0;for(m=0;m<8*d.length;m+=8)_[m>>5]|=(255&d.charCodeAt(m/8))<<m%32;return _}function V(d){for(var _="",m=0;m<32*d.length;m+=8)_+=String.fromCharCode(d[m>>5]>>>m%32&255);return _}function Y(d,_){d[_>>5]|=128<<_%32,d[14+(_+64>>>9<<4)]=_;for(var m=1732584193,f=-271733879,r=-1732584194,i=271733878,n=0;n<d.length;n+=16){var h=m,t=f,g=r,e=i;f=md5_ii(f=md5_ii(f=md5_ii(f=md5_ii(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_ff(f=md5_ff(f=md5_ff(f=md5_ff(f,r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+0],7,-680876936),f,r,d[n+1],12,-389564586),m,f,d[n+2],17,606105819),i,m,d[n+3],22,-1044525330),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+4],7,-176418897),f,r,d[n+5],12,1200080426),m,f,d[n+6],17,-1473231341),i,m,d[n+7],22,-45705983),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+8],7,1770035416),f,r,d[n+9],12,-1958414417),m,f,d[n+10],17,-42063),i,m,d[n+11],22,-1990404162),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+12],7,1804603682),f,r,d[n+13],12,-40341101),m,f,d[n+14],17,-1502002290),i,m,d[n+15],22,1236535329),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+1],5,-165796510),f,r,d[n+6],9,-1069501632),m,f,d[n+11],14,643717713),i,m,d[n+0],20,-373897302),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+5],5,-701558691),f,r,d[n+10],9,38016083),m,f,d[n+15],14,-660478335),i,m,d[n+4],20,-405537848),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+9],5,568446438),f,r,d[n+14],9,-1019803690),m,f,d[n+3],14,-187363961),i,m,d[n+8],20,1163531501),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+13],5,-1444681467),f,r,d[n+2],9,-51403784),m,f,d[n+7],14,1735328473),i,m,d[n+12],20,-1926607734),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+5],4,-378558),f,r,d[n+8],11,-2022574463),m,f,d[n+11],16,1839030562),i,m,d[n+14],23,-35309556),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+1],4,-1530992060),f,r,d[n+4],11,1272893353),m,f,d[n+7],16,-155497632),i,m,d[n+10],23,-1094730640),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+13],4,681279174),f,r,d[n+0],11,-358537222),m,f,d[n+3],16,-722521979),i,m,d[n+6],23,76029189),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+9],4,-640364487),f,r,d[n+12],11,-421815835),m,f,d[n+15],16,530742520),i,m,d[n+2],23,-995338651),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+0],6,-198630844),f,r,d[n+7],10,1126891415),m,f,d[n+14],15,-1416354905),i,m,d[n+5],21,-57434055),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+12],6,1700485571),f,r,d[n+3],10,-1894986606),m,f,d[n+10],15,-1051523),i,m,d[n+1],21,-2054922799),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+8],6,1873313359),f,r,d[n+15],10,-30611744),m,f,d[n+6],15,-1560198380),i,m,d[n+13],21,1309151649),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+4],6,-145523070),f,r,d[n+11],10,-1120210379),m,f,d[n+2],15,718787259),i,m,d[n+9],21,-343485551),m=safe_add(m,h),f=safe_add(f,t),r=safe_add(r,g),i=safe_add(i,e)}return Array(m,f,r,i)}function md5_cmn(d,_,m,f,r,i){return safe_add(bit_rol(safe_add(safe_add(_,d),safe_add(f,i)),r),m)}function md5_ff(d,_,m,f,r,i,n){return md5_cmn(_&m|~_&f,d,_,r,i,n)}function md5_gg(d,_,m,f,r,i,n){return md5_cmn(_&f|m&~f,d,_,r,i,n)}function md5_hh(d,_,m,f,r,i,n){return md5_cmn(_^m^f,d,_,r,i,n)}function md5_ii(d,_,m,f,r,i,n){return md5_cmn(m^(_|~f),d,_,r,i,n)}function safe_add(d,_){var m=(65535&d)+(65535&_);return(d>>16)+(_>>16)+(m>>16)<<16|65535&m}function bit_rol(d,_){return d<<_|d>>>32-_}
+    </script>
+    <script>
+    Vue.use(BootstrapVue);
+    Vue.use(VueBootstrapTypeahead);
+    Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
+       var app = new Vue({
+           el: "#app",
+        data: {
+
+            servicebook: {
+                provider_id:@Model.UserId,
+            service_id:null,
+            request_datetime:null,
+            instruction:null
+           }
+        },
+       mounted(){
+
+       },
+       methods: {
+            book() {
+            this.servicebook.service_id = 0;
+            var data =JSON.parse(JSON.stringify(this.servicebook))
+              axios.post('/api/booking/book',data)
+              .then(data=>{
+                  if(data.data.status==0){
+
+                      this.servicebook = {
+                          provider_id:@Model.UserId,
+                          service_id:null,
+                      request_datetime:null,
+                      instruction:null
+                    }
+               this.$refs["bookingDialog"].hide();
+               alert("Booking success")
+               window.location.reload()
+                  }else{
+                    aler(data.data.message)
+                  }
+
+
+              })
+
+            },
+            cancel(){
+
+              this.servicebook ={
+                provider_id:@Model.UserId,
+                service_id:null,
+                request_datetime:null,
+                instruction:null
+              }
+              this.$refs["bookingDialog"].hide();
+            },
+            bookuser(){
+              this.$refs["bookingDialog"].show();
+            }
+           }
+
+    })
+    </script>
+
+
+
+}

@@ -3,8 +3,10 @@
     <div class="wt-navigationarea">
         <div class="container-fluid">
             <div class="row">
+                
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <strong class="wt-logo"><a href="/"><img src="~/assets/img/brand/blue.png" alt="company logo here"></a></strong>
+                    <search></search>
                     <div class="wt-rightarea">
                         <nav id="wt-nav" class="wt-nav navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +115,7 @@
                                                     <button @*href="javascript:;"*@ class="wt-btn do-login-button">Login</button>
                                                     <span class="wt-checkbox">
                                                         @*<input id="wt-login" type="checkbox" name="rememberme">
-                                        <label for="wt-login">Keep me logged in</label>*@
+                                            <label for="wt-login">Keep me logged in</label>*@
                                                     </span>
                                                 </div>
                                             </fieldset>
@@ -141,20 +143,20 @@
                                 </div>
                                 <a href="/Account/Register" class="wt-btn">Join Now</a>
                             </div>
-                            
+
                         }
                         else
                         {
 
 
-                        <div class="wt-loginarea">
-                            <a href="/Home/Profile">
-                                <figure class="wt-userimg">
-                                    <img gravatar-email="@User.Email()" alt="img description" /> @User.Email()
-                                </figure>
-                            </a>
-                            <a href="/Account/Logout" class="wt-btn">Logout</a>
-                        </div>
+                            <div class="wt-loginarea">
+                                <a href="/Home/Profile">
+                                    <figure class="wt-userimg">
+                                        <img gravatar-email="@User.Email()" alt="img description" /> @User.Email()
+                                    </figure>
+                                </a>
+                                <a href="/Account/Logout" class="wt-btn">Logout</a>
+                            </div>
 
                         }
                     </div>

@@ -1,0 +1,16 @@
+﻿<form class="wt-formtheme wt-formbanner wt-formbannervtwo">
+    <fieldset>
+        <div class="form-group  input-group">
+            <select class="form-control" name="Search">
+                @foreach (var i in ViewBag.Data)
+                {
+                    <option value="@i.CategoryName">@i.CategoryName</option>
+                }
+            </select>
+            <div class="input-group-append">
+                <button class="wt-searchbtn"><i class="lnr lnr-magnifier"></i></button>
+            </div>
+        </div>
+        
+    </fieldset>
+</form>
