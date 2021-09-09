@@ -15,6 +15,7 @@ using app.Infra;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace app.Controllers
 {
@@ -29,13 +30,16 @@ namespace app.Controllers
 
         private IUserRepository Userprovider;
         private IBookingRepository BookingRepository;
-        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider, IUserRepository Userprovider,IBookingRepository bookingRepository)
+
+        private IMemoryCache _cache;
+        public HomeController(ILogger<HomeController> logger,IConfiguration _configuration,IProviderRepository Provider, IUserRepository Userprovider,IBookingRepository bookingRepository,IMemoryCache cache)
         {
             _logger = logger;
             configuration=_configuration;
             provider = Provider;
             this.Userprovider = Userprovider;
             BookingRepository = bookingRepository;
+            _cache = cache;
         }
        [AllowAnonymous]
         public IActionResult Index()
@@ -45,21 +49,18 @@ namespace app.Controllers
             using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
             {
                 var sql = @"select category_name CategoryName,image Image,display Display from service_category where status=1;
-                            select Count(*) from users where type=0;
-                            select count(*) from users where type=1;
-                            select count(*) from services;
+                            
                             ";
-                using(var result = connection.QueryMultiple(sql))
-                {
-                    var data =result.Read<ServiceCategoryVM>().ToList();
-                    var Consumer = result.ReadFirst<int>();
-                    var Provider = result.ReadFirst<int>();
-                    var services = result.ReadFirst<int>();
-                    ViewBag.Consumer = Consumer;
-                    ViewBag.Provider = Provider;
-                    ViewBag.Services = services;
+                
+                    List<ServiceCategoryVM> data;
+                    if(!_cache.TryGetValue("CategorySearch",out data))
+                    {
+                        data = connection.Query<ServiceCategoryVM>(sql).ToList();
+                        _cache.Set<List<ServiceCategoryVM>>("CategorySearch", data);
+                    }
+                    
                     return View(data);
-                }
+                
   
             }
         }
