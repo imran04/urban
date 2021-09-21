@@ -35,13 +35,13 @@
                         <div class="row">
                             <div class="wt-userprofile">
                                 <figure>
-                                    <img gravatar-email="@Model.Email" alt="img description" />
+                                    <img gravatar-email="@Model.email" alt="img description" />
                                     <div class="wt-userdropdown ">
                                     </div>
                                 </figure>
                                 <div class="wt-title">
-                                    <h3><i class="fa fa-check-circle"></i> @Model.Name</h3>
-                                    <span>@Model.AvgRating /5 @*<a class="javascript:void(0);">(860 Feedback)</a>*@ <br> <br><a href="javascript:void(0);">@Model.Email</a> @*<a href="javascript:void(0);" class="wt-reportuser">Report User</a>*@</span>
+                                    <h3><i class="fa fa-check-circle"></i> @Model.name</h3>
+                                    <span>@Model.avgrating /5 @*<a class="javascript:void(0);">(860 Feedback)</a>*@ <br> <br><a href="javascript:void(0);">@Model.email</a> @*<a href="javascript:void(0);" class="wt-reportuser">Report User</a>*@</span>
                                 </div>
                             </div>
                         </div>
@@ -49,14 +49,14 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
                         <div class="row">
                             <div class="wt-proposalhead wt-userdetails">
-                                <h2>@Model.HeadLine</h2>
+                                <h2>@Model.headline;</h2>
                                 <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
-                                    <li><span><i class="far fa-money-bill-alt"></i> ₹ @Model.Rate  / Hour</span></li>
+                                    <li><span><i class="far fa-money-bill-alt"></i> ₹ @Model.rate  / Hour</span></li>
                                     <li><span> India</span></li>
                                     <li></li>
                                 </ul>
                                 <div class="wt-description">
-                                    <p>@Html.Encode(Model.About)</p>
+                                    <p>@Html.Encode(Model.about)</p>
 
 
                                 </div>
@@ -104,7 +104,7 @@
     {
         <b-modal id="modal-2" ref="bookingDialog" title="Book Service" hide-footer no-close-on-esc no-close-on-backdrop hide-header-close>
             <div>
-                Book @Model.Name
+                Book @Model.name
             </div>
 
             <div class="form-group">
@@ -155,7 +155,7 @@
         data: {
 
             servicebook: {
-                provider_id:@Model.UserId,
+                provider_id:@Model.userid,
             service_id:null,
             request_datetime:null,
             instruction:null
@@ -173,7 +173,7 @@
                   if(data.data.status==0){
 
                       this.servicebook = {
-                          provider_id:@Model.UserId,
+                          provider_id:@Model.userid,
                           service_id:null,
                       request_datetime:null,
                       instruction:null
@@ -192,7 +192,7 @@
             cancel(){
 
               this.servicebook ={
-                provider_id:@Model.UserId,
+                provider_id:@Model.userid,
                 service_id:null,
                 request_datetime:null,
                 instruction:null

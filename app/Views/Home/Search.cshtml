@@ -330,19 +330,19 @@
                             <div class="wt-userlistinghold wt-featured">
                                 @*<span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>*@
                                 <figure class="wt-userlistingimg">
-                                    <img gravatar-email="@data.Email" alt="image description" />
+                                    <img gravatar-email="@data.email" alt="image description" />
                                 </figure>
                                 <div class="wt-userlistingcontent">
                                     <div class="wt-contenthead">
                                         <div class="wt-title">
-                                            <a asp-action="Professional" asp-controller="home" asp-route-id="@data.UserId">
-                                                <i class="fa fa-check-circle"></i> @data.Name 
+                                            <a asp-action="Professional" asp-controller="home" asp-route-id="@data.userid">
+                                                <i class="fa fa-check-circle"></i> @data.name 
                                             </a>
-                                            <h2>@data.HeadLine</h2>
+                                            <h2>@data.headline</h2>
                                         </div>
                                         <ul class="wt-userlisting-breadcrumb">
                                             @*<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>*@
-                                            <li><span>  @data.Email</span></li>
+                                            <li><span>  @data.email</span></li>
                                             @if (User.Identity.IsAuthenticated)
                                             {
                                                 <li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
@@ -356,11 +356,11 @@
                                     </div>
                                     <div class="wt-rightarea">
                                         <span class="wt-starsvtwo">
-                                            @for (int i = 0; i < (int)data.AvgRating; i++)
+                                            @for (int i = 0; i < (int)data.avgrating; i++)
                                             {
                                                 <i class="fa fa-star fill"></i>
                                             }
-                                            @for (int i = 0; i < 5 - (int)data.AvgRating; i++)
+                                            @for (int i = 0; i < 5 - (int)data.avgrating; i++)
                                             {
                                                 <i class="fa fa-star"></i>
                                             }
@@ -369,13 +369,13 @@
                                             <i class="fa fa-star fill"></i>
                                             <i class="fa fa-star fill"></i>*@
                                         </span>
-                                        <span class="wt-starcontent">@data.AvgRating /<sub>5</sub> @*<em>(860 Feedback)</em>*@</span>
+                                        <span class="wt-starcontent">@data.avgrating /<sub>5</sub> @*<em>(860 Feedback)</em>*@</span>
                                     </div>
                                 </div>
                                 <div class="wt-description">
-                                    @if (data.About.Length > 0)
+                                    @if (data.about.Length > 0)
                                     {
-                                    <p>@(data.About.Length > 150 ? new string(data.About.Take(150).ToArray()) : data.About) ...</p>
+                                    <p>@(data.about.Length > 150 ? new string(data.about.Take(150).ToArray()) : data.about) ...</p>
                                     }
                                 </div>
                                 <div class="wt-tag wt-widgettag">
@@ -388,7 +388,7 @@
                                         <a href="javascript:void(0);">@s.servicesubcategory</a>
                                     }
 
-                                    <a asp-action="Professional" asp-controller="home" asp-route-id="@data.UserId" class="btn btn-success">
+                                    <a asp-action="Professional" asp-controller="home" asp-route-id="@data.userid" class="btn btn-success">
                                         <i class="fa fa-check-circle"></i> Continue
                                     </a>
                                 </div>

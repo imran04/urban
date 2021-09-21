@@ -3,6 +3,7 @@ using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -31,8 +32,8 @@ namespace app.Infra
 
 
             int insertCount = 0;
-            var CountCheck = "select count(*) from [users] where emailid=@email or username=@username or mobile=@mobile";
-            var insertCommand = @"INSERT INTO[dbo].[users] ([type],[username],[password],[latitute],[longitude],[address],[mobile],[emailid],[last_login_datetime],[status],[securitystamp]) VALUES
+            var CountCheck = "select count(*) from users where emailid=@email or username=@username or mobile=@mobile";
+            var insertCommand = @"INSERT INTO users (type,username,password,latitute,longitude,address,mobile,emailid,last_login_datetime,status,securitystamp) VALUES
             (@type,@username,@password,@latitute,@longitude,@address,@mobile,@emailid,@last_login_datetime,@status,@securitystamp)";
             var (password, secu) = user.password.HashPassword();
 
@@ -78,7 +79,7 @@ namespace app.Infra
 
             using (var cn = new SqlConnection(configuration.GetConnectionString("default")))
             {
-                cn.Execute(@"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
+                cn.Execute(@"insert into profile (userid,name,avgrating,mobile,email,alternatemobile) 
                                 select userid,username,0,mobile,emailid,mobile from users where userid not in
 								( select userid from profile)");
                 var count = cn.QueryFirst<Users>(Query, new { UserName });
@@ -109,13 +110,13 @@ namespace app.Infra
             try
             {
                 var UserId = HttpContext.HttpContext.User.Identity.Name;
-                var Sql = "Select * from Profile where UserId=@UserId";
-                using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
+                var Sql = "Select * from profile where userid=@UserId";
+                using (var connection = new MySqlConnection(configuration.GetConnectionString("default")))
                 {
                     var data = connection.QueryFirstOrDefault<Profile>(Sql, new { UserId });
                     if (data == null)
                     {
-                        var sql1 = @"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
+                        var sql1 = @"insert into profile (userid,name,avgrating,mobile,email,alternatemobile)  
                                 select userid,username,0,mobile,emailid,mobile from users where userid = @UserId";
                         connection.Execute(sql1, new { UserId });
                         data = connection.QueryFirstOrDefault<Profile>(Sql, new { UserId });
@@ -150,12 +151,12 @@ namespace app.Infra
             {
                 //var UserId = HttpContext.HttpContext.User.Identity.Name;
 
-                using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
+                using (var connection = new MySqlConnection(configuration.GetConnectionString("default")))
                 {
-                    var sql1 = @"Update profile Set Name=@Name,AvgRating=@AvgRating,Mobile=@Mobile,Email=@Email,
-                                    AlternateMobile=@AlternateMobile,HeadLine=@Headline,
-                                    About=@About,Gender=@Gender,Rate=@Rate
-                                    where UserId = @UserId";
+                    var sql1 = @"Update profile Set name=@Name,avgrating=@AvgRating,mobile=@Mobile,email=@Email,
+                                    alternateMobile=@AlternateMobile,headline=@Headline,
+                                    about=@About,gender=@Gender,rate=@Rate
+                                    where userid = @UserId";
                     var l = connection.Execute(sql1, profile);
                     if(l==1)
                         return new ResultObject { status = ResultType.SUCCESS, Payload = true, Message = "Sccucess" };

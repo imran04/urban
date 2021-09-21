@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace app.Infra
 {
@@ -28,7 +29,7 @@ namespace app.Infra
         {
             int count = 0;
             var UserId = HttpContext.HttpContext.User.Identity.Name;
-            using (var con = new SqlConnection(Configuration.GetConnectionString("default")))
+            using (var con = new MySqlConnection(Configuration.GetConnectionString("default")))
             {
                 con.Open();
                 using(var tra= con.BeginTransaction())
@@ -83,8 +84,8 @@ namespace app.Infra
                 selected_services ss on ss.uid=u.userid  join
                 services s on ss.service_id=s.service_id where servicesubcategory=@Service or servicecategory=@Service 
                 order by userid
-                offset @page*@size rows
-                fetch next @size rows only";
+                offset  @page 
+                LIMIT 30";
             try{
             using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
                 {
@@ -92,16 +93,16 @@ namespace app.Infra
                     var hash = new Dictionary<int, ProfileSearchModel>();
                     var count = cn.Query<ProfileSearchModel,Services, ProfileSearchModel>(serach,(s,d)=> {
                         ProfileSearchModel p ;
-                        if(!hash.TryGetValue(s.UserId,out p))
+                        if(!hash.TryGetValue(s.userid,out p))
                         {
                             p = s;
                             p.Service = new List<Services>();
-                            hash.Add(p.UserId, p);
+                            hash.Add(p.userid, p);
                         }
                         p.Service.Add(d);
                         return p;
                     
-                    } ,new { s.Service,page=s.Page,size=s.Size },splitOn: "service_id").Distinct().ToList();
+                    } ,new { s.Service,page=s.Page*s.Size,size=s.Size },splitOn: "service_id").Distinct().ToList();
 
                     Logger.LogInformation("--------------------------------------------------------------------");
                     return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
@@ -153,17 +154,17 @@ namespace app.Infra
                 order by userid";
             try
             {
-                using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
+                using (var cn = new MySqlConnection(Configuration.GetConnectionString("default")))
                 {
                     Logger.LogInformation(serach);
                     var hash = new Dictionary<int, ProfileSearchModel>();
                     var count = cn.Query<ProfileSearchModel, Services, ProfileSearchModel>(serach, (s, d) => {
                         ProfileSearchModel p;
-                        if (!hash.TryGetValue(s.UserId, out p))
+                        if (!hash.TryGetValue(s.userid, out p))
                         {
                             p = s;
                             p.Service = new List<Services>();
-                            hash.Add(p.UserId, p);
+                            hash.Add(p.userid, p);
                         }
                         p.Service.Add(d);
                         return p;

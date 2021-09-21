@@ -11400,6 +11400,79 @@
         }
       },
       {
+        "HashCode": 1313088039,
+        "Kind": "ITagHelper",
+        "Name": "app.TagHelpers.GravatarTagHelper",
+        "AssemblyName": "app",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "img",
+            "Attributes": [
+              {
+                "Name": "gravatar-email"
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "gravatar-email",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Email"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "gravatar-mode",
+            "TypeName": "app.TagHelpers.Mode",
+            "IsEnum": true,
+            "Metadata": {
+              "Common.PropertyName": "Mode"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "gravatar-rating",
+            "TypeName": "app.TagHelpers.Rating",
+            "IsEnum": true,
+            "Metadata": {
+              "Common.PropertyName": "Rating"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "gravatar-size",
+            "TypeName": "System.Int32",
+            "Metadata": {
+              "Common.PropertyName": "Size"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "app.TagHelpers.GravatarTagHelper"
+        }
+      },
+      {
+        "HashCode": -1109671878,
+        "Kind": "ITagHelper",
+        "Name": "app.TagHelpers.SearchTagHelper",
+        "AssemblyName": "app",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "search"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "app.TagHelpers.SearchTagHelper"
+        }
+      },
+      {
         "HashCode": -1132855933,
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper",
@@ -15800,6 +15873,16 @@
   "RootNamespace": "app",
   "Documents": [
     {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Shared\\_IndexV2Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_IndexV2Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Shared\\_IndexV2Navigation.cshtml",
+      "TargetPath": "Views\\Shared\\_IndexV2Navigation.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Account\\Provider.cshtml",
       "TargetPath": "Views\\Account\\Provider.cshtml",
       "FileKind": "mvc"
@@ -15835,8 +15918,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Account\\AuthorizationFailed.cshtml",
+      "TargetPath": "Views\\Account\\AuthorizationFailed.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Shared\\_LoginLayout.cshtml",
       "TargetPath": "Views\\Shared\\_LoginLayout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Home\\Search.cshtml",
+      "TargetPath": "Views\\Home\\Search.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Account\\RegisterSuccess.cshtml",
+      "TargetPath": "Views\\Account\\RegisterSuccess.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Shared\\Taghelpers\\Search\\Index.cshtml",
+      "TargetPath": "Views\\Shared\\Taghelpers\\Search\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15847,6 +15950,21 @@
     {
       "FilePath": "d:\\Personal\\services_websit\\app\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Home\\NotFound.cshtml",
+      "TargetPath": "Views\\Home\\NotFound.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Home\\Professional.cshtml",
+      "TargetPath": "Views\\Home\\Professional.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Personal\\services_websit\\app\\Views\\Home\\BookigDetails.cshtml",
+      "TargetPath": "Views\\Home\\BookigDetails.cshtml",
       "FileKind": "mvc"
     },
     {

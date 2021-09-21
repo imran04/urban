@@ -16,6 +16,7 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Caching.Memory;
+using MySql.Data.MySqlClient;
 
 namespace app.Controllers
 {
@@ -46,7 +47,7 @@ namespace app.Controllers
         {
             _logger.LogInformation(User.Identity.Name);
          
-            using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
+            using (var connection = new MySqlConnection(configuration.GetConnectionString("default")))
             {
                 var sql = @"select category_name CategoryName,image Image,display Display from service_category where status=1;
                             
@@ -118,10 +119,10 @@ namespace app.Controllers
             if (result.status == ResultType.SUCCESS)
             {
                 var data = result.Payload as Profile;
-                profile.UserId = data.UserId;
+                profile.userid = data.userid;
                 if (User.IsConsumer()) {
-                    profile.HeadLine = "";
-                    profile.Rate = 0;
+                    profile.headline = "";
+                    profile.rate = 0;
                 }
 
                result= Userprovider.UpdateProfile(profile) as ResultObject;
@@ -149,6 +150,19 @@ namespace app.Controllers
             }
             throw new Exception(result.Message);
         }
+
+        public IActionResult BookingDetails(int Id)
+        {
+            var data = BookingRepository.SelectBooking(Id) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+            {
+                return View(data.Payload as BookingVm);
+            }
+            return View("NotFound");
+        }
+
+
+
         
     }
 }

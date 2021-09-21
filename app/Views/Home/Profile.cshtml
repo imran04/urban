@@ -164,40 +164,40 @@
                                 </div>
 
                                 <form class="wt-formtheme wt-userform" method="post">
-                                    <input type="hidden" asp-for="UserId" name="UserId" />
+                                    <input type="hidden" asp-for="userid" name="userid" />
                                     <fieldset>
                                         <div class="form-group ">
                                             <span class="wt-select">
-                                                <select asp-for="Gender" name="Gender">
+                                                <select asp-for="gender" name="Gender">
                                                     <option value="" disabled="">Select Gender</option>
-                                                    <option value="">Male</option>
-                                                    <option value="">Female</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                             </span>
                                         </div>
                                         <div class="form-group ">
-                                            <input type="text" asp-for="Name" name="Name" class="form-control" placeholder="Name">
+                                            <input type="text" asp-for="name" name="Name" class="form-control" placeholder="Name">
                                         </div>
                                         <div class="form-group ">
-                                            <input type="email" asp-for="Email" name="Email" class="form-control" placeholder="Email" readonly>
+                                            <input type="email" asp-for="email" name="email" class="form-control" placeholder="Email" readonly>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="text" asp-for="Mobile" name="Mobile" class="form-control" readonly>
+                                            <input type="text" asp-for="mobile" name="Mobile" class="form-control" readonly>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="text" asp-for="AlternateMobile" name="AlternateMobile" class="form-control" placeholder="Alternate Mobile">
+                                            <input type="text" asp-for="alternatemobile" name="AlternateMobile" class="form-control" placeholder="Alternate Mobile">
                                         </div>
                                         @if (User.IsServiceProvider())
                                         {
                                             <div class="form-group form-group-half">
-                                                <input type="number" asp-for="Rate" name="rate" class="form-control" placeholder="Your Service Hourly Rate (Rupees)">
+                                                <input type="number" asp-for="rate" name="rate" class="form-control" placeholder="Your Service Hourly Rate (Rupees)">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" asp-for="HeadLine" name="HeadLine" class="form-control" placeholder="Add Your Tagline Here">
+                                                <input type="text" asp-for="headline" name="HeadLine" class="form-control" placeholder="Add Your Tagline Here">
                                             </div>
                                         }
                                         <div class="form-group">
-                                            <textarea asp-for="About" name="About" class="form-control" placeholder="Description"></textarea>
+                                            <textarea asp-for="about" name="about" class="form-control" placeholder="Description"></textarea>
                                         </div>
 
                                     </fieldset>

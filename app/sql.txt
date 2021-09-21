@@ -1,0 +1,84 @@
+﻿
+create  table users (
+	id bigint not null auto_increment primary Key ,
+	type int not null,
+	username varchar(128) not null unique,
+	password varchar(128) not null,
+	latitute decimal(18,0) not null,
+	longitude decimal(18,0) not null,
+	address varchar(512) not null,
+	mobile varchar(16) null unique,
+	emailid varchar(265) null unique,
+	last_login_datetime datetime null,
+	status tinyint null,
+	securitystamp varchar(128)
+);
+
+
+
+create table booking(
+	booking_id bigint not null auto_increment primary Key,
+	consumer_id int NULL,
+	provider_id int NULL,
+	service_id int NULL,
+	request_datetime datetime NULL,
+	request_completion_date datetime NULL,
+	consumer_rating real NULL,
+	provider_rating real NULL,
+	complete_status tinyint NULL,
+	instruction varchar(1024) 
+);
+
+
+create table profile(
+	userid bigint not null,
+	name varchar(365) not null,
+	avgrating real not null,
+	mobile varchar(16) not null,
+	email varchar(256) not null,
+	alternatemobile varchar(16) not null,
+	headline varchar(256) null default '---',
+	rate real default 0,
+	about text default ' --- ',
+	gender varchar(16) default ' '
+
+
+);
+
+
+create table services(
+	service_id bigint not null auto_increment primary Key,
+	servicecategory varchar(255),
+	servicesubcategory varchar(255),
+	status tinyint ,
+	service_category_id int
+);
+
+
+create table service_category(
+service_category_id bigint not null auto_increment primary Key,
+category_name varchar(128) not null,
+image varchar(512) ,
+status tinyint default 1,
+display varchar(2000) 
+);
+
+
+create table select_services(
+uid bigint not null,
+service_id bigint not null,
+rate int,
+discountpercent int,
+status tinyint default 1
+);
+
+create table provider_services(
+	selected_services_id bigint not null auto_increment primary Key,
+	service_id bigint not null,
+	rate int,
+	discountpercent int,
+	status tinyint default 1
+	
+);
+
+

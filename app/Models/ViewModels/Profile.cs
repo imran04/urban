@@ -6,18 +6,19 @@ namespace app.Models.ViewModels
 {
     public class Profile
     {
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public float AvgRating { get; set; }
-        public string Mobile { get; set; }
-        public string Email { get; set; }
-        public string AlternateMobile { get; set; }
-        public string HeadLine { get; set; }
-        public string About { get; set; }
-        public string Gender { get; set; }
-        public float Rate { get; set; }
+        
+        public int userid { get; set; }
+        public string name { get; set; }
+        public float avgrating { get; set; }
+        public string mobile { get; set; }
+        public string email { get; set; }
+        public string alternatemobile { get; set; }
+        public string headline { get; set; }
+        public string about { get; set; }
+        public string gender { get; set; }
+        public float rate { get; set; }
 
-        public string Id => WebUtility.HtmlDecode(new AESEncrytDecryt().EncriptStringAES(UserId.ToString()));
+        public string id => WebUtility.HtmlDecode(new AESEncrytDecryt().EncriptStringAES(userid.ToString()));
 
     }
 

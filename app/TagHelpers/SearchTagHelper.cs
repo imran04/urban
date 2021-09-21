@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -31,10 +32,9 @@ namespace app.TagHelpers
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            using (var connection = new SqlConnection(configuration.GetConnectionString("default")))
+            using (var connection = new MySqlConnection(configuration.GetConnectionString("default")))
             {
-                var sql = @"select category_name CategoryName,image Image,display Display from service_category where status=1;
-                            
+                var sql = @"select category_name CategoryName,image Image,display Display from service_category where status=1;     
                             ";
                 List<ServiceCategoryVM> data;
                 if (!_cache.TryGetValue("CategorySearch", out data))
