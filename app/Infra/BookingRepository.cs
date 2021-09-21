@@ -131,12 +131,97 @@ namespace app.Infra
 
         public object UpdateConsumerRating(Booking booking, float rate)
         {
-            throw new NotImplementedException();
+            var Query = @"UPDATEbooking SET consumer_rating = @rate WHERE booking_id=@Id";
+            using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
+            {
+                try
+                {
+                    using (var tran = cn.BeginTransaction())
+                    {
+                        Logger.LogInformation(Query);
+                        var count = cn.Execute(Query, new { Id = booking.booking_id, rate }, tran);
+                        if (count == 0)
+                            return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
+                        else
+                            return new ResultObject { status = ResultType.FAILED, Message = "Failed", Payload = count };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new ResultObject { status = ResultType.FAILED, Message = ex.Message, Payload = null };
+                }
+            }
+
         }
 
         public object UpdateProviderRating(Booking booking, float rate)
         {
-            throw new NotImplementedException();
+            var Query = @"UPDATE booking SET request_completion_date =curdate(),provider_rating = @rate,complete_status = 1 WHERE booking_id=@Id";
+            using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
+            {
+                try
+                {
+                    using (var tran = cn.BeginTransaction())
+                    {
+                        Logger.LogInformation(Query);
+                        var count = cn.Execute(Query, new { Id = booking.booking_id, rate }, tran);
+                        if (count == 0)
+                            return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
+                        else
+                            return new ResultObject { status = ResultType.FAILED, Message = "Failed", Payload = count };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new ResultObject { status = ResultType.FAILED, Message = ex.Message, Payload = null };
+                }
+            }
+        }
+
+        public object SelectBooking(int Id)
+        {
+            try
+            {
+                string Query = "";
+                var UserType = int.Parse(HttpContext.HttpContext.User.Claims.FirstOrDefault(o => o.Type == "TypeUser").Value);
+                var userid = HttpContext.HttpContext.User.Identity.Name;
+
+                Logger.LogInformation($@"{userid} : {UserType}");
+
+                if (UserType == 0)
+                {
+                    Query = @"select b.booking_id, b.instruction,C.name ConsumerName,c.email ConsumerEmail,c.avgrating consumerrating,P.name ProviderName,p.email ProviderEmail,p.avgrating providerrating,b.request_datetime OnDate,
+                                pu.address as ProviderAddress,cu.address as ConsumerAddress,
+                                b.complete_status complete from booking b join 
+                                profile p on p.userid=b.provider_id join
+                                Users pu on pu.userid=b.provider_id join
+                                profile c on c.userid=b.consumer_id join
+                                Users cu on cu.userid=b.provider_id 
+                                where booking_id=@Id";
+
+                }
+                else
+                {
+                    Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,
+                                pu.Address as ProviderAddress,cu.Address as ConsumerAddress,
+                                b.complete_status complete from booking b join 
+                                profile p on p.userid=b.provider_id join
+                                Users pu on pu.userid=b.provider_id join
+                                profile c on c.userid=b.consumer_id join
+                                Users cu on cu.userid=b.provider_id  
+                                where ";
+                }
+                using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
+                {
+                    Logger.LogInformation(Query);
+                    var count = cn.QueryFirstOrDefault<BookingVm>(Query, new { Id, });
+                    return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResultObject { status = ResultType.FAILED, Message = ex.Message, Payload = null };
+            }
         }
     }
 

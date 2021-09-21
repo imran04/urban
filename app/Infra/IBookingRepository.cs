@@ -12,6 +12,7 @@ namespace app.Infra
         object UpdateProviderRating(Booking booking, float rate);
         object DeleteBooking(Booking booking);
 
+        object SelectBooking(int Id);
     }
 
 }

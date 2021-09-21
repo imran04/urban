@@ -149,6 +149,35 @@ namespace app.Controllers
             }
             throw new Exception(result.Message);
         }
-        
+
+        public IActionResult BookingDetails(int Id)
+        {
+            var data = BookingRepository.SelectBooking(Id) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+            {
+                return View(data.Payload as BookingVm);
+            }
+            return View("NotFound");
+        }
+
+        [HttpPost]
+        public IActionResult Rate(int booking_id,int rate)
+        {
+            var data = BookingRepository.SelectBooking(booking_id) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+            {
+               if(User.IsServiceProvider())
+                {
+                  BookingRepository.UpdateConsumerRating(data.Payload as Booking, rate);
+                }
+                else
+                {
+                    BookingRepository.UpdateProviderRating(data.Payload as Booking, rate);
+                }
+
+                return RedirectToAction("BookingDetails", new { Id = booking_id });
+            }
+            return View("NotFound");
+        }
     }
 }
