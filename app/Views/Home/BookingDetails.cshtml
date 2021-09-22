@@ -130,6 +130,47 @@
             </div>
         </div>
     </div>
+<style>
+    .rating {
+        overflow: hidden;
+        vertical-align: bottom;
+        display: inline-block;
+        width: auto;
+        height: 30px;
+    }
+
+        .rating > input {
+            opacity: 0;
+            margin-right: -100%;
+        }
+
+        .rating > label {
+            position: relative;
+            display: block;
+            float: right;
+            background: url('/star-off-big.png');
+            background-size: 30px 30px;
+        }
+
+            .rating > label:before {
+                display: block;
+                opacity: 0;
+                content: '';
+                width: 30px;
+                height: 30px;
+                background: url('/star-on-big.png');
+                background-size: 30px 30px;
+                transition: opacity 0.2s linear;
+            }
+
+            .rating > label:hover:before, .rating > label:hover ~ label:before, .rating:not(:hover) > :checked ~ label:before {
+                opacity: 1;
+            }
+
+            #ss{
+            margin-top:100px
+            }
+</style>
 
 }
 
@@ -149,8 +190,8 @@
                             @{var i = Model;}
 
 
-
-
+                           
+                            @User.IsConsumer() @User.IsServiceProvider()
                             <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
 
                                 @if (User.IsConsumer())
@@ -179,74 +220,96 @@
                                                 <ul class="wt-hireduserimgs">
                                                     <li><figure><img gravatar-email="@i.ProviderAddress" alt="img description" /></figure></li>
                                                 </ul>
+
+                                                @if (Model.providerrating == 0)
+                                                {
+                                                    <form asp-controller="home" asp-action="rate" method="post" id="ss">
+                                                        <input type="hidden" asp-for="booking_id" value="@Model.booking_id" />
+
+                                                        <div>
+                                                            <span class="rating">
+                                                                <input id="rating5" type="radio" name="rate" value="5">
+                                                                <label for="rating5">5</label>
+                                                                <input id="rating4" type="radio" name="rate" value="4">
+                                                                <label for="rating4">4</label>
+                                                                <input id="rating3" type="radio" name="rate" value="3">
+                                                                <label for="rating3">3</label>
+                                                                <input id="rating2" type="radio" name="rate" value="2" checked>
+                                                                <label for="rating2">2</label>
+                                                                <input id="rating1" type="radio" name="rate" value="1">
+                                                                <label for="rating1">1</label>
+                                                            </span>
+
+
+                                                        </div>
+                                                        <button class="btn btn-info">Rate and Finish</button>
+                                                    </form>
+                                                }
                                             </div>
 
 
 
-                                            @if (Model.providerrating==0)
-                                            {
-                                                <form asp-controller="home" asp-action="rate" >
-                                                    <input type="hidden" asp-for="booking_id" value="@Model.booking_id" />
-
-                                                    <div>
-                                                        
-                                                        <input type="radio" name="rate" value="1" />1
-                                                        <input type="radio" name="rate" value="2" />2
-                                                        <input type="radio" name="rate" value="3" />3
-                                                        <input type="radio" name="rate" value="4" />4
-                                                        <input type="radio" name="rate" value="5" />5
-                                                    </div>
-                                                    <button>Rate and Finish</button>
-                                                </form>
-                                            }
+                                            
                                         </div>
                                     </div>
                                 }
                                 @if (User.IsServiceProvider())
                                 {
-                            <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
-                                <div class="wt-contenthead">
-                                    <div class="wt-title">
-                                        <a href="#">
-                                            <i class="fa fa-check-circle"></i> @i.ConsumerName
-                                        </a>
-                                        <h2>@i.instruction</h2>
-                                        <p>@i.ConsumerAddress</p>
+                                    <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
+                                        <div class="wt-contenthead">
+                                            <div class="wt-title">
+                                                <a href="#">
+                                                    <i class="fa fa-check-circle"></i> @i.ConsumerName
+                                                </a>
+                                                <h2>@i.instruction</h2>
+                                                <p>@i.ConsumerAddress</p>
+                                            </div>
+                                            <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                                                <li><span class="wt-dashboraddoller">@i.ConsumerEmail</span></li>
+                                                <li> <span> @(i.completed?"Completed":"Pendeing") Task</span></li>
+
+                                                <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Date: @i.OnDate.ToShortDateString()</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="wt-rightarea">
+
+
+                                            <div class="wt-hireduserstatus">
+                                                @*<h4>Hired</h4><span>Terrence Tynan</span>*@
+                                                <ul class="wt-hireduserimgs">
+                                                    <li><figure><img gravatar-email="@i.ConsumerEmail" alt="img description" /></figure></li>
+                                                </ul>
+                                                @if (Model.consumerrating == 0)
+                                                {
+                                                    <form asp-controller="home" asp-action="rate" method="post" id="ss">
+                                                        <input type="hidden" asp-for="booking_id" value="@Model.booking_id" />
+
+                                                        <div>
+
+                                                            <span class="rating">
+                                                                <input id="rating5" type="radio" name="rate" value="5">
+                                                                <label for="rating5">5</label>
+                                                                <input id="rating4" type="radio" name="rate" value="4">
+                                                                <label for="rating4">4</label>
+                                                                <input id="rating3" type="radio" name="rate" value="3">
+                                                                <label for="rating3">3</label>
+                                                                <input id="rating2" type="radio" name="rate" value="2" checked>
+                                                                <label for="rating2">2</label>
+                                                                <input id="rating1" type="radio" name="rate" value="1">
+                                                                <label for="rating1">1</label>
+                                                            </span>
+                                                        </div>
+                                                        <button class="btn btn-info">Rate Consumer</button>
+                                                    </form>
+                                                }
+                                            </div>
+
+                                            
+
+                                        </div>
+
+                                        
                                     </div>
-                                    <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-                                        <li><span class="wt-dashboraddoller">@i.ConsumerEmail</span></li>
-                                        <li> <span> @(i.completed?"Completed":"Pendeing") Task</span></li>
-
-                                        <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Date: @i.OnDate.ToShortDateString()</span></li>
-                                    </ul>
-                                </div>
-                                <div class="wt-rightarea">
-
-
-                                    <div class="wt-hireduserstatus">
-                                        @*<h4>Hired</h4><span>Terrence Tynan</span>*@
-                                        <ul class="wt-hireduserimgs">
-                                            <li><figure><img gravatar-email="@i.ConsumerEmail" alt="img description" /></figure></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                @if (Model.consumerrating == 0)
-                                {
-                            <form asp-controller="home" asp-action="rate">
-                                <input type="hidden" asp-for="booking_id" value="@Model.booking_id" />
-
-                                <div>
-
-                                    <input type="radio" name="rate" value="1" />1
-                                    <input type="radio" name="rate" value="2" />2
-                                    <input type="radio" name="rate" value="3" />3
-                                    <input type="radio" name="rate" value="4" />4
-                                    <input type="radio" name="rate" value="5" />5
-                                </div>
-                                <button>Rate Consumer</button>
-                            </form>
-                                }
-                            </div>
                                 }
 
 
@@ -256,159 +319,159 @@
                             </div>
 
                             @*<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
-                                    <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
-                                    <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="usersingle.html">
-                                                    <i class="fa fa-check-circle"></i> Louanne Mattioli
-                                                </a>
-                                                <h2>I want some customization and installation on wordpress</h2>
-                                            </div>
-                                            <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-                                                <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                                <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
-                                                <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
-                                                <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="wt-rightarea">
-                                            <div class="wt-btnarea">
-                                                <span> Project Complete</span>
-                                                <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
-                                            </div>
-                                            <div class="wt-hireduserstatus">
-                                                <h4>Hired</h4><span>Herlinda Hundley</span>
-                                                <ul class="wt-hireduserimgs">
-                                                    <li><figure><img src="images/user/userlisting/img-05.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
-                                    <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="usersingle.html">
-                                                    <i class="fa fa-check-circle"></i> Louanne Mattioli
-                                                </a>
-                                                <h2>Develop a transportation company website</h2>
-                                            </div>
-                                            <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-                                                <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                                <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
-                                                <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
-                                                <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="wt-rightarea">
-                                            <div class="wt-btnarea">
-                                                <span> Project Complete</span>
-                                                <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
-                                            </div>
-                                            <div class="wt-hireduserstatus">
-                                                <h4>Hired</h4><span>Marcelene Westerberg</span>
-                                                <ul class="wt-hireduserimgs">
-                                                    <li><figure><img src="images/user/userlisting/img-02.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
-                                    <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
-                                    <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="usersingle.html">
-                                                    <i class="fa fa-check-circle"></i> Louanne Mattioli
-                                                </a>
-                                                <h2>Change temp to Arabic and install on wordpress</h2>
-                                            </div>
-                                            <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-                                                <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                                <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
-                                                <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
-                                                <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="wt-rightarea">
-                                            <div class="wt-btnarea">
-                                                <span> Project Complete</span>
-                                                <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
-                                            </div>
-                                            <div class="wt-hireduserstatus">
-                                                <h4>Hired</h4><span>Vance Applebaum</span>
-                                                <ul class="wt-hireduserimgs">
-                                                    <li><figure><img src="images/user/userlisting/img-03.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
-                                    <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
-                                    <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="usersingle.html">
-                                                    <i class="fa fa-check-circle"></i> Louanne Mattioli
-                                                </a>
-                                                <h2>I want some customization and installation on wordpress</h2>
-                                            </div>
-                                            <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-                                                <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                                <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
-                                                <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
-                                                <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="wt-rightarea">
-                                            <div class="wt-btnarea">
-                                                <span> Project Complete</span>
-                                                <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
-                                            </div>
-                                            <div class="wt-hireduserstatus">
-                                                <h4>Hired</h4><span>Terrence Tynan</span>
-                                                <ul class="wt-hireduserimgs">
-                                                    <li><figure><img src="images/user/userlisting/img-05.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
-                                    <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
-                                    <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="usersingle.html">
-                                                    <i class="fa fa-check-circle"></i> Louanne Mattioli
-                                                </a>
-                                                <h2>I want some customization and installation on wordpress</h2>
-                                            </div>
-                                            <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-                                                <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                                <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
-                                                <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
-                                                <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="wt-rightarea">
-                                            <div class="wt-btnarea">
-                                                <span> Project Complete</span>
-                                                <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
-                                            </div>
-                                            <div class="wt-hireduserstatus">
-                                                <h4>Hired</h4><span>Terrence Tynan</span>
-                                                <ul class="wt-hireduserimgs">
-                                                    <li><figure><img src="images/user/userlisting/img-05.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+            <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+            <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="usersingle.html">
+                            <i class="fa fa-check-circle"></i> Louanne Mattioli
+                        </a>
+                        <h2>I want some customization and installation on wordpress</h2>
+                    </div>
+                    <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                        <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
+                        <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
+                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
+                        <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <div class="wt-btnarea">
+                        <span> Project Complete</span>
+                        <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
+                    </div>
+                    <div class="wt-hireduserstatus">
+                        <h4>Hired</h4><span>Herlinda Hundley</span>
+                        <ul class="wt-hireduserimgs">
+                            <li><figure><img src="images/user/userlisting/img-05.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+            <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="usersingle.html">
+                            <i class="fa fa-check-circle"></i> Louanne Mattioli
+                        </a>
+                        <h2>Develop a transportation company website</h2>
+                    </div>
+                    <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                        <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
+                        <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
+                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
+                        <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <div class="wt-btnarea">
+                        <span> Project Complete</span>
+                        <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
+                    </div>
+                    <div class="wt-hireduserstatus">
+                        <h4>Hired</h4><span>Marcelene Westerberg</span>
+                        <ul class="wt-hireduserimgs">
+                            <li><figure><img src="images/user/userlisting/img-02.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+            <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+            <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="usersingle.html">
+                            <i class="fa fa-check-circle"></i> Louanne Mattioli
+                        </a>
+                        <h2>Change temp to Arabic and install on wordpress</h2>
+                    </div>
+                    <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                        <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
+                        <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
+                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
+                        <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <div class="wt-btnarea">
+                        <span> Project Complete</span>
+                        <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
+                    </div>
+                    <div class="wt-hireduserstatus">
+                        <h4>Hired</h4><span>Vance Applebaum</span>
+                        <ul class="wt-hireduserimgs">
+                            <li><figure><img src="images/user/userlisting/img-03.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+            <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+            <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="usersingle.html">
+                            <i class="fa fa-check-circle"></i> Louanne Mattioli
+                        </a>
+                        <h2>I want some customization and installation on wordpress</h2>
+                    </div>
+                    <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                        <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
+                        <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
+                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
+                        <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <div class="wt-btnarea">
+                        <span> Project Complete</span>
+                        <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
+                    </div>
+                    <div class="wt-hireduserstatus">
+                        <h4>Hired</h4><span>Terrence Tynan</span>
+                        <ul class="wt-hireduserimgs">
+                            <li><figure><img src="images/user/userlisting/img-05.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+            <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+            <div class="wt-userlistingcontent wt-userlistingcontentvtwo">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="usersingle.html">
+                            <i class="fa fa-check-circle"></i> Louanne Mattioli
+                        </a>
+                        <h2>I want some customization and installation on wordpress</h2>
+                    </div>
+                    <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
+                        <li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> Professional</span></li>
+                        <li><span><img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</span></li>
+                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: Per Fixed</a></li>
+                        <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: 15 Days</span></li>
+                    </ul>
+                </div>
+                <div class="wt-rightarea">
+                    <div class="wt-btnarea">
+                        <span> Project Complete</span>
+                        <a href="javascript:void(0);" class="wt-btn">VIEW DETAILS</a>
+                    </div>
+                    <div class="wt-hireduserstatus">
+                        <h4>Hired</h4><span>Terrence Tynan</span>
+                        <ul class="wt-hireduserimgs">
+                            <li><figure><img src="images/user/userlisting/img-05.jpg" alt="img description" class="mCS_img_loaded"></figure></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                         </div>
                     </div>
                 </div>

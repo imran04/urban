@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Security.Claims;
 
 namespace app.Infra
@@ -73,6 +74,7 @@ namespace app.Infra
 
         public object Login(string UserName, string Password)
         {
+
             string Query = "Select * from Users where username=@UserName or emailid=@UserName or mobile=@UserName";
             var ProfileComplete = false;
 
@@ -81,7 +83,7 @@ namespace app.Infra
                 cn.Execute(@"insert into profile (UserId,Name,AvgRating,Mobile,Email,AlternateMobile) 
                                 select userid,username,0,mobile,emailid,mobile from users where userid not in
 								( select userid from profile)");
-                var count = cn.QueryFirst<Users>(Query, new { UserName });
+                var count = cn.QueryFirstOrDefault<Users>(Query, new { UserName });
                 if (count != null)
                 {
                     if (Password.CheckValidPasswprd(count.securitystamp, count.password))

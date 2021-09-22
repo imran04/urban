@@ -166,13 +166,15 @@ namespace app.Controllers
             var data = BookingRepository.SelectBooking(booking_id) as ResultObject;
             if (data.status == ResultType.SUCCESS)
             {
-               if(User.IsServiceProvider())
+                var b = (BookingVm)data.Payload;
+               if (User.IsServiceProvider())
                 {
-                  BookingRepository.UpdateConsumerRating(data.Payload as Booking, rate);
+                   
+                  BookingRepository.UpdateConsumerRating( b, rate);
                 }
                 else
                 {
-                    BookingRepository.UpdateProviderRating(data.Payload as Booking, rate);
+                    BookingRepository.UpdateProviderRating(b, rate);
                 }
 
                 return RedirectToAction("BookingDetails", new { Id = booking_id });

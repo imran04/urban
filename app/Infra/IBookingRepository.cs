@@ -8,8 +8,8 @@ namespace app.Infra
     {
         object AddBooking(Booking booking);
         object ListAllBooking(int Page,int Size);
-        object UpdateConsumerRating(Booking booking, float rate);
-        object UpdateProviderRating(Booking booking, float rate);
+        object UpdateConsumerRating(BookingVm booking, float rate);
+        object UpdateProviderRating(BookingVm booking, float rate);
         object DeleteBooking(Booking booking);
 
         object SelectBooking(int Id);
