@@ -129,9 +129,9 @@ namespace app.Infra
             }
         }
 
-        public object UpdateConsumerRating(BookingVm booking, float rate)
+        public object UpdateConsumerRating(BookingVm booking,string comment, float rate)
         {
-            var Query = @"UPDATE booking SET consumer_rating = @rate WHERE booking_id=@Id";
+            var Query = @"UPDATE booking SET consumer_rating = @rate, provider_comment=@comment, provider_comment_date=getdate() WHERE booking_id=@Id";
             using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
             { cn.Open();
                 try
@@ -139,7 +139,7 @@ namespace app.Infra
                     using (var tran = cn.BeginTransaction())
                     {
                         Logger.LogInformation(Query);
-                        var count = cn.Execute(Query, new { Id = booking.booking_id, rate }, tran);
+                        var count = cn.Execute(Query, new { Id = booking.booking_id, comment,rate }, tran);
                         if (count == 1)
                         {
                             tran.Commit();
@@ -156,9 +156,9 @@ namespace app.Infra
 
         }
 
-        public object UpdateProviderRating(BookingVm booking, float rate)
+        public object UpdateProviderRating(BookingVm booking,string comment, float rate)
         {
-            var Query = @"UPDATE booking SET request_completion_date =getdate(),provider_rating = @rate,complete_status = 1 WHERE booking_id=@Id";
+            var Query = @"UPDATE booking SET request_completion_date =getdate(),provider_rating = @rate,complete_status = 1 ,consumer_comment=@comment,consumer_comment_date=getdate() m WHERE booking_id=@Id";
             using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
             {
                 cn.Open();
@@ -167,7 +167,7 @@ namespace app.Infra
                     using (var tran = cn.BeginTransaction())
                     {
                         Logger.LogInformation(Query);
-                        var count = cn.Execute(Query, new { Id = booking.booking_id, rate }, tran);
+                        var count = cn.Execute(Query, new { Id = booking.booking_id,comment, rate }, tran);
                         if (count == 1)
                         {
                             tran.Commit();
@@ -230,6 +230,37 @@ C.name ConsumerName,c.email ConsumerEmail,b.consumer_rating consumerrating,
             catch (Exception ex)
             {
                 return new ResultObject { status = ResultType.FAILED, Message = ex.Message, Payload = null };
+            }
+        }
+
+        public object AddComment(BookingVm id, string comment,int c_to_p)
+        {
+            string Query = @"insert into booking_follow_up
+ (id, booking_Id, cid, pid, c_to_p, comment, on_datetime)
+select NEWID(),booking_Id,consumer_id,provider_id,@c_to_p,@comment,getdate()  from booking
+where booking_id = @booking_id";
+            using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
+            {
+                cn.Open();
+                try
+                {
+                    using (var tran = cn.BeginTransaction())
+                    {
+                        Logger.LogInformation(Query);
+                        var count = cn.Execute(Query, new {  id.booking_id, c_to_p ,comment}, tran);
+                        if (count == 1)
+                        {
+                            tran.Commit();
+                            return new ResultObject { status = ResultType.SUCCESS, Message = "Success", Payload = count };
+                        }
+                        else
+                            return new ResultObject { status = ResultType.FAILED, Message = "Failed", Payload = count };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new ResultObject { status = ResultType.FAILED, Message = ex.Message, Payload = null };
+                }
             }
         }
     }

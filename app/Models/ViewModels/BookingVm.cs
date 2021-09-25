@@ -18,4 +18,16 @@ namespace app.Models.ViewModels
         public DateTime OnDate{get;set;}
 
     }
+
+    public class BookingFollowUp
+    {
+        public Guid id { get; set; }
+        public int booking_Id { get; set; }
+        public int cid { get; set; }
+        public int pid { get; set; }
+        public bool c_to_p { get; set; }
+        public string comment { get; set; }
+        public DateTime on_datetime { get; set; }
+
+    }
 }

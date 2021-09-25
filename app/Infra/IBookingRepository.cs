@@ -8,11 +8,13 @@ namespace app.Infra
     {
         object AddBooking(Booking booking);
         object ListAllBooking(int Page,int Size);
-        object UpdateConsumerRating(BookingVm booking, float rate);
-        object UpdateProviderRating(BookingVm booking, float rate);
+        object UpdateConsumerRating(BookingVm booking,string comment ,float rate);
+        object UpdateProviderRating(BookingVm booking, string comment, float rate);
         object DeleteBooking(Booking booking);
 
         object SelectBooking(int Id);
+
+        object AddComment(BookingVm bookingVm, string comment, int c_to_p);
     }
 
 }

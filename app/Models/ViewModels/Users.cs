@@ -7,6 +7,7 @@ namespace app.Models.ViewModels
 {
     public class Users
     {
+        [Key]
         public int userid { get; set; }
         public int type { get; set; }
         [Required]

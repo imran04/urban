@@ -1,11 +1,13 @@
 ﻿using app.Infra;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace app.Models.ViewModels
 {
     public class Profile
     {
+        [Key]
         public int UserId { get; set; }
         public string Name { get; set; }
         public float AvgRating { get; set; }

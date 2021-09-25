@@ -161,7 +161,8 @@ namespace app.Controllers
         }
 
         [HttpPost]
-        public IActionResult Rate(int booking_id,int rate)
+        [Authorize]
+        public IActionResult Rate(int booking_id,int rate,string comment)
         {
             var data = BookingRepository.SelectBooking(booking_id) as ResultObject;
             if (data.status == ResultType.SUCCESS)
@@ -169,15 +170,33 @@ namespace app.Controllers
                 var b = (BookingVm)data.Payload;
                if (User.IsServiceProvider())
                 {
-                   
-                  BookingRepository.UpdateConsumerRating( b, rate);
+                    BookingRepository.UpdateConsumerRating( b,comment, rate);
                 }
                 else
                 {
-                    BookingRepository.UpdateProviderRating(b, rate);
+                    BookingRepository.UpdateProviderRating(b,comment, rate);
                 }
 
                 return RedirectToAction("BookingDetails", new { Id = booking_id });
+            }
+            return View("NotFound");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Followup(int id,string comment)
+        {
+            var data = BookingRepository.SelectBooking(id) as ResultObject;
+            if (data.status == ResultType.SUCCESS)
+            {
+                int c_to_p = 0;
+                var b = (BookingVm)data.Payload;
+                if (User.IsConsumer())
+                {
+                    c_to_p = 1;   
+                }
+                BookingRepository.AddComment(b, comment,c_to_p);
+                return RedirectToAction("BookingDetails", new { Id = id });
             }
             return View("NotFound");
         }
