@@ -93,7 +93,7 @@ namespace app.Infra
                 {
                     Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,
                                 pu.Address as ProviderAddress,cu.Address as ConsumerAddress,
-                                b.complete_status complete from booking b join 
+                                b.complete_status completed from booking b join 
                                 profile p on p.userid=b.provider_id join
                                 Users pu on pu.userid=b.provider_id join
                                 profile c on c.UserId=b.consumer_id join
@@ -107,7 +107,7 @@ namespace app.Infra
                 {
                     Query = @"select b.booking_id, b.instruction,C.Name ConsumerName,c.Email ConsumerEmail,c.AvgRating consumerrating,P.Name ProviderName,p.Email ProviderEmail,p.AvgRating providerrating,b.request_datetime OnDate,
                                 pu.Address as ProviderAddress,cu.Address as ConsumerAddress,
-                                b.complete_status complete from booking b join 
+                                b.complete_status completed from booking b join 
                                 profile p on p.userid=b.provider_id join
                                 Users pu on pu.userid=b.provider_id join
                                 profile c on c.UserId=b.consumer_id join
