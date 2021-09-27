@@ -138,12 +138,12 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="wt-dashboardbox">
                 <div class="wt-dashboardboxtitle">
-                    <h2>All Jobs</h2>
+                    <h2>All Bookings</h2>
                 </div>
                 <div class="wt-dashboardboxcontent wt-jobdetailsholder">
                     <div class="wt-completejobholder">
                         <div class="wt-tabscontenttitle">
-                            <h2>Jobs</h2>
+                            <h2>Bookings</h2>
                         </div>
                         <div class="wt-managejobcontent">
                             @foreach(var i in Model)
@@ -196,7 +196,7 @@
                                             </div>
                                             <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
                                                 <li><span class="wt-dashboraddoller">@i.ConsumerEmail</span></li>
-                                                <li> <span> @(i.completed?"Completed":"Pending") Task</span></li>
+                                                <li> <span>Task @(i.completed?"Completed":"Pending") </span></li>
                                                 
                                                 <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Date: @i.OnDate.ToShortDateString()</span></li>
                                             </ul>

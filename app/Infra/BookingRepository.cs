@@ -158,7 +158,7 @@ namespace app.Infra
 
         public object UpdateProviderRating(BookingVm booking,string comment, float rate)
         {
-            var Query = @"UPDATE booking SET request_completion_date =getdate(),provider_rating = @rate,complete_status = 1 ,consumer_comment=@comment,consumer_comment_date=getdate() m WHERE booking_id=@Id";
+            var Query = @"UPDATE booking SET request_completion_date =getdate(),provider_rating = @rate,complete_status = 1 ,consumer_comment=@comment,consumer_comment_date=getdate()  WHERE booking_id=@Id";
             using (var cn = new SqlConnection(Configuration.GetConnectionString("default")))
             {
                 cn.Open();
@@ -199,7 +199,7 @@ namespace app.Infra
 C.name ConsumerName,c.email ConsumerEmail,b.consumer_rating consumerrating,
  P.name ProviderName,p.email ProviderEmail,b.provider_rating providerrating,b.request_datetime OnDate,
                                pu.address as ProviderAddress,cu.address as ConsumerAddress,
-                                b.complete_status complete from booking b join 
+                                b.complete_status completed from booking b join 
                                 profile p on p.userid=b.provider_id join
                                 Users pu on pu.userid=b.provider_id join
                                 profile c on c.userid=b.consumer_id join
@@ -213,7 +213,7 @@ C.name ConsumerName,c.email ConsumerEmail,b.consumer_rating consumerrating,
 C.name ConsumerName,c.email ConsumerEmail,b.consumer_rating consumerrating,
  P.name ProviderName,p.email ProviderEmail,b.provider_rating providerrating,b.request_datetime OnDate,
                                pu.address as ProviderAddress,cu.address as ConsumerAddress,
-                                b.complete_status complete from booking b join  
+                                b.complete_status completed from booking b join  
                                 profile p on p.userid=b.provider_id join
                                 Users pu on pu.userid=b.provider_id join
                                 profile c on c.userid=b.consumer_id join

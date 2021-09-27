@@ -164,6 +164,8 @@ namespace app.Controllers
         [Authorize]
         public IActionResult Rate(int booking_id,int rate,string comment)
         {
+
+
             var data = BookingRepository.SelectBooking(booking_id) as ResultObject;
             if (data.status == ResultType.SUCCESS)
             {

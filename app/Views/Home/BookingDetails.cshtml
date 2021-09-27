@@ -179,12 +179,12 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="wt-dashboardbox">
                 <div class="wt-dashboardboxtitle">
-                    <h2>All Jobs</h2>
+                    <h2>All Bookings</h2>
                 </div>
                 <div class="wt-dashboardboxcontent wt-jobdetailsholder">
                     <div class="wt-completejobholder">
                         <div class="wt-tabscontenttitle">
-                            <h2>Jobs</h2>
+                            <h2>Booking</h2>
                         </div>
                         <div class="wt-managejobcontent">
                             @{var i = Model;}
@@ -208,7 +208,7 @@
                                             <ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
                                                 <li><span class="wt-dashboraddoller"> @i.ProviderEmail</span></li>
 
-                                                <li> <span> @(i.completed?"Completed":"Pending") Task</span></li>
+                                                <li> <span>Task @(i.completed?"Completed":"Pending") </span></li>
                                                 <li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Date: @i.OnDate.ToShortDateString()</span></li>
                                             </ul>
                                         </div>
@@ -217,9 +217,9 @@
 
                                             <div class="wt-hireduserstatus">
                                                 @*<h4>Hired</h4><span>Terrence Tynan</span>*@
-                                                <ul class="wt-hireduserimgs">
+                                                @*<ul class="wt-hireduserimgs">
                                                     <li><figure><img gravatar-email="@i.ProviderAddress" alt="img description" /></figure></li>
-                                                </ul>
+                                                </ul>*@
 
                                                 @if (Model.providerrating == 0)
                                                 {
@@ -281,9 +281,9 @@
 
                                             <div class="wt-hireduserstatus">
                                                 @*<h4>Hired</h4><span>Terrence Tynan</span>*@
-                                                <ul class="wt-hireduserimgs">
+                                                @*<ul class="wt-hireduserimgs">
                                                     <li><figure><img gravatar-email="@i.ConsumerEmail" alt="img description" /></figure></li>
-                                                </ul>
+                                                </ul>*@
                                                 @if (Model.consumerrating == 0)
                                                 {
                                             <form asp-controller="home" asp-action="rate" method="post" id="ss">
