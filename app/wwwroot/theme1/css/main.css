@@ -1326,7 +1326,7 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 /* Banner Style */
 .wt-bannerholder{
-	background-image: url(../images/bannerimg/banner-img.jpg);
+	background-image: url(../images/bannerimg/banner-img.jpeg);
 	background-size:cover;
     background-repeat: no-repeat;
     position: relative;
